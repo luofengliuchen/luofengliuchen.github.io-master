@@ -1,0 +1,26 @@
+permalink: /:year/:month/:day/:title.html
+markdown: kramdown
+pygments: true
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: 落风
+  email: luofengliuchen@gmail.com
+  link: http://www.liuschen.com
+
+# 站点信息
+title: 落风的博客 
+description: 落风的博客
+url: http://www.liuschen.com
+rss_url: /pages/atom.xml
+
+# avatar头像及Favicon
+avatar: http://localhost:4000/assets/img/avatar.png
+favicon: http://localhost:4000/assets/img/site-favicon.ico
+
+# disqus 设置
+disqus:
+  shortname: luofeng

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="canvas.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+	drawCanvas();
+});
+
+$(window).resize(drawCanvas);
+
+function drawCanvas(){
+	//获取canvas对象
+    var canvas  = $("#mycanvas");
+	//的到2D context
+	var context = canvas.get(0).getContext("2d");
+	
+	//使canvas元素填充窗口
+	//canvas.attr("width",$(window).get(0).innerWidth);
+	//canvas.attr("height",$(window).get(0).innerHeight);
+	
+	var canvasWidth = canvas.width();
+	var canvasHeight = canvas.height();
+	
+	var startButton = $("#startAnimation");
+	var stopButton = $("#stopAnimation");
+	
+	startButton.hide();
+	startButton.click(function(e) {
+        $(this).hide();
+		stopButton.show();
+		
+		playAnimation = true;
+		animate();
+    });
+	
+	stopButton.click(function(e){
+		$(this).hide();
+		startButton.show();
+		playAnimation = false;
+		
+		});
+		var Shape = function(x,y,width,height){
+		
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		
+		this.radius = Math.random()*30;
+		this.angle = 0;
+		
+		}
+	var shapes = new Array();
+	
+	for(var i=0;i<10;i++){
+		var x = Math.random()*250;
+		var y = Math.random()*250;
+		var width = height = Math.random()*30;
+		shapes.push(new Shape(x,y,width,height));
+		}
+		function animate(){
+			context.clearRect(0,0,canvasWidth,canvasHeight);
+			
+			var shapesLength = shapes.length;
+			for(var i = 0;i<shapesLength;i++){
+				var tmpShape = shapes[i];
+				var x = tmpShape.x + (tmpShape.radius*Math.cos(tmpShape.angle*(Math.PI/180)));
+				var y = tmpShape.y + (tmpShape.radius*Math.cos(tmpShape.angle*(Math.PI/180)));
+				
+				tmpShape.angle +=5;
+				if(tmpShape.angle>360){
+					tmpShape.angle = 0;
+					}
+					context.fillRect(x,y,tmpShape.width,tmpShape.height);
+					
+				}
+				
+				if(playAnimation){
+						setTimeout(animate,33);
+						}
+			}
+	
+	
+	animate();
+	}
+	
+	
+</script>
+
+<title>动画练习</title>
+</head>
+
+<body>
+
+<canvas id="mycanvas" width="500" height="500">
+
+</canvas>
+
+<div>
+	<button id="startAnimation">start</button>
+	<button id="stopAnimation">stop</button>
+</div>
+
+</body>
+</html>

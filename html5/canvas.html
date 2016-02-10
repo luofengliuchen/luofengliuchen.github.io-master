@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="canvas.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+	drawCanvas();
+});
+
+$(window).resize(drawCanvas);
+
+function drawCanvas(){
+	
+	//获取canvas对象
+    var canvas  = $("#mycanvas");
+	//的到2D context
+	var context = canvas.get(0).getContext("2d");
+	
+	//使canvas元素填充窗口
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	
+	context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	
+	context.fillStyle = "rgb(255,0,0)";
+	context.strokeStyle = "rgb(0,255,0)";
+	context.fillRect(40,40,100,100);
+	context.strokeRect(140,140,100,100);
+	
+	//直线
+	context.beginPath();
+	context.moveTo(240,240);
+	context.lineTo(600,500);
+	context.closePath();
+	context.stroke();
+	
+	//绘制圆形
+	context.beginPath();
+	context.arc(500,500,50,0,Math.PI/2,false);
+	context.lineTo(500,500);
+	context.closePath();
+	context.stroke();
+	
+	//加粗线条
+	context.lineWidth = 5;
+	
+	//绘制环形
+	context.beginPath();
+	context.arc(600,500,50,0,Math.PI/2,false);
+	context.arc(600,500,100,Math.PI/2,0,true);
+	context.closePath();
+	context.stroke();
+	
+	
+	//绘制字体
+	var text  = "this is html5";
+	context.font = "italic 30px serif";
+	context.fillText(text,40,300);	
+	context.lineWidth = 1;
+	context.strokeText(text,40,400);
+	
+	//擦除操作
+	context.clearRect(200,200,100,100);
+	//context.clearRect(0,0,canvas.width(),canvas.height());
+	
+	//重置所有canvas上的元素
+	//canvas.attr("width",canvas.width());
+	//canvas.attr("height",canvas.height());
+	
+	}
+drawCanvas();
+
+</script>
+
+
+
+
+<title>HTML练习1</title>
+</head>
+
+<body>
+
+<canvas id="mycanvas" width="1000" height="1000">
+
+</canvas>
+
+
+
+</body>
+</html>
