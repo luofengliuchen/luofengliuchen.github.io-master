@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="canvas.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+	drawCanvas();
+});
+
+$(window).resize(resizeWindow);
+
+function resizeWindow(){
+	//使canvas元素填充窗口
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	}
+
+function drawCanvas(){
+	
+	//获取canvas对象
+    var canvas  = $("#mycanvas");
+	//的到2D context
+	var context = canvas.get(0).getContext("2d");
+	
+	//使canvas元素填充窗口
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	
+	//context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	var width = canvas.width();
+	var height = canvas.height();
+	
+	var minSize = width>height?height:width;
+	
+	context.translate(width/2,height/2);
+	
+	context.fillStyle = "rgb(255,0,0)";
+	context.strokeStyle = "rgb(0,255,0)";
+	
+	var source_degree = Math.PI*3/2;
+	//var target_degree = Math.PI*65/180;
+	var target_degree = -Math.PI/2;
+	
+	var dymic_degree = source_degree;
+	var unit = (source_degree-target_degree)/42;
+	var scrollN = false;
+	
+	context.shadowBlur = 9;
+	context.shadowOffsetX = minSize/30;
+	context.shadowOffsetY = minSize/20;
+	//context.shadowColor = "rgba(0,142,0,0.3)";
+	context.shadowColor = "rgba(100,100,100,0.3)";
+	
+	var canvasCentreX = canvas.width()/2;
+	var canvasCentreY = canvas.height()/2;
+	var gradient = context.createRadialGradient(0,0,minSize/6,0,0,minSize/3);
+	gradient.addColorStop(0,"rgb(21,174,103)");
+	gradient.addColorStop(1,"rgb(123,185,155)");
+	gradient.addColorStop(0.3,"rgb(0,142,87)");
+	gradient.addColorStop(0.6,"rgb(0,142,87)");
+	
+	context.fillStyle = gradient;
+	
+	context.globalAlpha = 0.95;
+	
+	function track1_anim(){
+	
+	
+	dymic_degree -= unit;
+	
+	context.clearRect(-canvas.width(),-canvas.height(),2*canvas.width(),2*canvas.height());
+		//绘制环形
+	context.beginPath();
+	if(scrollN){
+		if(dymic_degree>target_degree){
+			context.arc(0,0,minSize/6,source_degree,dymic_degree,false);
+			context.arc(0,0,minSize/3,dymic_degree,source_degree,true);
+			}
+		}else{
+			context.arc(0,0,minSize/6,source_degree,dymic_degree,true);
+			context.arc(0,0,minSize/3,dymic_degree,source_degree,false);
+			}
+	
+	context.closePath();
+	context.fill();
+	
+	if(dymic_degree<target_degree){
+		dymic_degree = source_degree;
+		if(scrollN){
+			scrollN = false;
+			}else{
+				scrollN = true;
+				}
+		}
+		setTimeout(track1_anim,33);
+		}
+		track1_anim();
+	}
+</script>
+
+<title>loading</title>
+</head>
+
+<body>
+
+<canvas id="mycanvas" width="1000" height="1000">
+
+</canvas>
+
+
+
+</body>
+</html>
