@@ -18,8 +18,8 @@ url: http://www.liuschen.com
 rss_url: /pages/atom.xml
 
 # avatar头像及Favicon
-avatar: http://localhost:4000/assets/img/avatar.png
-favicon: http://localhost:4000/assets/img/site-favicon.ico
+avatar: http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png
+favicon: http://7xpui7.com1.z0.glb.clouddn.com/blog-site-favicon.ico
 
 # disqus 设置
 disqus:
