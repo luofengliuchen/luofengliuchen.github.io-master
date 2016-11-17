@@ -34,10 +34,23 @@ JNI是**Java Native Interface**的缩写，而JNA则是**jna:Java Native Access*
     	compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.0.0-1.1', classifier: 'android-x86'
     	compile group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '2.8.1-1.1', classifier: 'android-arm'
     	compile group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '2.8.1-1.1', classifier: 'android-x86'
-}
+	}
+
+
 
 
 尤其是最后面的几项，项目里面用到了FFMPEG，但是却没有任何外部c或.so库的引用，那么就是说这些库包含在了这些Android官方提供的这些引用里面。
+
+同时，需要在gradle中的Android下加入
+
+	packagingOptions {
+        exclude 'META-INF/maven/org.bytedeco.javacpp-presets/opencv/pom.properties'
+        exclude 'META-INF/maven/org.bytedeco.javacpp-presets/opencv/pom.xml'
+        exclude 'META-INF/maven/org.bytedeco.javacpp-presets/ffmpeg/pom.properties'
+        exclude 'META-INF/maven/org.bytedeco.javacpp-presets/ffmpeg/pom.xml'
+    }
+
+
 
 通过之上的引用，在代码中用到的内容主要如下:
 
