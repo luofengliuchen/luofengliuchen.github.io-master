@@ -6,6 +6,8 @@ keywords: Android，sqlite
 ---
 
 
+>文章链接:[http://www.liuschen.com](http://www.liuschen.com)
+
 # 1.Android SQLite函数调用
 
 首先在SQLiteDatabase中有已经封装好的增删改查操作函数，操作简单数据自己在封装一个dao直接调用即可,操作复杂可以自定义SQL语句，但是里面都是通过SQLiteStatement来执行其对应操作。查询操作执行和其他不同，是通过SQLiteCursorDriver来找到curser的。
