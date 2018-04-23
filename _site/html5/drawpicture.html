@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="canvas.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+	drawCanvas();
+});
+
+$(window).resize(drawCanvas);
+
+function drawCanvas(){
+	
+	//获取canvas对象
+    var canvas  = $("#mycanvas");
+	//的到2D context
+	var context = canvas.get(0).getContext("2d");
+	
+	//使canvas元素填充窗口
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	
+	//context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	
+	mosaicImage(canvas,context);
+	
+	}
+	
+	//将图片风格化处理，可以是马赛克效果
+	function mosaicImage(canvas,context){
+		
+		var image = new Image();
+		image.src = "example.jpg";
+		$(image).load(function(e) {
+            context.drawImage(image,0,0,canvas.width(),canvas.height());
+			var imageData = context.getImageData(0,0,canvas.width(),canvas.height());
+			var pixels = imageData.data;
+			context.clearRect(0,0,canvas.width(),canvas.height());
+			
+			//马赛克的块数
+			var numTileRows = 30;
+			var numTileCols = 30;
+		
+			//每个块的尺寸
+			var tileWidth = imageData.width/numTileCols;
+			var tileHeight = imageData.height/numTileRows;
+			
+			for(var r = 0;r<numTileRows;r++){
+			for(var c = 0;c<numTileCols;c++){
+							//的到每个色块中每个像素点的坐标
+						var x = (c*tileWidth) + tileWidth/2;
+						var y = (r*tileHeight) + tileHeight/2;
+						
+						var pos = (Math.floor(y)*(imageData.width*4))+(Math.floor(x)*4);
+						
+						var red = pixels[pos];
+						var green = pixels[pos+1];
+						var blue = pixels[pos+2];
+						
+						context.fillStyle = "rgb("+red+","+green+","+blue+")";
+						context.fillRect(x-(tileWidth/2),y-(tileHeight/2),tileWidth,tileHeight);
+						/*context.beginPath();
+						context.arc(x,y,tileWidth/2,0,Math.PI*2,false);
+						context.closePath();
+						context.fill();*/
+				}
+			}
+        });
+		}
+	
+	
+	//马赛克效果
+	function drawMosaic(canvas,context){
+		
+		//var imageData = context.createImageData(canvas.width(),canvas.height());
+		var imageData = context.createImageData(500,500);
+		var pixels = imageData.data;
+		
+		//马赛克的块数
+		var numTileRows = 4;
+		var numTileCols = 4;
+		
+		//每个块的尺寸
+		var tileWidth = imageData.width/numTileCols;
+		var tileHeight = imageData.height/numTileRows;
+		for(var r = 0;r<numTileRows;r++){
+			for(var c = 0;c<numTileCols;c++){
+				//每个块的颜色值
+				var red = Math.floor(Math.random()*255);
+				var green = Math.floor(Math.random()*255);
+				var blue = Math.floor(Math.random()*255);
+				for(var tr = 0;tr<tileHeight;tr++){
+					for(var tc = 0;tc<tileWidth;tc++){
+							
+							//的到每个色块中每个像素点的坐标
+						var trueX = (c*tileWidth) + tc;
+						var trueY = (r*tileHeight) + tr;
+						
+						var pos = (trueY*(imageData.width*4))+(trueX*4);
+						
+						pixels[pos] = red;
+						pixels[pos+1] = green;
+						pixels[pos+2] = blue;
+						pixels[pos+3] = 255;
+						}
+					}
+				}
+			}
+			context.putImageData(imageData,0,0);
+		}
+	
+	
+	//画图片
+	function drawPicture(canvas,context){
+		
+		var imageData = context.createImageData(canvas.width(),canvas.height());
+		var pixels = imageData.data;
+		var numpixels = imageData.width*imageData.height;
+	
+		for(var i = 0; i< numpixels; i++){
+		
+			pixels[i*4] = Math.floor(Math.random()*255);
+			pixels[i*4+1] = Math.floor(Math.random()*255);
+			pixels[i*4+2] = Math.floor(Math.random()*255);
+			pixels[i*4+3] = 255;
+		
+		}
+		context.putImageData(imageData,0,0);
+	}
+	
+	//反相操作，可以执行，但是不能处理过大的图片，不然浏览器会干脆不响应操作
+	function revertColor(canvas,context){
+		
+		var image = new Image();
+		image.src = "example.jpg";
+		$(image).load(function(e) {
+            context.drawImage(image,0,0,canvas.width(),canvas.height());
+			var imageData = context.getImageData(0,0,canvas.width(),canvas.height());
+			var pixels = imageData.data;
+			var numPixels = pixels.length;
+			context.clearRect(0,0,canvas.width(),canvas.height());
+			for(var i=0;i<numPixels;i++){
+				//反相
+				/*pixels[i*4] = 255-pixels[i*4];
+				pixels[i*4+1] = 255-pixels[i*4+1];
+				pixels[i*4+2] = 255-pixels[i*4+2];*/
+				
+				//灰度
+				var average = (pixels[i*4]+pixels[i*4+1]+pixels[i*4+2])/3;
+				pixels[i*4] = average;
+				pixels[i*4+1] = average;
+				pixels[i*4+2] = average;
+				
+				}
+			context.putImageData(imageData,0,0);
+        });
+		
+		}
+
+
+	
+</script>
+
+<title>html练习，像素点操作</title>
+</head>
+
+<body>
+
+<canvas id="mycanvas" width="1000" height="1000">
+
+</canvas>
+
+
+
+</body>
+</html>

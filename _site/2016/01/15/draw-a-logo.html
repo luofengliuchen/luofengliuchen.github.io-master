@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
+
+<title>Android绘图-LOGO-实现3 | 落风的博客</title>
+<meta name="author" content="落风">
+
+  <meta name="keywords" content="android ,绘图,logo">
+
+
+
+
+<link rel="shortcut icon" href="http://7xpui7.com1.z0.glb.clouddn.com/blog-site-favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+<link href="/pages/rss.xml" rel="alternate" title="落风的博客" type="application/atom+xml">
+  </head>
+  <body>
+    <aside id="sidebar">
+  <nav id="tags">
+    <a href="/index.html" id="avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+
+    <ul id="tags__ul">
+      <li id="pl__all" class="tags__li tags-btn active">全部</li>
+       
+        <li id="技术" class="tags__li tags-btn">技术</li>
+       
+        <li id="杂说" class="tags__li tags-btn">杂说</li>
+       
+        <li id="小说" class="tags__li tags-btn">小说</li>
+       
+        <li id="照片" class="tags__li tags-btn">照片</li>
+      
+    </ul>
+
+    <div id="tags__bottom">
+      <a href="mailto:luofengliuchen@gmail.com" id="icon-email" class="tags-btn fontello"></a>
+      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello"></a>
+    </div>
+  </nav> <!-- end #tags -->
+
+  <div id="posts-list">
+    <form action="" id="search-form">
+      <a href="/index.html" id="mobile-avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+      <!-- NOTE: input field is disabled by default -->
+      <input id="search-input" type="text" placeholder="Search...">
+    </form>
+
+    <nav id="pl__container">
+    
+      <a class="技术 pl__all" href="/2016/02/14/apk.html"><span class="pl__circle"></span><span class="pl__title">android反编译</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/02/05/html5-2.html"><span class="pl__circle"></span><span class="pl__title">html5内嵌入android</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/02/04/html5-1.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习记录</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/02/03/html5.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="照片 pl__all" href="/2016/01/31/fox3.html"><span class="pl__circle"></span><span class="pl__title">想要冬眠的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="照片 pl__all" href="/2016/01/31/fox2.html"><span class="pl__circle"></span><span class="pl__title">擅长卖萌的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="照片 pl__all" href="/2016/01/31/fox1.html"><span class="pl__circle"></span><span class="pl__title">正在找东西的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="小说 pl__all" href="/2016/01/27/dream-flower.html"><span class="pl__circle"></span><span class="pl__title">梦花</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="杂说 pl__all" href="/2016/01/27/project-mode.html"><span class="pl__circle"></span><span class="pl__title">我对瀑布开发模式和敏捷开发模式的理解</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/25/stackblur.html"><span class="pl__circle"></span><span class="pl__title">Android滤镜-快速模糊</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/18/listview-focus.html"><span class="pl__circle"></span><span class="pl__title">listview焦点冲突</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/18/android-StringPicker.html"><span class="pl__circle"></span><span class="pl__title">NumberPicker与StringPicker</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/15/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现3</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/15/android-logo1.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现3</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/15/NDK.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下jni的一些问题</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/14/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现2</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/12/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现1</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="技术 pl__all" href="/2016/01/11/deal-with-pix.html"><span class="pl__circle"></span><span class="pl__title">android图像处理:像素过滤</span><span class="pl__date">Jan 2016</span></a>
+    
+    </nav>
+  </div> <!-- end #posts-list -->
+</aside> <!-- end #sidebar -->
+    <div id="post">
+      <div id="pjax">
+        <article id="post__content">
+  <h1 id="post__title" data-identifier="20160115">Android绘图-LOGO-实现3</h1>
+  <p>最开始被带沟里了，走了不少弯路，兼容方法:通过圆弧相接画圆环</p>
+
+<pre><code>private void drawRing(Canvas canvas, Paint paint,float interX, float innerY,float outerX, float outerY,float outerStartAngle,float outerSweepAngle,float innerStartAngle,float innerSweepAnglefloat ,float inner_circle,float outter_circle) {
+
+        Path mPath = new Path();
+        arcTo(mPath,outerX,outerY,outter_circle,outerStartAngle,outerSweepAngle,false);
+        arcTo(mPath,interX,innerY,inner_circle,innerStartAngle+innerSweepAnglefloat,-innerSweepAnglefloat,false);
+        mPath.close();
+        canvas.drawPath(mPath,paint);
+
+    }
+</code></pre>
+
+<p>构造的方法同html5中的对应方法用相似的参数，只是最后forceMoveTo是是否强制封闭圆弧，和js中的最后参数控制绘制顺逆方向不同</p>
+
+<pre><code>/**
+ * 通过已知圆心半径和夹角画圆心
+ * */
+private void arcTo(Path path ,float circleX,float circleY,float circleR, float startAngle,
+                   float sweepAngle, boolean forceMoveTo){
+
+    float left = circleX - circleR;
+    float right = circleX + circleR;
+    float top = circleY -circleR;
+    float bottom = circleY + circleR;
+
+    path.arcTo(new RectF(left, top, right, bottom), startAngle,
+            sweepAngle, forceMoveTo);
+}
+</code></pre>
+
+</article> <!-- end #post__content -->
+
+<div id="post__share">
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://www.liuschen.com/2016/01/15/draw-a-logo.html&text=Android绘图-LOGO-实现3" target="_blank"></a>
+  <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://www.liuschen.com/2016/01/15/draw-a-logo.html&title=Android绘图-LOGO-实现3" target="_blank"></a>
+</div> <!-- end #post__share -->
+<div id="disqus_thread" name="luofeng">
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+</div>
+
+<!-- <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//luofeng.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+
+
+        <p id="copyright">Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Theme <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Hosted on <a href="https://pages.github.com" target="_blank">Github</a></p>
+      </div> <!-- end #pjax -->
+
+      <div id="post__toc-trigger">
+        <div id="post__toc">
+          <span id="post__toc-title">Table of Contents</span>
+          <ul id="post__toc-ul"></ul>
+        </div>
+      </div>
+    </div> <!-- end #post -->
+
+    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.pjax.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="canvas.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+	drawCanvas();
+});
+
+$(window).resize(drawCanvas);
+
+function drawCanvas(){
+	
+	//获取canvas对象
+    var canvas  = $("#mycanvas");
+	//的到2D context
+	var context = canvas.get(0).getContext("2d");
+	
+	//使canvas元素填充窗口
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	
+	context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	//绘图状态的保存
+	context.fillStyle = "rgb(255,0,0)";
+	context.save();
+	context.fillRect(50,50,100,100);
+	context.fillStyle = "rgb(0,255,0)";
+	context.save();
+	context.fillRect(200,50,100,100);
+	context.restore();
+	context.fillRect(350,50,100,100);
+	context.restore();
+	context.fillRect(500,50,100,100);
+	
+	//平移,其实是平移画布，和android中的绘画方法表现原理一样
+	context.save();
+	//平移
+	context.translate(100,100);
+	//缩放，注意缩放中心
+	context.scale(1,1.5);
+	//缩放，注意旋转中心
+	context.rotate(Math.PI/12);
+	context.fillRect(700,50,100,100);
+	context.restore();
+	context.fillRect(700,50,100,100);
+	
+	
+	context.save();
+	//变换矩阵，和android中的一样
+	context.transform(2,2,0,2,150,150);
+	context.fillRect(50,200,100,100);
+	context.restore();
+	context.fillRect(50,200,100,100);
+	
+	//全局阿尔法值
+	
+	context.fillStyle = "rgb(63,169,245)";
+	context.save();
+	context.globalAlpha = 0.5;
+	context.fillRect(50,315,100,100);
+	context.restore();
+	context.fillRect(100,365,100,100);
+	
+	//清空图像
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	//context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	//合成模式
+	context.save();
+	context.fillStyle = "rgb(63,169,245)";
+	context.fillRect(50,50,100,100);
+	//context.globalCompositeOperation = "source-over";
+	//context.globalCompositeOperation = "destination-over";
+	//context.globalCompositeOperation = "source-stop";
+	//context.globalCompositeOperation = "destination-stop";
+	//context.globalCompositeOperation = "source-in";
+	//context.globalCompositeOperation = "destination-in";
+	//context.globalCompositeOperation = "source-out";
+	//context.globalCompositeOperation = "destination-out";
+	//context.globalCompositeOperation = "lighter";
+	//context.globalCompositeOperation = "copy";
+	context.globalCompositeOperation = "xor";
+	context.fillStyle = "rgb(255,123,172)";
+	context.fillRect(100,100,100,100);
+	context.restore();
+	
+	//狂霸酷炫叼的阴影
+	context.save();
+	context.shadowBlur = 5;
+	context.shadowOffsetX = 10;
+	context.shadowOffsetY = 20;
+	context.shadowColor = "rgba(100,100,100,0.5)";
+	context.fillRect(500,50,100,100);
+	
+	//线性渐变
+	context.restore();
+	var gradient = context.createLinearGradient(0,0,0,canvas.height());
+	gradient.addColorStop(0,"rgb(0,0,0)");
+	gradient.addColorStop(1,"rgb(255,0,0)");
+	context.fillStyle = gradient;
+	context.fillRect(100,100,100,100);
+	
+	//放射渐变
+	var canvasCentreX = canvas.width()/2;
+	var canvasCentreY = canvas.height()/2;
+	var gradient = context.createRadialGradient(canvasCentreX,canvasCentreY,0,canvasCentreX,canvasCentreY,250);
+	gradient.addColorStop(0,"rgb(0,0,0)");
+	gradient.addColorStop(1,"rgb(150,150,150)");
+	context.fillStyle = gradient;
+	context.fillRect(canvasCentreX-200,canvasCentreY-200,400,400);
+	
+	//贝塞尔曲线--功能最强，同时也是最为复杂的曲线
+	//一阶贝塞尔曲线
+	context.lineWidth = 15;
+	context.beginPath();
+	context.moveTo(200,200);
+	context.quadraticCurveTo(350,200,450,450);
+	context.stroke();
+	//三阶贝塞尔曲线
+	context.lineWidth = 15;
+	context.beginPath();
+	context.moveTo(200,200);
+	context.bezierCurveTo(350,200,450,450,800,500);
+	context.stroke();
+	
+	//清空图像
+	canvas.attr("width",$(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight);
+	//context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	//导出图像
+	context.save();
+	context.fillRect(50,50,100,100);
+	context.fillStyle = "rgb(255,0,0)";
+	context.fillRect(150,150,100,100);
+	
+	var dataURL = canvas.get(0).toDataURL();
+	var img = $("<img></img>");
+	img.attr("src",dataURL);
+	canvas.replaceWith(img);
+	
+	}
+
+</script>
+
+
+
+
+<title>qjlogo的js实现</title>
+</head>
+
+<body>
+
+<canvas id="mycanvas" width="1000" height="1000">
+
+</canvas>
+
+
+
+</body>
+</html>

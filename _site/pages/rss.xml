@@ -1,0 +1,1887 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>落风的博客</title>
+    <link>http://www.liuschen.com</link>
+    <description>落风的博客</description>
+    
+      <item>
+        <title>jar打包问题</title>
+        <link>http://www.liuschen.com/2018/04/01/jar.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/04/01/jar.html</guid>
+        <pubDate>Sun, 01 Apr 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;打jar包命令:jar cvf &lt;打包生成的jar文件&gt; &lt;要打包的目录&gt;&lt;/要打包的目录&gt;&lt;/打包生成的jar文件&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;1. 问题发现&lt;/h2&gt;
+
+&lt;p&gt;但是打完包我却出现一个问题，就是引用后无法调用jar包内部的方法。可能是由于我打的包内部调用有native方法，因为我之后通过eclipse中的导出jar包功能又对比试了一下，发现，普通的包可以正常导出，但是带有native方法的包导出会报异常：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;JAR creation failed. See details for additional information.
+  	Class files on classpath not found or not accessible for: &#39;XXXX&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由于有缓存的原因，eclipse反复尝试多次导出并不稳定，clean的效果也有限。&lt;br /&gt;
+最终确定eclipse上导出问题是由于缓存问题，需要修改bug后clean,必须真实clean后再导出才能成功。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;2. 问题解决&lt;/h2&gt;
+
+&lt;p&gt;通过eclipse中的导出jar包功能时，会先将java文件编译为class文件，而我通过jar命令打包却没有进行这一步，正确应该是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1. 先通过javac命令将Java文件编译成class文件
+2. 通过jar命令将class文件打包成jar文件
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之前遇到过这个问题，但是没记，结果忘了，总觉得不记住的话，以后还会浪费时间到这里。&lt;/p&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>http请求头</title>
+        <link>http://www.liuschen.com/2018/04/01/http_sb.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/04/01/http_sb.html</guid>
+        <pubDate>Sun, 01 Apr 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;一. 请求首部&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;1. 通用首部:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Connection:允许客户端和服务端制定与请求/响应连接有关的选项，通常为keep-alive&lt;/li&gt;
+  &lt;li&gt;Date:提供日期和时间编制，说明报文的创建时间&lt;/li&gt;
+  &lt;li&gt;MIME-Vwesion:给出了发送端给出的MIME版本&lt;/li&gt;
+  &lt;li&gt;Trailer：如果报文采用了分块传输编码，可以用这个首部列出位于报文拖挂部分的首部集合。&lt;/li&gt;
+  &lt;li&gt;Transfer-Encoding:告知接收端为了保证报文的可靠传输，对报文采用了什么编码方式。&lt;/li&gt;
+  &lt;li&gt;Update:给出了发送端想要升级使用的新版本或协议。&lt;/li&gt;
+  &lt;li&gt;Via:显示报文经过的中间节点（代理，网关）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;2. 通用缓存首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cache-Control:用于随报文传送缓存指示&lt;/li&gt;
+  &lt;li&gt;Pragma:另一种随报文传送指示方式，但并不专用于缓存。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;3. 请求首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Client-IP:提供了运行客户端的机器IP地址&lt;/li&gt;
+  &lt;li&gt;Prom：提供了客户端用户的E-mail地址&lt;/li&gt;
+  &lt;li&gt;Host:给出了接收请求的服务器的主机名和端口号&lt;/li&gt;
+  &lt;li&gt;Referer:提供了包含当前请求URI的文档的URL&lt;/li&gt;
+  &lt;li&gt;UA-Color:提供了与客户端显示器的显示颜色有关的信息&lt;/li&gt;
+  &lt;li&gt;UA-CPU：给出了客户端CPU的类型或制造商&lt;/li&gt;
+  &lt;li&gt;UA-OS:提供了裕兴在客户端机器上的操作系统的名称和版本&lt;/li&gt;
+  &lt;li&gt;UA-Pixels:提供了客户端显示器的像素信息&lt;/li&gt;
+  &lt;li&gt;User-Agent:将发起请求的应用程序名称告知服务器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;accept&quot;&gt;4. Accept首部(提供偏好信息)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Accept:告诉服务器能发送哪些媒体类型&lt;/li&gt;
+  &lt;li&gt;Accept-Charset：告诉服务器发送哪些字符集&lt;/li&gt;
+  &lt;li&gt;Accept-Encoding:告诉服务器能够发送哪些编码方式&lt;/li&gt;
+  &lt;li&gt;Accept-Language:告诉服务器能够发送哪些语言&lt;/li&gt;
+  &lt;li&gt;TE:告诉服务器能够使用哪些扩展传输编码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;5. 安全请求首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Authorization：包含了客户端提供给服务器，以便对其自身进行认证的数据&lt;/li&gt;
+  &lt;li&gt;Cookie：客户端向服务端传送的一个令牌&lt;/li&gt;
+  &lt;li&gt;Cookie2:用来书名请求端支持的cookie版本&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;6. 代理请求首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Max-Forward:通往源端服务器的路径上，将请求转发给其他代理或是网关的最大次数&lt;/li&gt;
+  &lt;li&gt;Proxy-Authorization:同Authorization，用于代理&lt;/li&gt;
+  &lt;li&gt;Proxy-Connection:同Connection，用于代理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;二. 响应首部&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;1. 通用信息性首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Age:响应持续时间&lt;/li&gt;
+  &lt;li&gt;Public：资源支持的请求方法列表&lt;/li&gt;
+  &lt;li&gt;Retry-After:如果资源不可用的话在此日期或时间重试&lt;/li&gt;
+  &lt;li&gt;Server：服务器应用程序软件的名称和版本&lt;/li&gt;
+  &lt;li&gt;Title:对HTML文档来说，标题&lt;/li&gt;
+  &lt;li&gt;Warning：警告报文&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;2. 协商首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Accept-Ranges:对此资源来说，服务器可接受的范围类型&lt;/li&gt;
+  &lt;li&gt;Vary：服务器查看的其他首部的列表，可能会使响应发生变化，也就是说，服务器会根据首部内容挑选合适资源版本发送给客户端&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;3. 安全响应首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Proxy-Authenticate:来自代理对客户端的质询列表&lt;/li&gt;
+  &lt;li&gt;Set-Cookie:对应令牌的响应&lt;/li&gt;
+  &lt;li&gt;Set-Cookie2:&lt;/li&gt;
+  &lt;li&gt;www-Authenticate:来自服务器对客户端的质询列表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;4. 实体首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Allow:列出了可以对此实体执行的请求方法&lt;/li&gt;
+  &lt;li&gt;Location:告知客户端实体实际上位于何处，用于将接收端定向到资源的（可能是新的）位置（URL）上去&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;5. 内容首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Content-Base:解析主题中的相对URL时使用的基础URL&lt;/li&gt;
+  &lt;li&gt;Content-Encoding:对主题执行的任意编码方式&lt;/li&gt;
+  &lt;li&gt;Content-Language:理解主题时对十一使用的自然语言&lt;/li&gt;
+  &lt;li&gt;Content-Length:主体的长度或尺寸&lt;/li&gt;
+  &lt;li&gt;Content-Location:资源实际所处的位置&lt;/li&gt;
+  &lt;li&gt;Content-MD5:主题的MD5校验和&lt;/li&gt;
+  &lt;li&gt;Content-Range:在整个资源中此实体表示的字节范围&lt;/li&gt;
+  &lt;li&gt;Content-Type:这个主体的对象类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;6. 实体缓存首部&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ETag：与此实体相关的实体标记&lt;/li&gt;
+  &lt;li&gt;Expires:实体不再有效，要从原始的远端在此获取此实体的日期和时间&lt;/li&gt;
+  &lt;li&gt;Last-Modified:这个实体最后一次被修改的日期和时间&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>Fiddler抓取数据失败：tunnel to 443</title>
+        <link>http://www.liuschen.com/2018/04/01/fiddler.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/04/01/fiddler.html</guid>
+        <pubDate>Sun, 01 Apr 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/htdeyanlei/article/details/52874248&quot;&gt;参考&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Telerik Fiddler Options-Http,勾选CaptureHTTPS CONNECTs和Decrypt HTTPS traffic,会弹出如下提示&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;To intercept HTTPS traffic, Fiddler generates a unique root certificate.
+
+You may configure Windows to trust this root certificate to suppress
+security warnings. This is generally safe.
+
+Click &#39;Yes&#39; to reconfigure Windows&#39; Trusted CA list.
+Click &#39;No&#39; if this is all geek to you.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确定，安装对应证书到计算机&lt;/p&gt;
+
+&lt;p&gt;SSL证书通过在客户端浏览器和Web服务器之间建立一条SSL安全通道，只要安装对应证书就可以激活服务，实现加密传输.&lt;/p&gt;
+
+&lt;p&gt;HTTPS:即是加入了SSL的HTTP，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。&lt;/p&gt;
+
+&lt;p&gt;Fiddler解析HTTPS的请求打开上述开关即可，但是如果要作为代理捕获手机客户端的对应请求，则需要安装对应的插件&lt;br /&gt;
+ &lt;a href=&quot;https://www.telerik.com/fiddler/add-ons&quot;&gt;CertMaker for iOS and Android&lt;/a&gt;在官网上下载，并且Fiddler以及它的一些插件都是免费的。&lt;/p&gt;
+
+&lt;p&gt;certmgr.msc是window的证书管理器&lt;/p&gt;
+
+&lt;p&gt;然而并没有什么用，安装完之后通过手机浏览网页会提示证书不可靠。并且还是捕获不到特定APP内的HTTPS请求。&lt;/p&gt;
+
+&lt;p&gt;所以，证书是站点发给客户端的凭证，通过证书可以保证交互的数据安全，Fiddler安装的证书可以对原始证书进行替换，在手机端请求到的证书是替换后的证书，所以检验会报警告。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;TO BE TONTINUE&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>线程实例分析</title>
+        <link>http://www.liuschen.com/2018/04/01/thread.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/04/01/thread.html</guid>
+        <pubDate>Sun, 01 Apr 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果在主线程中启动一个子线程，将这个子线程join到主线程上，子线程中再开一个线程池来启动一个新的任务。这个新的任务中设置一个无限循环。当程序执行5分钟后，有多少线程还在执行。程序如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Main {
+	public static void main(String[] args){
+		try {
+		Thread thread;
+		thread = new Thread(){
+			 @Override
+			public void run() {
+				 ExecutorService fixPool = Executors.newFixedThreadPool(5);
+				 WorkRunable1 runa = new WorkRunable1();
+				 //WorkRunable1 runa2 = new WorkRunable1();
+				 fixPool.execute(runa);
+				 //fixPool.execute(runa2);
+				 System.out.println(&quot;该线程已经执行完毕:当前线程为&quot;+Thread.currentThread().getName());
+			}
+		};
+		thread.start();
+		thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(&quot;主线程已经执行完毕:&quot;+Thread.currentThread().getName());
+		
+	}
+	
+	public static class WorkRunable1 implements Runnable{
+
+		@Override
+		public void run() {
+			while(true){
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println(&quot;我一直在输出:&quot;+Thread.activeCount());
+			}
+		}
+		
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行显示将会有两个线程：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Thread[pool-1-thread-1]
+Thread[DestoryJavaVM]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时，第一个启动的子线程早已经结束，所以main线程也随之结束。但是，还有线程执行，在主线程结束后启动了DestoryJavaVM，监听是否还有非守护线程执行，如果没有将关闭JVM。&lt;/p&gt;
+
+&lt;p&gt;如果在一个子线程中开一个无限循环，那么执行的线程将会变为2个，分别是：&lt;/p&gt;
+
+&lt;p&gt;主线程，第一个启动的子线程，和持续输出的线程池中的线程。&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>JNI常见问题(问题查询笔记)2</title>
+        <link>http://www.liuschen.com/2018/03/15/jni2.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/03/15/jni2.html</guid>
+        <pubDate>Thu, 15 Mar 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ndk-build&quot;&gt;1.编译(ndk-build):&lt;/h2&gt;
+
+&lt;p&gt;Android.mk文件:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LOCAL_PATH := $(call my-dir)：指向编译目标文件的位置，这里是本目录，开头必填项
+
+include $(CLEAR_VARS):清除之前系统中存在的LOCAL_XXX变量，因为是全局的
+
+LOCAL_MODULE：编译成为模块的名字
+
+LOCAL_SRC_FILES：编译包含的源文件，需要注意看Android.mk文件中的LOCAL_SRC_FILES选项是否包含了必要文件（不要忘了自己写的那个连接Java的调用文件），可以这样写来包含文件夹下的所有c文件LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/*.c)
+
+LOCAL_LDLIBS：依赖库，连接的是NDK目录下的android-ndk-r9b\platforms\android-19\arch-arm\usr\lib中的so文件
+
+LOCAL_ALLOW_UNDEFINED_SYMBOLS := true：忽略掉未定义的错误
+
+LOCAL_ARM_MODE := arm：指定编译的指令集
+
+LOCAL_PRELINK_MODULE ：Prelink利用事先链接代替运行时链接的方法来加速共享库的加载
+
+LOCAL_MODULE_TAGS ：=user eng tests optional
+	user: 指该模块只在user版本下才编译
+	eng: 指该模块只在eng版本下才编译
+	tests: 指该模块只在tests版本下才编译
+	optional:指该模块在所有版本下都编译
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结尾要指向一个编译选项：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;include $(BUILD_STATIC_LIBRARY) ：编译成为一个静态库，不能被项目引用，用来生成动态库&lt;/li&gt;
+  &lt;li&gt;include $(BUILD_EXECUTABLE) ：编译成为一个可执行的本地程序&lt;/li&gt;
+  &lt;li&gt;include $(BUILD_SHARED_LIBRARY)：编译为一个共享库，.so文件，我们通常用的&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;TO BE CONTINUE&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>DCloud下的静态资源路径</title>
+        <link>http://www.liuschen.com/2018/03/15/DCloud.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/03/15/DCloud.html</guid>
+        <pubDate>Thu, 15 Mar 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在HBUILder中开发应用，访问开发目录中的资源，一般会通过http://localhost:13131/来访问。但是之前我做手机开发从来没有这种方式过，印象中只有服务器端才会有的这种服务器的访问方式。在手机端可这样搞的话，就说明了手机端自己构建了一个小型的服务器用来分配H5资源的访问。&lt;/p&gt;
+
+&lt;p&gt;DCloud离线打包在Android端集成有两种方式，一种是以H5APP的方式集成打包，一种是WebView的插件形式，原理没有区别，有区别的是对应的服务，插件形式只是提供简单的交互，而APP的方式则提供了一个完整的H5生态，其中就包括了在特定目录下资源的释放，以及http://localhost:13131/访问资源的服务。&lt;/p&gt;
+
+&lt;p&gt;需要注意的点:1.放到assets文件夹下的文件不能包含中文字符。aseets下的子文件名必须为manifest.json配置的id,子文件的子文件名必须为www,在这个文件夹下的文件才是对应在Hbuilder建立的项目文件&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>python4-mxnet笔记</title>
+        <link>http://www.liuschen.com/2018/03/15/python4.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/03/15/python4.html</guid>
+        <pubDate>Thu, 15 Mar 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ndarray&quot;&gt;ndarray(矩阵计算)&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;from mxnet import ndarray as nd
+nd.zeros((3, 4))   #初始化为0的3行4列2D数组
+nd.ones((3, 4))    #初始化为1的3行4列2D数组
+nd.array([[1,2],[2,3]])  #直接构造
+nd.random_normal(0, 1, shape=(3, 4))
+#元素值服从0到1的正态分布
+数组.shape获取形状
+数组.size数组大小
+
+nd.dot(x, y.T)  #转置，矩阵相乘
+nd.exp(y)       #指数运算
+nd.arange(3).reshape((3,1))  #3行1列二维数组从0到2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ndarray可以很方便地同numpy进行转换&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+x = np.ones((2,3))
+y = nd.array(x)  # numpy -&amp;gt; mxnet
+z = y.asnumpy()  # mxnet -&amp;gt; numpy
+print([z, y])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;功能函数:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;id(y):y的ID，可能是关于内存空间的ID
+z[:] = x + y  #将x+y之和赋给已开好的二维数组z中
+z = x + y     #将x+y之和赋给新开的二维数组z中(旧的被回收)
+nd.elemwise_add(x, y, out=z) #能够同时避免x+y临时空间的开销
+x[1:2,1:3]  #截取二维数组部分，这种写法也支持批量写入
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;autograd&quot;&gt;autograd&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;with关键字，用来代替try:except:finally&lt;br /&gt;
+流程控制语句中要注意行的缩进&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;求导过程:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;x = nd.array([[1, 2], [3, 4]])
+x.attach_grad()  #申请对应空间
+with ag.record():
+    y = x * 2
+    z = y * x
+z.backward()   
+x.grad 				#求导
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Android增量更新</title>
+        <link>http://www.liuschen.com/2018/03/15/android_zlgx.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/03/15/android_zlgx.html</guid>
+        <pubDate>Thu, 15 Mar 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;android上进行增量更新是需要&lt;a href=&quot;http://www.daemonology.net/bsdiff/&quot;&gt;bsdiff4.3&lt;/a&gt;的而bsdiff里面又依赖&lt;a href=&quot;http://www.bzip.org/downloads.html&quot;&gt;bzip2-1.0.6&lt;/a&gt;,需要将其编译成so文件供Android调用&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;将解压后中的.c和.h文件拷贝到项目中的jni文件夹下，配置Android.mk,如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := libdiff
+
+LOCAL_ARM_MODE := arm
+
+LOCAL_LDLIBS := -llog -lz
+
+LOCAL_PRELINK_MODULE := false
+
+LOCAL_CPPFLAGS := \
+    -DNULL=0 -DSOCKLEN_T=socklen_t -DNO_SSTREAM -DBSD=1 -DNO_SSTREAM -fexceptions -DANDROID -DXLOCALE_NOT_USED
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/*.c)
+
+include $(BUILD_SHARED_LIBRARY)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后在cmd中执行ndk-build进行编译：&lt;/p&gt;
+
+&lt;p&gt;错误：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[armeabi] Compile arm    : diff &amp;lt;= spewG.c
+[armeabi] Compile arm    : diff &amp;lt;= unzcrash.c
+[armeabi] SharedLibrary  : libdiff.so
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: error: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/bzip2recover.o: multiple definition of &#39;main&#39;
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/bzip2.o: previous definition here
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: error: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/dlltest.o: multiple definition of &#39;main&#39;
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/bzip2.o: previous definition here
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: error: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/mk251.o: multiple definition of &#39;main&#39;
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/bzip2.o: previous definition here
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: error: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/spewG.o: multiple definition of &#39;main&#39;
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/bzip2.o: previous definition here
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: error: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/unzcrash.o: multiple definition of &#39;main&#39;
+F:/programer/android-ndk-r10e/toolchains/arm-linux-androideabi-4.8/prebuilt/windows-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.8/../../../../arm-linux-androideabi/bin/ld.exe: D:/softku/BSDiff/app/src/main/obj/local/armeabi/objs/diff/D_/softku/BSDiff/app/src/main/jni/bzip2.o: previous definition here
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:96: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:140: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:150: error: undefined reference to &#39;errx&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:162: error: undefined reference to &#39;errx&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:181: error: undefined reference to &#39;errx&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:193: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:198: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:175: error: undefined reference to &#39;errx&#39;
+collect2.exe: error: ld returned 1 exit status
+make.exe: *** [D:/softku/BSDiff/app/src/main/obj/local/armeabi/libdiff.so] Error 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个错误，前一部分报的是main函数入口太多，当然不是作者犯浑，而是可能有些文件是用作测试或是其他用途，从makefile文件中就可以知道并不是所有c文件都需要编译的。&lt;/p&gt;
+
+&lt;p&gt;将android.mk中的LOCAL_SRC_FILES改为:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LOCAL_SRC_FILES := blocksort.c  \
+  huffman.c    \
+  crctable.c   \
+  randtable.c  \
+  compress.c   \
+  decompress.c \
+  bzlib.c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次编译，成功通过。但是，这一次没有把新写入的Java调用的文件编入进去。没添加会报找不到对应的本地函数，添加后，报以下错误：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;D:/softku/BSDiff/app/src/main/jni/bspatch.c:96: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:140: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:150: error: undefined reference to &#39;errx&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:162: error: undefined reference to &#39;errx&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:181: error: undefined reference to &#39;errx&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:193: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:198: error: undefined reference to &#39;err&#39;
+D:/softku/BSDiff/app/src/main/jni/bspatch.c:175: error: undefined reference to &#39;errx&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;缺少依赖，应该是c中的有些基础依赖没有引用，之前遇到过，如log日志，先忽略错误试试，毕竟看样子这个是关于错误的，如果项目没错是不会触发的。在android.mk中添加:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次编译，成功了，引入项目，能够正常生成和使用差量包。&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Android优化</title>
+        <link>http://www.liuschen.com/2018/03/15/android_yh.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/03/15/android_yh.html</guid>
+        <pubDate>Thu, 15 Mar 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1.不要在ondraw里面新建太多对象，对象在最好在构造方法里面先建好。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;引申:不要在多次调用的回调方法里面新建对象(不只适用Android)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2.不要频繁调用requestLayout，invalidate这些方法，这些方法调用的时候必须保证绝对必要&lt;/p&gt;
+
+&lt;p&gt;3.View和activity，fragment这些一样，要有预防机制，在发生屏幕旋转，后台被杀这种情况时，要保存数据以便恢复，节省性能消耗。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@Override
+protected Parcelable onSaveInstanceState() {
+    Bundle bundle = new Bundle();
+    bundle.putParcelable(STATE_INSTANCE, super.onSaveInstanceState());
+    bundle.putInt(STATE_TYPE, mType);
+    bundle.putInt(STATE_BORDER_RADIUS, mBorderRadius);
+    return bundle;
+}
+
+@Override
+protected void onRestoreInstanceState(Parcelable state) {
+    if (state instanceof Bundle) {
+        Bundle bundle = (Bundle) state;
+        super.onRestoreInstanceState(((Bundle) state).getParcelable(STATE_INSTANCE));
+        this.mType = bundle.getInt(STATE_TYPE);
+        this.mBorderRadius = bundle.getInt(STATE_BORDER_RADIUS);
+    } else {
+        super.onRestoreInstanceState(state);
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;TO BE CONTINUE&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Android访问存储目录</title>
+        <link>http://www.liuschen.com/2018/03/15/Androidstore.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/03/15/Androidstore.html</guid>
+        <pubDate>Thu, 15 Mar 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Context中方法：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;getFileDir():/data/user/0/包名/file&lt;/li&gt;
+  &lt;li&gt;getCache():/data/user/0/包名/cache&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Environment中方法：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;getExternalStorageDirectory():内存卡根目录，/storge/emulated/0&lt;/li&gt;
+  &lt;li&gt;getDataDirectory():/data&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;getExternalStoragePublicDirectory(str):参数（Environment中的常量）&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;* Each of its values have its own constant:
+   * &amp;lt;ul&amp;gt;
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_MUSIC}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_PODCASTS}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_ALARMS}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_RINGTONES}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_NOTIFICATIONS}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_PICTURES}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_MOVIES}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_DOWNLOADS}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_DCIM}
+   *   &amp;lt;li&amp;gt;{@link #DIRECTORY_DOCUMENTS}
+   * &amp;lt;/ul&amp;gt;
+   * @hide
+   */
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;获取Android存储卡上的图片，文档，等默认目录&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;getExternalFilesDir(“文件夹名”):/storge/emulated/0/Android/data/包名/files/文件夹名&lt;/li&gt;
+  &lt;li&gt;getExternalCacheDir():/storge/emulated/0/Android/data/包名/cache&lt;/li&gt;
+  &lt;li&gt;ContextCompat.getExternalCacheDirs(MainActivity.this)[0]:同上一条&lt;/li&gt;
+  &lt;li&gt;getExternalFilesDirs(Environment.DIRECTORY_MUSIC)[0]:/storge/emulated/0/Android/data/包名/files/Music&lt;br /&gt;
+应用可以管理在它外部存储上的特定包名目录，这个目录就是存储卡上的Android目录，而不用获取WRITE_EXTERNAL_STORAGE权限。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;比如，一个包名为com.example.foo的应用，可以自由访问外存上的Android/data/com.example.foo/目录。&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>PHP语法简要笔记</title>
+        <link>http://www.liuschen.com/2018/01/20/PHP0.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/01/20/PHP0.html</guid>
+        <pubDate>Sat, 20 Jan 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;PHP是一种弱类型的语言，和javascript很相似，但是PHP底层是c语言写的，又保证了执行的效率。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;1. 符号语法&lt;/h2&gt;
+
+&lt;p&gt;@抵制错误输出，加在函数前面&lt;/p&gt;
+
+&lt;p&gt;$变量前缀，不需要事先声明，&lt;/p&gt;
+
+&lt;p&gt;.= 字符串连接符&lt;/p&gt;
+
+&lt;h2 id=&quot;php&quot;&gt;2. PHP固定函数&lt;/h2&gt;
+
+&lt;p&gt;$_POST[”“]取得POST表单值&lt;/p&gt;
+
+&lt;p&gt;$_GET[”“]取得POST表单值&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;3. 字符串连接符&lt;/h2&gt;
+
+&lt;p&gt;不是我们常用的“+”,而是“ . ”并且两边的空格必不可少，这点需要注意&lt;/p&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>PHP开发环境搭建</title>
+        <link>http://www.liuschen.com/2018/01/20/PHP.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/01/20/PHP.html</guid>
+        <pubDate>Sat, 20 Jan 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;最近买了个虚拟主机，但是买回来后却发现不支持java程序，只支持PHP，想想也不是想做什么复杂的东西，所以将就着先用用看。毕竟，所有语言都是共通的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;环境安装&lt;/h1&gt;
+
+&lt;p&gt;下载&lt;a href=&quot;http://www.apachelounge.com/download/&quot;&gt;httpd-2.4.29-Win32-VC15&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下载&lt;a href=&quot;http://windows.php.net/download#php-5.5&quot;&gt;php-5.6.32-Win32-VC11-x64&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;apache&quot;&gt;Apache配置&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;注意:下面安装服务必须使用管理员权限，所以打开CMD的时候要用管理员的身份打开&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;同java一样，先配置了环境变量，然后打开CMD（必须使用管理员权限），不然不能安装服务：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;首先配置:httpd.conf
+ServerRoot &quot;httpd的根目录&quot;
+DocumentRoot “根目录下同样位置”
+以及其下的Directory路径也配置相同
+
+httpd -k install（将apache注册为window的服务）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;经常出现的错误是端口占用，这时候只需要更改默认的端口即可(至少两处)。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Errors reported here must be corrected before the service can be started
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这句话并不是错误，而是提示如果下面有错误要先解决。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;httpd -k start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动（必须先安装服务），可以访问了，通过127.0.0.1：端口&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;继续配置httpd.conf
+DirectoryIndex index.html 后添加index.php index.htm
+ScriptAlias后目录同样修改为本机的相对应目录，后面Directory里面的当然也要修改
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;文件尾部最后添加对PHP支持：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LoadModule php5_module &quot;本机php路径/php5apache2_4.dll&quot;
+AddType application/x-httpd-php .php .html .htm
+PHPIniDir &quot;本机php路径&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后一句是为了找PHP根目录下的PHP.ini文件，是由php.ini-production重命名后得到，添加后如果提示不能载入php5_module，那么要么是window下的依赖没配置好（单独启动php试试），也可能就是我遇到的版本搭配问题，网上有关于这个问题的解答，我在版本号上的选择是没错的，只是，64位和32位的弄混了。应该下载httpd-2.4.29-Win64-VC15，才对，这是它起名造成的误解。&lt;/p&gt;
+
+&lt;h1 id=&quot;eclipse-for-php&quot;&gt;eclipse for PHP调试环境的搭建&lt;/h1&gt;
+
+&lt;p&gt;配置完调试没反应,修改php.ini文件,在结尾添加:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;;zend_extension = F:\programer4\php-5.6.32-Win32-VC11-x64\ext\php_xdebug.dll
+zend_extension_ts = F:\programer4\php-5.6.32-Win32-VC11-x64\ext\php_xdebug.dll
+;extension = php_xdebug.dll
+[Xdebug]
+xdebug.auto_trace = 1
+xdebug.show_exception_trace = 1
+xdebug.remote_autostart = 1
+xdebug.remote_enable = 1
+xdebug.collect_vars = 1
+xdebug.collect_return = 1
+xdebug.collect_params = 1
+xdebug.trace_output_dir=”D:/xDebugLog”
+xdebug.profiler_output_dir=”D:/xDebugLog”
+xdebug.profiler_enable= 1
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.remote_mode = req
+xdebug.remote_handler=dbgp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：配置文件中的”；”为注释符号，end_extension要根据自己下载的放出合适的版本（TS线程安全和非线程安全）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;xdebug.remote_port=9000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;远程端口要和eclipse中设置一致，&lt;/p&gt;
+
+&lt;p&gt;选中php文件，点击Debug As-&amp;gt;PHP Script执行调试&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;错误&lt;/h1&gt;
+
+&lt;p&gt;使用mysqli连接数据库错误:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Call to undefined function mysqli_connect()错误
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;在php.ini文件中extension=php_mysqli.dll去掉前面的分号，然后再添加extension_dir=&quot;ext&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;万网数据库访问遇到问题：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD(&#39;your_existing_password&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新修改数据库密码，并把密码设置为41位加密的&lt;/p&gt;
+
+&lt;p&gt;服务端错误：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Call to undefined function mysqli_connect()错误
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;开始我还以为是同一个问题，后来梳理清楚了，发现解决上面这个问题的方法，只是在eclipse中执行脚本时运行通过了（eclipse中关联php.ini文件了）。但是一旦在服务器上让网页访问还是会出现这个问题。&lt;/p&gt;
+
+&lt;h1 id=&quot;php&quot;&gt;更换PHP版本&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;鉴于阿里云上的PHP没有5.6版本的支持，最终选择7.0版本作为使用版本，因为阿里云最高支持到7.1版本，为了避免麻烦，使用7.0版的。&lt;br /&gt;
+配置依照上面配置只是php5换成php7&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>PHP开发环境搭建</title>
+        <link>http://www.liuschen.com/2018/01/01/adb.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/01/01/adb.html</guid>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;adb无法连接&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;error: device not found
+error: device not found
+error: device not found
+- waiting for device -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动adb服务:adb nodaemon server&lt;br /&gt;
+查找adb服务占用端口:netstat -ano | findstr “5037”&lt;br /&gt;
+查找端口占用程序:tasklist | findstr “3360”&lt;br /&gt;
+杀死程序进程，释放端口：taskkill /F /PID 3360&lt;br /&gt;
+重新列出adb连接设备:adb devices&lt;/p&gt;
+
+&lt;p&gt;安装时报如下错误:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1808 KB/s (1050884 bytes in 0.567s)
+Failure [INSTALL_PARSE_FAILED_NO_CERTIFICATES: Failed to collect certificates from /data/app/vmdl571586590.tmp/base.apk: Attempt to get length of null array]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装包没有签名，签名:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;jarsigner -verbose -keystore C:\Users\用户\.android\debug.keystore -signedjar dst.apk src.apk androiddebugkey
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;adb命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Android Debug Bridge version 1.0.31
+
+ -a                            - directs adb to listen on all interfaces for a connection
+ -d                            - directs command to the only connected USB device
+                                 returns an error if more than one USB device is present.
+ -e                            - directs command to the only running emulator.
+                                 returns an error if more than one emulator is running.
+ -s &amp;lt;specific device&amp;gt;          - directs command to the device or emulator with the given
+                                 serial number or qualifier. Overrides ANDROID_SERIAL
+                                 environment variable.
+ -p &amp;lt;product name or path&amp;gt;     - simple product name like &#39;sooner&#39;, or
+                                 a relative/absolute path to a product
+                                 out directory like &#39;out/target/product/sooner&#39;.
+                                 If -p is not specified, the ANDROID_PRODUCT_OUT
+                                 environment variable is used, which must
+                                 be an absolute path.
+ -H                            - Name of adb server host (default: localhost)
+ -P                            - Port of adb server (default: 5037)
+ devices [-l]                  - list all connected devices
+                                 (&#39;-l&#39; will also list device qualifiers)
+ connect &amp;lt;host&amp;gt;[:&amp;lt;port&amp;gt;]       - connect to a device via TCP/IP
+                                 Port 5555 is used by default if no port number is specified.
+ disconnect [&amp;lt;host&amp;gt;[:&amp;lt;port&amp;gt;]]  - disconnect from a TCP/IP device.
+                                 Port 5555 is used by default if no port number is specified.
+                                 Using this command with no additional arguments
+                                 will disconnect from all connected TCP/IP devices.
+
+device commands:
+  adb push [-p] &amp;lt;local&amp;gt; &amp;lt;remote&amp;gt;
+                               - copy file/dir to device
+                                 (&#39;-p&#39; to display the transfer progress)
+  adb pull [-p] [-a] &amp;lt;remote&amp;gt; [&amp;lt;local&amp;gt;]
+                               - copy file/dir from device
+                                 (&#39;-p&#39; to display the transfer progress)
+                                 (&#39;-a&#39; means copy timestamp and mode)
+  adb sync [ &amp;lt;directory&amp;gt; ]     - copy host-&amp;gt;device only if changed
+                                 (-l means list but don&#39;t copy)
+                                 (see &#39;adb help all&#39;)
+  adb shell                    - run remote shell interactively
+  adb shell &amp;lt;command&amp;gt;          - run remote shell command
+  adb emu &amp;lt;command&amp;gt;            - run emulator console command
+  adb logcat [ &amp;lt;filter-spec&amp;gt; ] - View device log
+  adb forward --list           - list all forward socket connections.
+                                 the format is a list of lines with the following format:
+                                    &amp;lt;serial&amp;gt; &quot; &quot; &amp;lt;local&amp;gt; &quot; &quot; &amp;lt;remote&amp;gt; &quot;\n&quot;
+  adb forward &amp;lt;local&amp;gt; &amp;lt;remote&amp;gt; - forward socket connections
+                                 forward specs are one of:
+                                   tcp:&amp;lt;port&amp;gt;
+                                   localabstract:&amp;lt;unix domain socket name&amp;gt;
+                                   localreserved:&amp;lt;unix domain socket name&amp;gt;
+                                   localfilesystem:&amp;lt;unix domain socket name&amp;gt;
+                                   dev:&amp;lt;character device name&amp;gt;
+                                   jdwp:&amp;lt;process pid&amp;gt; (remote only)
+  adb forward --no-rebind &amp;lt;local&amp;gt; &amp;lt;remote&amp;gt;
+                               - same as &#39;adb forward &amp;lt;local&amp;gt; &amp;lt;remote&amp;gt;&#39; but fails
+                                 if &amp;lt;local&amp;gt; is already forwarded
+  adb forward --remove &amp;lt;local&amp;gt; - remove a specific forward socket connection
+  adb forward --remove-all     - remove all forward socket connections
+  adb jdwp                     - list PIDs of processes hosting a JDWP transport
+  adb install [-l] [-r] [-d] [-s] [--algo &amp;lt;algorithm name&amp;gt; --key &amp;lt;hex-encoded key&amp;gt; --iv &amp;lt;hex-encoded iv&amp;gt;] &amp;lt;file&amp;gt;
+                               - push this package file to the device and install it
+                                 (&#39;-l&#39; means forward-lock the app)
+                                 (&#39;-r&#39; means reinstall the app, keeping its data)
+                                 (&#39;-d&#39; means allow version code downgrade)
+                                 (&#39;-s&#39; means install on SD card instead of internal storage)
+                                 (&#39;--algo&#39;, &#39;--key&#39;, and &#39;--iv&#39; mean the file is encrypted already)
+  adb uninstall [-k] &amp;lt;package&amp;gt; - remove this app package from the device
+                                 (&#39;-k&#39; means keep the data and cache directories)
+  adb bugreport                - return all information from the device
+                                 that should be included in a bug report.
+
+  adb backup [-f &amp;lt;file&amp;gt;] [-apk|-noapk] [-obb|-noobb] [-shared|-noshared] [-all] [-system|-nosystem] [&amp;lt;packages...&amp;gt;]
+                               - write an archive of the device&#39;s data to &amp;lt;file&amp;gt;.
+                                 If no -f option is supplied then the data is written
+                                 to &quot;backup.ab&quot; in the current directory.
+                                 (-apk|-noapk enable/disable backup of the .apks themselves
+                                    in the archive; the default is noapk.)
+                                 (-obb|-noobb enable/disable backup of any installed apk expansion
+                                    (aka .obb) files associated with each application; the default
+                                    is noobb.)
+                                 (-shared|-noshared enable/disable backup of the device&#39;s
+                                    shared storage / SD card contents; the default is noshared.)
+                                 (-all means to back up all installed applications)
+                                 (-system|-nosystem toggles whether -all automatically includes
+                                    system applications; the default is to include system apps)
+                                 (&amp;lt;packages...&amp;gt; is the list of applications to be backed up.  If
+                                    the -all or -shared flags are passed, then the package
+                                    list is optional.  Applications explicitly given on the
+                                    command line will be included even if -nosystem would
+                                    ordinarily cause them to be omitted.)
+
+  adb restore &amp;lt;file&amp;gt;           - restore device contents from the &amp;lt;file&amp;gt; backup archive
+
+  adb help                     - show this help message
+  adb version                  - show version num
+
+scripting:
+  adb wait-for-device          - block until device is online
+  adb start-server             - ensure that there is a server running
+  adb kill-server              - kill the server if it is running
+  adb get-state                - prints: offline | bootloader | device
+  adb get-serialno             - prints: &amp;lt;serial-number&amp;gt;
+  adb get-devpath              - prints: &amp;lt;device-path&amp;gt;
+  adb status-window            - continuously print device status for a specified device
+  adb remount                  - remounts the /system partition on the device read-write
+  adb reboot [bootloader|recovery] - reboots the device, optionally into the bootloader or recovery program
+  adb reboot-bootloader        - reboots the device into the bootloader
+  adb root                     - restarts the adbd daemon with root permissions
+  adb usb                      - restarts the adbd daemon listening on USB
+  adb tcpip &amp;lt;port&amp;gt;             - restarts the adbd daemon listening on TCP on the specified port
+networking:
+  adb ppp &amp;lt;tty&amp;gt; [parameters]   - Run PPP over USB.
+ Note: you should not automatically start a PPP connection.
+ &amp;lt;tty&amp;gt; refers to the tty for PPP stream. Eg. dev:/dev/omap_csmi_tty1
+ [parameters] - Eg. defaultroute debug dump local notty usepeerdns
+
+adb sync notes: adb sync [ &amp;lt;directory&amp;gt; ]
+  &amp;lt;localdir&amp;gt; can be interpreted in several ways:
+
+  - If &amp;lt;directory&amp;gt; is not specified, both /system and /data partitions will be updated.
+
+  - If it is &quot;system&quot; or &quot;data&quot;, only the corresponding partition
+    is updated.
+
+environmental variables:
+  ADB_TRACE                    - Print debug information. A comma separated list of the following values
+                                 1 or all, adb, sockets, packets, rwx, usb, sync, sysdeps, transport, jdwp
+  ANDROID_SERIAL               - The serial number to connect to. -s takes priority over this if given.
+  ANDROID_LOG_TAGS             - When used with the logcat option, only these debug tags are printed.
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>AndroidHTTPS安全请求解析2-手机请求以及连接捕获</title>
+        <link>http://www.liuschen.com/2018/01/01/AndroidHTTPS2.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/01/01/AndroidHTTPS2.html</guid>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;fiddlerhttps&quot;&gt;1. Fiddler捕获HTTPS原理&lt;/h1&gt;
+
+&lt;p&gt;之前所说，当手机通过PS上的Fiddler代理访问网络时，Fiddler会从服务器端请求到一个证书，同Fiddler自带的根证书合并生成一个新的证书返回给客户端(手机)，由于此证书没有在权威认证机构注册过，所以显示不合法。这种办法是不能看到完整的SSl请求数据的&lt;/p&gt;
+
+&lt;p&gt;SSL会话原理&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;客户端发送安全会话请求&lt;/li&gt;
+  &lt;li&gt;服务器发送X509(或其他，根据配置)证书，包含服务器公钥&lt;/li&gt;
+  &lt;li&gt;客户端用已知的CA列表来认证证书(如果是手机客户端的话，会在Assets文件夹下有证书文件，通过代码加载)&lt;/li&gt;
+  &lt;li&gt;客户端生成随机对称密钥，并用服务端的公钥加密&lt;/li&gt;
+  &lt;li&gt;客户机和服务器都知道了对称密钥，并用它来加密会话期间的用户数据&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;SSL是高层协议，工作在传输层之上。&lt;/p&gt;
+
+&lt;p&gt;在Fiddler上代理访问时，启用了它的测试证书，手机访问会提示证书不安全，这个是服务端对客户端证书请求导致的，没请求到符合规范的证书，所以提示，如果这一过程是强制的，将直接导致会话失败。&lt;/p&gt;
+
+&lt;p&gt;在wireshark中捕获请求得到的数据将是TCP包，SSL是上层协议，而wireshark捕获后分析报文到传输层为止。&lt;/p&gt;
+
+&lt;p&gt;可以下载OPENSSL了解其中的功能。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;TO BE CONTINUE&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>Android HTTPS安全请求解析-keystore工具的使用</title>
+        <link>http://www.liuschen.com/2018/01/01/AndroidHTTPS.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2018/01/01/AndroidHTTPS.html</guid>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;keystorekeytoolhttpsblogcsdnnetsayyyarticledetails78351512&quot;&gt;一.keystore工具的使用(大部分摘自&lt;a href=&quot;https://blog.csdn.net/sayyy/article/details/78351512&quot;&gt;使用Keytool工具生成证书及签名完整步骤&lt;/a&gt;)&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;命令:
+
+ -certreq            生成证书请求
+ -changealias        更改条目的别名
+ -delete             删除条目
+ -exportcert         导出证书
+ -genkeypair         生成密钥对
+ -genseckey          生成密钥
+ -gencert            根据证书请求生成证书
+ -importcert         导入证书或证书链
+ -importpass         导入口令
+ -importkeystore     从其他密钥库导入一个或所有条目
+ -keypasswd          更改条目的密钥口令
+ -list               列出密钥库中的条目
+ -printcert          打印证书内容
+ -printcertreq       打印证书请求的内容
+ -printcrl           打印 CRL 文件的内容
+ -storepasswd        更改密钥库的存储口令
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;keystorejkscertificate&quot;&gt;1.创建证书库(Keystore/JKS)及证书(Certificate):&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -genkeypair \
+    -alias www.mydomain.com \
+    -keyalg RSA \
+    –keysize 4096 \
+    -keypass mypassword \
+    -sigalg SHA256withRSA \
+    -dname &quot;cn=www.mydomain.com,ou=xxx,o=xxx,l=Beijing,st=Beijing,c=CN&quot; \ 
+    -validity 3650 \
+    -keystore www.mydomain.com_keystore.jks \
+    -storetype JKS \
+    -storepass mypassword
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用&lt;strong&gt;genkeypair&lt;/strong&gt;参数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;查看选项keytool -genkeypair -option
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;keytool 是jdk提供的工具，该工具名为”keytool“&lt;/li&gt;
+  &lt;li&gt;-alias www.mydomain.com 此处”www.mydomain.com“为别名，可以是任意字符，只要不提示错误即可。因一个证书库中可以存放多个证书，通过别名标识证书。&lt;/li&gt;
+  &lt;li&gt;-keyalg RSA 此处”RSA“为密钥的算法。可以选择的密钥算法有：RSA、DSA、EC。&lt;/li&gt;
+  &lt;li&gt;–keysize 4096 此处”4096“为密钥长度。keysize与keyalg默认对应关系： &lt;br /&gt;
+2048 (when using -genkeypair and -keyalg is “RSA”) &lt;br /&gt;
+1024 (when using -genkeypair and -keyalg is “DSA”) &lt;br /&gt;
+256 (when using -genkeypair and -keyalg is “EC”)&lt;/li&gt;
+  &lt;li&gt;-keypass mypassword 此处”mypassword “为本条目的密码(私钥的密码)。最好与storepass一致。&lt;/li&gt;
+  &lt;li&gt;-sigalg SHA256withRSA 此处”SHA256withRSA“为签名算法。keyalg=RSA时，签名算法有：MD5withRSA、SHA1withRSA、SHA256withRSA、SHA384withRSA、SHA512withRSA。keyalg=DSA时，签名算法有：SHA1withDSA、SHA256withDSA。此处需要注意：MD5和SHA1的签名算法已经不安全。&lt;/li&gt;
+  &lt;li&gt;-dname “cn=www.mydomain.com,ou=xxx,o=xxx,l=Beijing,st=Beijing,c=CN” 在此填写证书信息。”CN=名字与姓氏/域名,OU=组织单位名称,O=组织名称,L=城市或区域名称,ST=州或省份名称,C=单位的两字母国家代码”&lt;/li&gt;
+  &lt;li&gt;-validity 3650 此处”3650“为证书有效期天数。&lt;/li&gt;
+  &lt;li&gt;-keystore www.mydomain.com_keystore.jks 此处”www.mydomain.com_keystore.jks“为密钥库的名称。此处也给出绝对路径。默认在当前目录创建证书库。&lt;/li&gt;
+  &lt;li&gt;-storetype JKS 此处”JKS “为证书库类型。可用的证书库类型为：JKS、PKCS12等。jdk9以前，默认为JKS。自jdk9开始，默认为PKCS12。&lt;/li&gt;
+  &lt;li&gt;-storepass mypassword 此处”mypassword “为证书库密码(私钥的密码)。最好与keypass 一致。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明： &lt;br /&gt;
+上述命令，需要将 -dname 参数替换（尤其时域名要写对）、密码更改即可，其它可保持不变。&lt;/p&gt;
+
+&lt;p&gt;生成证书命令:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -genkey -alias luofeng -keyalg RSA -keystore .keystore
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;csr&quot;&gt;2.生成证书签名请求(CSR)&lt;/h2&gt;
+
+&lt;p&gt;命令如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -certreq -keyalg RSA \
+        -alias www.mydomain.com \
+        -keystore www.mydomain.com_keystore.jks \
+        -storetype JKS \
+        -storepass mypassword \
+        -file www.mydomain.com_certreq.csr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;certreq&lt;/strong&gt;;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;查看具体参数选项:keytool -certreq -option
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解释：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;-file www.mydomain.com_certreq.csr 此处”www.mydomain.com_certreq.csr “为证书签名请求文件。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;将”www.mydomain.com_certreq.csr “文件发送给证书签名机构，然后等待证书签名机构将签名的证书发回，再进行下一步。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;3.将签名请求发给证书签名机构&lt;/h2&gt;
+
+&lt;p&gt;签名机构通过gencert来处理证书：&lt;/p&gt;
+
+&lt;p&gt;需要提供自己的签名请求文件，还需要签名机构的根证书(也是通过genkeypair生成的，只不过签名机构的证书被广泛认可)&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;3.将已签名的证书导入证书库&lt;/h2&gt;
+
+&lt;p&gt;如果到了这步，应该会拿到两个证书。一个是签名机构的根证书（假定为GlobalSign_cert.cer），一个是www.mydomain.com的已签名证书（假定为www.mydomain.com_cert.cer）。两个证书均导入到证书库（www.mydomain.com_keystore.jks）中。&lt;/p&gt;
+
+&lt;p&gt;导入签名机构的根证书：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -import -trustcacerts \
+        -keystore www.mydomain.com_keystore.jks \
+        -storepass mypassword \
+        -alias root_GlobalSign \
+        -file GlobalSign_cert.cer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;alias和file两个参数进行替换。&lt;/p&gt;
+
+&lt;p&gt;导入www.mydomain.com的已签名证书&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -import -trustcacerts \
+        -keystore www.mydomain.com_keystore.jks \
+        -storepass mypassword \
+        -alias www.mydomain.com \
+        -file www.mydomain.com_cert.cer 说明：  alias参数要与生成时一致，file参数进行替换。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;辅助命令&lt;/p&gt;
+
+&lt;p&gt;查看证书库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -list -v \
+        -keystore www.mydomain.com_keystore.jks \
+        -storepass mypassword
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看证书签名请求&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -printcertreq  -file www.mydomain.com_certreq.csr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看已签名证书&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -printcert -file GlobalSign_cert.cer
+keytool -printcert -file www.mydomain.com_cert.cer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;二. 证书概念的区别&lt;/h2&gt;
+
+&lt;p&gt;CSR文件:CSR文件-Certificate Signing Request证书签名请求，这个文件是向权威机构获得颁发证书的请求，核心是一个公钥&lt;br /&gt;
+JKS：java key store,java的keytool上实现的密钥库的格式&lt;br /&gt;
+Cer：window下证书格式&lt;/p&gt;
+
+&lt;p&gt;如果不想要得到签名机构的认可，可以直接使用JKS文件&lt;/p&gt;
+
+&lt;h2 id=&quot;cs&quot;&gt;三. C/S证书交互配置&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;生成服务端证书(库)（注意域名填入服务端网站域名，否则访问会弹出警告）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;导出服务端证书&lt;/p&gt;
+
+    &lt;p&gt;keytool -export -alias server -keystore 证书库路径+名称 -storepass 密码 -rfc -file 导出证书路径+名称.cer&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;tomcat中开启SSL&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;修改Server.xml:&lt;/p&gt;
+
+    &lt;connector port=&quot;8443&quot; protocol=&quot;org.apache.coyote.http11.Http11Protocol&quot; maxthreads=&quot;150&quot; sslenabled=&quot;true&quot; scheme=&quot;https&quot; secure=&quot;true&quot; clientauth=&quot;false&quot; sslprotocol=&quot;TLS&quot; keystorefile=&quot;C:/Users/luofe/Desktop/keystore/server.jks&quot; keystorepass=&quot;123456&quot; /&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;注释掉:&lt;/p&gt;
+
+    &lt;p&gt;&lt;!--&lt;Listener className=&quot;org.apache.catalina.core.AprLifecycleListener&quot; SSLEngine=&quot;on&quot; /&gt;--&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装证书到客户端浏览器(第二步导出的证书)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在浏览器中访问tomcat通过https://127.0.0.1:8443/&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果出现不安全或是该链接不是私密连接的提示，说明证书安装的位置不对，这个证书只有安装到“受信任的根证书颁发机构”下才会被浏览器信任。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;运行中输入certmgr.msc可以打开window的证书管理器，查看证书的安装位置&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;生成本地测试证书:
+
+keytool -genkeypair -alias localhost -keyalg RSA -keysize 4096 -keypass 123456 -sigalg SHA256withRSA -dname &quot;cn=localhost,ou=test,o=test,l=Beijing,st=Beijing,c=CN&quot; -validity 3650 -keystore server.jks -storetype JKS -storepass 123456
+
+导出本地测试
+
+keytool -export -alias localhost -keystore server.jks -storepass 123456 -rfc -file server.cer
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>混淆点义</title>
+        <link>http://www.liuschen.com/2017/10/07/point2.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2017/10/07/point2.html</guid>
+        <pubDate>Sat, 07 Oct 2017 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;not-found&quot;&gt;1.NOT FOUND&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;java.lang.NoClassDefFoundError是运行阶段无法加载到类&lt;/p&gt;
+
+  &lt;p&gt;java.lang.ClassNotfoundException是编译阶段无法找到类&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;2.代理模式和装饰模式&lt;/h2&gt;
+
+&lt;p&gt;代码类似，都是两个类实现同一个接口，一个类实际功能操作，传给另一个作为代理或是装饰的类；&lt;/p&gt;
+
+&lt;p&gt;功能不同，装饰旨在增加功能（不妨碍直接访问功能类的方法），代理则重在控制访问（会在访问功能类的方法中添加访问规则）&lt;/p&gt;
+
+&lt;h2 id=&quot;jdk&quot;&gt;3.JDK动态代理:&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;定义代理对象接口以及代理对象实现&lt;/p&gt;
+
+    &lt;p&gt;如：UserService userService = new UserServiceImpl();&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;实现InvocationHandler接口，将代理对象传入(其中Invoke方法可以实现代理功能//通过反射)&lt;/p&gt;
+
+    &lt;p&gt;如：MyInvocationHandler invocationHandler = new MyInvocationHandler(userService);&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;根据目标对象生成代理对象(classLoader只要选对就行，加载普通类用的同一种classLoader)&lt;/p&gt;
+
+    &lt;p&gt;如：UserService proxy = (UserService) Proxy.newProxyInstance(userService.getClass().getClassLoader(),  &lt;br /&gt;
+              userService.getClass().getInterfaces(), invocationHandler);&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;根据需要调用代理对象的方法&lt;/p&gt;
+
+    &lt;p&gt;如：proxy.getXXX()&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;CGLib代理(针对目标类没有实现目标接口的代理):&lt;/p&gt;
+
+&lt;p&gt;动态生成子类，需要外部包，适合不频繁创建类的代理&lt;/p&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>oracle数据库入门</title>
+        <link>http://www.liuschen.com/2017/09/27/GoogleMap.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2017/09/27/GoogleMap.html</guid>
+        <pubDate>Wed, 27 Sep 2017 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;oracle&quot;&gt;安装Oracle数据库&lt;/h2&gt;
+
+&lt;p&gt;访问安装的Oracle数据库：&lt;/p&gt;
+
+&lt;p&gt;1.https://localhost:1158/em&lt;/p&gt;
+
+&lt;p&gt;2.命令行输入sqlplus&lt;/p&gt;
+
+&lt;h2 id=&quot;oracle-1&quot;&gt;oracle数据库服务&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Oracle ORCL VSS Writer Service：Oracle卷映射拷贝写入服务，VSS（Volume Shadow Copy Service）能够让存储基础设备（比如磁盘，阵列等）创建高保真的时间点映像，即映射拷贝（shadow copy）。它可以在多卷或者单个卷上创建映射拷贝，同时不会影响到系统的系统能。（非必须启动）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OracleDBConsoleorcl：Oracle数据库控制台服务，orcl是Oracle的实例标识，默认的实例为orcl。在运行Enterprise Manager（企业管理器OEM）的时候，需要启动这个服务。（非必须启动）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OracleJobSchedulerORCL：Oracle作业调度（定时器）服务，ORCL是Oracle实例标识。（非必须启动）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OracleMTSRecoveryService：服务端控制。该服务允许数据库充当一个微软事务服务器MTS、COM/COM+对象和分布式环境下的事务的资源管理器。（非必须启动)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OracleOraDb11g_home1ClrAgent：Oracle数据库.NET扩展服务的一部分。 （非必须启动）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OracleOraDb11g_home1TNSListener：监听器服务，服务只有在数据库需要远程访问的时候才需要。（非必须启动）。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OracleServiceORCL：数据库服务(数据库实例)，是Oracle核心服务该服务，是数据库启动的基础， 只有该服务启动，Oracle数据库才能正常启动。(必须启动)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;只用Oracle自带的sql*plus的话，只要启动OracleServiceORCL即可，要是使用PL/SQL Developer等第三方工具的话，OracleOraDb11g_home1TNSListener服务也要开启。OracleDBConsoleorcl是进入基于web的EM必须开启的，其余服务很少用。&lt;/p&gt;
+
+&lt;h1 id=&quot;plsql&quot;&gt;PLSQL远程访问数据库&lt;/h1&gt;
+
+&lt;p&gt;PLSQL Developer\instantclient_11_2下的文件tnsnames.ora配置数据库的访问地址&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;问题&lt;/h1&gt;
+
+&lt;p&gt;如果通过浏览器访问不到数据库了，那么需要在服务管理器中（window）依次关闭，然后依次重启以下服务：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;OracleOraDb11g_home1TNSListener
+OracleDbConsoleorcl
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Google离线地图</title>
+        <link>http://www.liuschen.com/2017/09/23/GoogleMap.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2017/09/23/GoogleMap.html</guid>
+        <pubDate>Sat, 23 Sep 2017 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;1.初始化地图&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map = new google.maps.Map(document.getElementById(&#39;map&#39;), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;2.还可以添加地图选项：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map = new google.maps.Map(document.getElementById(&#39;map_canvas&#39;), mapOptions);
+ var mapOptions = {
+      zoom: 16,
+      center: myLatlng,
+	  mapTypeControl: true,
+      mapTypeControlOptions: {
+		  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+		mapTypeIds: [
+		&#39;localMap&#39; ]  //定义地图类型
+	  },
+	  //平移控制器
+	  panControl: false,
+	  //缩放控制器
+	  zoomControl: false,
+	  //地图切换
+	  mapTypeControl: true,
+	  scaleControl: false,
+	  //街道视图控制（小人）
+	  streetViewControl: false,
+	  //鹰眼图
+	  overviewMapControl: true
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;3.绑定本地地图&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map.mapTypes.set(&#39;localMap&#39;, localMapType);   //绑定本地地图类型
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;localMapType是返回的瓦片，可以这样获取：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function LocalMapType() {}
+  
+    LocalMapType.prototype.tileSize = new google.maps.Size(256, 256);
+    LocalMapType.prototype.maxZoom = 16;   //地图显示最大级别
+    LocalMapType.prototype.name = &quot;本地地图&quot;;
+    LocalMapType.prototype.alt = &quot;显示本地地图数据&quot;;
+	//设置地图瓦片的边框和颜色，当前为不可见，因为width为0
+    LocalMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
+		var div = ownerDocument.createElement(&#39;div&#39;);
+		div.innerHTML = &#39;&amp;lt;img name=&quot;&quot; src=&quot;./maptile/googlemaps/roadmap/&#39; + zoom + &#39;/&#39; + coord.x + &#39;/&#39; + coord.y+&#39;.jpg&quot;/&amp;gt;&#39;; 
+		div.style.width = this.tileSize.width + &#39;px&#39;;
+		div.style.height = this.tileSize.height + &#39;px&#39;;
+		div.style.fontSize = &#39;10&#39;;
+		div.style.borderStyle = &#39;solid&#39;;
+		div.style.borderWidth = &#39;0px&#39;;
+		div.style.borderColor = &#39;#AAAAAA&#39;;
+		//瓦片背景颜色
+		div.style.backgroundColor = &#39;#E5E3DF&#39;;
+	  return div;
+    };
+  var localMapType = new LocalMapType();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;5.基本的一个坐标点对象：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;var myLatlng = new google.maps.LatLng(39.97094, 116.37234);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;6.指定显示本地地图&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map.setMapTypeId(&#39;localMap&#39;);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;7.设置可拖曳地图：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map.setOptions({draggable: true});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;8.获取地图边界：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mapRangeBound = map.getBounds();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;map&quot;&gt;9.map上添加事件，如下为点击事件：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map.addListener(&#39;click&#39;, function(event) {})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;mapdiv&quot;&gt;10.为map瓦块div添加点击事件：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;google.maps.event.addDomListener(mapDiv, &#39;click&#39;, function() {});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;11.点击事件：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;google.maps.event.addListener
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;12.代码拖动地图：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map.panTo(new google.maps.LatLng(39.97094, 116.37234));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;13.拖动地图事件：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;map.addListener(&#39;center_changed&#39;, function() {
+      // 3 seconds after the center of the map has changed, pan back to the
+      // marker.
+      window.setTimeout(function() {
+        map.panTo(marker.getPosition());
+      }, 3000);
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;marker&quot;&gt;14.点击marker改变地图显示等级和中心：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;marker.addListener(&#39;click&#39;, function() {
+      map.setZoom(8);
+      map.setCenter(marker.getPosition());
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;15.添加消息显示框：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;function attachSecretMessage(marker, secretMessage) {
+    var infowindow = new google.maps.InfoWindow({
+      content: secretMessage
+    });
+	
+    marker.addListener(&#39;click&#39;, function() {
+      infowindow.open(marker.get(&#39;map&#39;), marker);
+    });
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;注意:&lt;/h2&gt;
+
+&lt;p&gt;google.maps.event.addListener是为其他对象添加事件，而map.addListener是为map本身添加对象&lt;/p&gt;
+
+&lt;p&gt;google.maps.event是事件对象，可以通过获取到很多东西。如坐标还可能是图形对象，具体看情况，以下就是图形对象：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	google.maps.event.addListener(drawingManager, &#39;circlecomplete&#39;, function(circle) {
+  var radius = circle.getRadius();
+});
+
+google.maps.event.addListener(drawingManager, &#39;overlaycomplete&#39;, function(event) {
+  if (event.type == &#39;circle&#39;) {
+    var radius = event.overlay.getRadius();
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;设置位置没有加单位导致不能用，在地图上绘图时，google.maps.Map 事件（如 click 和 mousemove）将被禁用。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;google地图的点击事件会有遮挡和屏蔽的效果。所以如果处于绘图模式map的点击等一系列效果会被屏蔽。&lt;/p&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>GPS坐标区域判定2</title>
+        <link>http://www.liuschen.com/2017/09/20/gps2.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2017/09/20/gps2.html</guid>
+        <pubDate>Wed, 20 Sep 2017 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;1.两点之间距离&lt;/h1&gt;
+
+&lt;p&gt;通过手动算法计算：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static double getEarthDistance(double lat1,double lon1,
+                             double lat2, double lon2){
+    double φ1 = Math.toRadians(lat1);
+    double φ2 = Math.toRadians(lat2);
+    double Δφ = Math.toRadians(lat2-lat1);
+    double Δλ =  Math.toRadians(lon2-lon1);
+
+    double a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ/2) * Math.sin(Δλ/2);
+
+    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    double d = EARTH_RADIUS_KM * c;
+    return d;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过android中现成的方法:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;private static void computeDistanceAndBearing(double lat1, double lon1,
+    double lat2, double lon2, float[] results) {
+    // Based on http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
+    // using the &quot;Inverse Formula&quot; (section 4)
+
+    int MAXITERS = 20;
+    // Convert lat/long to radians
+    lat1 *= Math.PI / 180.0;
+    lat2 *= Math.PI / 180.0;
+    lon1 *= Math.PI / 180.0;
+    lon2 *= Math.PI / 180.0;
+
+    double a = 6378137.0; // WGS84 major axis
+    double b = 6356752.3142; // WGS84 semi-major axis
+    double f = (a - b) / a;
+    double aSqMinusBSqOverBSq = (a * a - b * b) / (b * b);
+
+    double L = lon2 - lon1;
+    double A = 0.0;
+    double U1 = Math.atan((1.0 - f) * Math.tan(lat1));
+    double U2 = Math.atan((1.0 - f) * Math.tan(lat2));
+
+    double cosU1 = Math.cos(U1);
+    double cosU2 = Math.cos(U2);
+    double sinU1 = Math.sin(U1);
+    double sinU2 = Math.sin(U2);
+    double cosU1cosU2 = cosU1 * cosU2;
+    double sinU1sinU2 = sinU1 * sinU2;
+
+    double sigma = 0.0;
+    double deltaSigma = 0.0;
+    double cosSqAlpha = 0.0;
+    double cos2SM = 0.0;
+    double cosSigma = 0.0;
+    double sinSigma = 0.0;
+    double cosLambda = 0.0;
+    double sinLambda = 0.0;
+
+    double lambda = L; // initial guess
+    for (int iter = 0; iter &amp;lt; MAXITERS; iter++) {
+        double lambdaOrig = lambda;
+        cosLambda = Math.cos(lambda);
+        sinLambda = Math.sin(lambda);
+        double t1 = cosU2 * sinLambda;
+        double t2 = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
+        double sinSqSigma = t1 * t1 + t2 * t2; // (14)
+        sinSigma = Math.sqrt(sinSqSigma);
+        cosSigma = sinU1sinU2 + cosU1cosU2 * cosLambda; // (15)
+        sigma = Math.atan2(sinSigma, cosSigma); // (16)
+        double sinAlpha = (sinSigma == 0) ? 0.0 :
+            cosU1cosU2 * sinLambda / sinSigma; // (17)
+        cosSqAlpha = 1.0 - sinAlpha * sinAlpha;
+        cos2SM = (cosSqAlpha == 0) ? 0.0 :
+            cosSigma - 2.0 * sinU1sinU2 / cosSqAlpha; // (18)
+
+        double uSquared = cosSqAlpha * aSqMinusBSqOverBSq; // defn
+        A = 1 + (uSquared / 16384.0) * // (3)
+            (4096.0 + uSquared *
+             (-768 + uSquared * (320.0 - 175.0 * uSquared)));
+        double B = (uSquared / 1024.0) * // (4)
+            (256.0 + uSquared *
+             (-128.0 + uSquared * (74.0 - 47.0 * uSquared)));
+        double C = (f / 16.0) *
+            cosSqAlpha *
+            (4.0 + f * (4.0 - 3.0 * cosSqAlpha)); // (10)
+        double cos2SMSq = cos2SM * cos2SM;
+        deltaSigma = B * sinSigma * // (6)
+            (cos2SM + (B / 4.0) *
+             (cosSigma * (-1.0 + 2.0 * cos2SMSq) -
+              (B / 6.0) * cos2SM *
+              (-3.0 + 4.0 * sinSigma * sinSigma) *
+              (-3.0 + 4.0 * cos2SMSq)));
+
+        lambda = L +
+            (1.0 - C) * f * sinAlpha *
+            (sigma + C * sinSigma *
+             (cos2SM + C * cosSigma *
+              (-1.0 + 2.0 * cos2SM * cos2SM))); // (11)
+
+        double delta = (lambda - lambdaOrig) / lambda;
+        if (Math.abs(delta) &amp;lt; 1.0e-12) {
+            break;
+        }
+    }
+
+    float distance = (float) (b * A * (sigma - deltaSigma));
+    results[0] = distance;
+    if (results.length &amp;gt; 1) {
+        float initialBearing = (float) Math.atan2(cosU2 * sinLambda,
+            cosU1 * sinU2 - sinU1 * cosU2 * cosLambda);
+        initialBearing *= 180.0 / Math.PI;
+        results[1] = initialBearing;
+        if (results.length &amp;gt; 2) {
+            float finalBearing = (float) Math.atan2(cosU1 * sinLambda,
+                -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda);
+            finalBearing *= 180.0 / Math.PI;
+            results[2] = finalBearing;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;2.判断一点是否在不规则多边形中&lt;/h1&gt;
+
+&lt;p&gt;判断一点是否在多边形中，常用的是射线法，个人觉得也是最简单的一种，因为比较角度和面积都会牵扯到正负的判断，而射线法则不需要。规则：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;以给定的点为起点，向任意方向做一条射线。如果射线与给定的多边形的交点为奇数则该点在多边形内部（点不再多边形边上且不与顶点重合），为偶数则为点在多边形外（0是偶数）。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;单单这样看的话，也并不简单，首先应该先建立坐标系，然后取一条过点的射线，列出函数表达式，然后因为已知多边形各各点的坐标，求出每条边的函数，遍历每条边，计算与射线的交点并计算交点是否在多边形的边上。如果在，算作一个交点。最后算出总的交点个数即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;特殊情况：当所选取的射线与一条边重合时，如果点不在重合线段上，算作两个交点，如果在，算作一个交点，并且排除相邻两边的计算，排除以上情况后，如果射线过多边形的一个顶点，那么依旧算作两个交点，并且排除过该顶点的另一条边的计算。其余的按照正常计算即可。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体问题具体分析，gps坐标是地理坐标，是在一个球体上表示，如果求一个点是否在指定图形区域内，如果要在笛卡尔坐标系中计算，就需要将坐标投影到平面上，可以用web墨卡托坐标系，在平面坐标系中求得多边形距离给定点最近的一点的坐标，将此点再次转化为gps坐标，然后计算给定点与该点的距离即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;之所以做两次转化是因为平面坐标系计算距离不准确，而且维度不同误差很大，所以平面坐标系将点到多边形转化为点到点的计算，然后可以在球面坐标系中用现成的方法来计算
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是，以上方法还是太麻烦了，因为是应用计算，完全不必要，只需要取一个特殊的射线即可，我取的是 给定点指向北极点（将极点看作无穷远）的射线。那么只需要3步骤即可：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1.判断射线是否与多边形边重合&lt;/li&gt;
+  &lt;li&gt;2.判断给定点是否与多边形顶点重合&lt;/li&gt;
+  &lt;li&gt;3.判断多边形每条边是否与射线相交（遍历，以下是对多边形每条线段的处理）&lt;/li&gt;
+  &lt;li&gt;3.1.线段两个端点的纬度如果大于给定点，经度如果一个大于一个小于给定点则相交，记为一个交点。&lt;/li&gt;
+  &lt;li&gt;3.2.如果线段两端点经度一个大于一个小于给定点，同时纬度一个大于一个小于给定点，那么就需要通过平行相交的比例关系判断与射线所在直线的交点是否是在射线上。如果在，记为一个交点。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体算法:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**
+ * 判断点是否在图形区域内
+ * 原理:射线法，取点所在的经线作为射线来判断
+ *
+ * 特殊情况：
+ * 1.射线与n条边重合
+ * 2.射线与经过n个顶点
+ * @param point 点的经纬度，0/1   latitude/ longitude 纬度/经度
+ * @param polygon 多边形的点集合，0/1   latitude/ longitude 纬度/经度
+ * */
+public static boolean isPointInPolygon(double[] point,double[][] polygon){
+    /**参考射线取点所在经线自该点向南极发射的一条射线*/
+    int node = 0;
+    for (int i = 0; i &amp;lt; polygon.length; i++) {
+        int next = i+1;
+        if (i==polygon.length-1)
+            next = 0;
+        /**首先判断边是否与参考经线重合*/
+        if(point[1]==polygon[i][1]&amp;amp;&amp;amp;polygon[i][1]==polygon[next][1]){
+            if((point[0]&amp;gt;=polygon[i][0]&amp;amp;&amp;amp;point[0]&amp;lt;=polygon[next][0])||(point[0]&amp;lt;=polygon[i][0]&amp;amp;&amp;amp;point[0]&amp;gt;=polygon[next][0])){
+                /**在线段内*/
+                return true;
+            }else if(point[0]&amp;lt;polygon[i][0]&amp;amp;&amp;amp;point[0]&amp;lt;polygon[next][0]){
+                /**在线段外的射线上*/
+                System.out.println(&quot;~~点在线段延长线上:&quot;+i);
+                node+=2;
+            }else{
+                /**在线段外，并且不在射线上*/
+            }
+        }else if(point[1]==polygon[i][1]){
+            /**判断顶点是否在参考经线之上*/
+            if(point[0]==polygon[i][0]){
+                /**点与图形顶点重合*/
+                return true;
+            }else if(point[0]&amp;lt;polygon[i][0]){
+                node+=2;
+            }
+        }else{
+            /**判断边是否与射线相交*/
+
+            /**这种计算的先决条件是线段两点必须分布在当前位置点所在经线的两端*/
+            if((polygon[i][1]&amp;gt;point[1]&amp;amp;&amp;amp;polygon[next][1]&amp;gt;point[1])||(polygon[i][1]&amp;lt;point[1]&amp;amp;&amp;amp;polygon[next][1]&amp;lt;point[1])){
+                /**参考经线不会经过该线段*/
+                continue;
+            }else{
+                /**判断纬度是否需要计算*/
+                if(polygon[i][0]&amp;gt;point[0]&amp;amp;&amp;amp; polygon[next][0]&amp;gt;point[0]){
+                    System.out.println(&quot;~~纬度判断:&quot;+i);
+                    node++;
+                }else if(polygon[i][0]&amp;lt;point[0]&amp;amp;&amp;amp; polygon[next][0]&amp;gt;point[0]){
+                    /***/
+                    double tempLength1 = getDistanceByAndroid(polygon[i][0],polygon[i][1],polygon[i][0],point[1]);
+                    double tempLength2 = getDistanceByAndroid(polygon[next][0],polygon[next][1],polygon[next][0],point[1]);
+                    /**参考距离*/
+                    double tempLength4 = getDistanceByAndroid(point[0],point[1],polygon[next][0],point[1]);
+
+                    double tempLength5 = getDistanceByAndroid(polygon[i][0],point[1],polygon[next][0],point[1]);
+                    if((tempLength4/tempLength5)&amp;gt;(tempLength2/(tempLength1+tempLength2))){
+                        /**经过一个交点*/
+                        System.out.println(&quot;~~夹点判断1:&quot;+i);
+                        node++;
+                    }
+                }else if(polygon[i][0]&amp;gt;point[0]&amp;amp;&amp;amp; polygon[next][0]&amp;lt;point[0]){
+                    /***/
+                    double tempLength1 = getDistanceByAndroid(polygon[i][0],polygon[i][1],polygon[i][0],point[1]);
+                    double tempLength2 = getDistanceByAndroid(polygon[next][0],polygon[next][1],polygon[next][0],point[1]);
+                    /**参考距离*/
+                    double tempLength3 = getDistanceByAndroid(point[0],point[1],polygon[i][0],point[1]);
+
+                    double tempLength5 = getDistanceByAndroid(polygon[i][0],point[1],polygon[next][0],point[1]);
+                    if((tempLength3/tempLength5)&amp;gt;(tempLength1/(tempLength1+tempLength2))){
+                        /**经过一个交点*/
+                        System.out.println(&quot;~~夹点判断2:&quot;+i);
+                        node++;
+                    }
+                }
+                /**
+                 * polygon[i][0]&amp;lt;point[0]&amp;amp;&amp;amp; polygon[next][0]&amp;lt;point[0]
+                 相交于射线的反向延长线上(最后一种可能，基于性能不做判断)
+                 * */
+                }
+            }
+    }
+    System.out.println(&quot;~~node:&quot;+node);
+    if(node%2==0) return false;
+    else return true;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;3.计算点到多边形的距离&lt;/h1&gt;
+
+&lt;p&gt;直接计算我没有好的方法，我计算的是配合上面判断点是否在多边形内部，然后计算点到各个多边形边的最短距离&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1.遍历多边形，得出每条边&lt;/li&gt;
+  &lt;li&gt;2.已知给定点到线段端点的长度，以及线段长度，求出点到线段的距离&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;算法1，已知三边长，求高：&lt;/p&gt;
+
+ 	/**&lt;br /&gt;
+&lt;pre&gt;&lt;code&gt; * 计算三角上a边上的高
+ *@param a a边长
+ *@param b b边长
+ *@param c c边长
+ * */
+public static double getTrigCh(double b,double c,double a){
+    double p1 = a+c+b;
+    double p2 = a+c-b;
+    double p3 = b+a-c;
+    double p4 = b-a+c;
+    double r1 = p1*p2*p3*p4;
+    double r2 = Math.sqrt(r1);
+    return r2/(2*a);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;算法2，计算点到多边形的距离：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**计算点到多边形之间的距离*/
+public static double calculateDistance(double[] point,double[][] polygon){
+    double[] distances = new double[polygon.length];
+    double[] sideLengths = new double[polygon.length];
+    for (int i = 0; i &amp;lt; polygon.length; i++) {
+        int next = i+1;
+        if (i==polygon.length-1)
+            next = 0;
+        distances[i] = getDistance(point[0],point[1],polygon[i][0],polygon[i][1]);
+        sideLengths[i] = getDistance(polygon[i][0],polygon[i][1],polygon[next][0],polygon[next][1]);
+        System.out.println(&quot;~distances[&quot;+i+&quot;]:&quot;+distances[i]);
+        System.out.println(&quot;~sideLengths[&quot;+i+&quot;]:&quot;+sideLengths[i]);
+    }
+    double minDistance = Double.MAX_VALUE;
+    for (int i = 0; i &amp;lt; polygon.length; i++) {
+        int next = i+1;
+        if (i==polygon.length-1)
+            next = 0;
+        double tampDistance;
+        if(distances[i]&amp;gt;distances[next]&amp;amp;&amp;amp;distances[i]&amp;gt;sideLengths[i]){
+            tampDistance = distances[next];
+        }else if(distances[next]&amp;gt;distances[i]&amp;amp;&amp;amp;distances[next]&amp;gt;sideLengths[i]){
+            tampDistance = distances[i];
+        }else{
+            tampDistance = getTrigCh(distances[i],distances[next],sideLengths[i]);
+        }
+        System.out.println(&quot;~tampDistance:&quot;+tampDistance);
+        minDistance = (minDistance&amp;gt;tampDistance)?tampDistance:minDistance;
+    }
+    return minDistance;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://www.liuschen.com/code/gpsUtils.html&quot;&gt;更多GPS操作方法&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>GPS坐标区域判定1</title>
+        <link>http://www.liuschen.com/2017/09/20/gps1.html</link>
+        <guid isPermaLink="true">http://www.liuschen.com/2017/09/20/gps1.html</guid>
+        <pubDate>Wed, 20 Sep 2017 00:00:00 +0800</pubDate>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;文章链接:&lt;a href=&quot;http://www.liuschen.com&quot;&gt;http://www.liuschen.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;相关知识因为总要用到，结果再看时却已经忘的差不多，所以这次温习，记下，备忘。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;地球是一个两极稍扁，赤道略鼓的扁球体&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;坐标系区分&lt;/h1&gt;
+
+&lt;p&gt;首先按坐标类型划分分为:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;地理坐标系(大地坐标系，球面坐标，地理坐标，4326 GCS_WGS_1984,火星坐标和百度坐标属于加偏过的地理坐标)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;投影坐标系(平面坐标，例:102100 WGS_1984_web_mercator_auxiliary_sphere,墨卡托投影坐标系)&lt;/p&gt;
+
+    &lt;p&gt;web_mercator是一个投影坐标系，其参考的基准面是WGS_1984( WGS 1984 是一个长半轴(a)为6378137，短半轴（b）为6356752.314245179 的椭球体，扁率(f)为298.257223563，f=(a-b)/a ),并不是严格意义上的墨卡托投影,&lt;br /&gt;
+  Auxiliary Sphere 就是在告知你，这个坐标在投影过程中，将椭球体近似为正球体做投影变换，虽然基准面是WGS 1984 椭球面&lt;br /&gt;
+  102100是Esri内部使用ID与之对应EPSG分配的坐标系ID为3857&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;其中地理坐标系也是一种球面坐标系，是用来定位一点在地球中的位置的。而投影坐标系则是通过点线面来计算长度测算距离面积的。&lt;/p&gt;
+
+&lt;p&gt;通过android手机获取的GPS坐标是经纬度坐标，一般小数位比较长，这是因为做分秒转化时没有除尽导致的，这也说明了Google取到的坐标是时分秒的形式，北京经度都是116。&lt;/p&gt;
+
+&lt;p&gt;时分秒坐标转经纬度坐标：&lt;/p&gt;
+
+&lt;p&gt;经/纬度 = 经/纬度 + 经/纬分/60 + 经/纬秒/3600&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GCJ-02：火星坐标系，我国使用的，所有电子地图必须经过至少一次的加偏
+
+谷歌地图API，高德地图API，腾讯地图API上取到的，都是GCJ-02坐标
+百度API上取到的，是BD-09坐标，只适用于百度地图相关产品。
+搜狗API上取到的，是搜狗坐标，只适用于搜狗地图相关产品。
+谷歌地球，google earth上取到的，是GPS坐标，而且是度分秒形式的经纬度坐标，在国内不允许直接使用。
+百度和goole投影选择的都是墨卡托，web_mercator（web墨卡托）是将地球模拟为球体，Spherical Mercator常规墨卡托将地球模拟为椭球体
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;坐标转换&lt;/h1&gt;
+
+&lt;p&gt;坐标转换包括，GPS坐标转火星坐标(中国必须，偏移)，GPS和web墨卡托互相转化(地图显示)，算法，略。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;地图概念区分&lt;/h1&gt;
+
+&lt;p&gt;通常我们使用的定位坐标是GPS坐标，是一种地理坐标，即WGS_1984&lt;/p&gt;
+
+&lt;p&gt;应用到地图中的坐标为平面坐标，即墨卡托坐标系，与上面坐标系不同的是这种坐标系是一种平面坐标系，也就是单位是m或是km&lt;/p&gt;
+
+&lt;p&gt;我再用地图下载器下载的Google地图有未加偏和加偏的地图，这个加偏就是转火星坐标，也就是GCJ-02坐标，这种坐标的本质还是一种地理坐标系，所以还是用度分秒来表示&lt;/p&gt;
+
+&lt;p&gt;arcgis中进行图形判定时会有些转化设置，SpatialReference.create(4326), SpatialReference.create(102100),是将gps坐标转换为地图投影坐标再计算，注意，是由于是图形计算，才需要平面坐标系。&lt;/p&gt;
+
+&lt;p&gt;而我另一篇写的坐标区域判定并不是和arcgis一样纯图形的，是先通过gps来判断内外，然后通过各个点的距离来进行图形计算的，完美绕开了我误解的区域（我曾以为Google的偏移是由于gps转墨卡托坐标引起的）&lt;/p&gt;
+
+&lt;p&gt;参考:&lt;a href=&quot;http://blog.csdn.net/kikitamoon/article/details/46124935&quot;&gt;Web Mercator 公开的小秘密&lt;/a&gt;&lt;br /&gt;
+参考:&lt;a href=&quot;http://www.movable-type.co.uk/scripts/latlong.html&quot;&gt;Calculate distance, bearing and more between Latitude/Longitude points&lt;/a&gt;&lt;/p&gt;
+
+</description>
+      </item>
+    
+  </channel>
+</rss>

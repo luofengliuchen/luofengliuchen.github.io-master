@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
+
+<title>GPS坐标区域判定2 | 落风的博客</title>
+<meta name="author" content="落风">
+
+  <meta name="keywords" content="gps,java">
+
+
+
+
+<link rel="shortcut icon" href="http://7xpui7.com1.z0.glb.clouddn.com/blog-site-favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+<link href="/pages/rss.xml" rel="alternate" title="落风的博客" type="application/atom+xml">
+  </head>
+  <body>
+    <aside id="sidebar">
+  <nav id="tags">
+    <a href="/index.html" id="avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+
+    <ul id="tags__ul">
+      <li id="pl__all" class="tags__li tags-btn active">全部</li>
+       
+        <li id="Java" class="tags__li tags-btn">Java</li>
+       
+        <li id="Android" class="tags__li tags-btn">Android</li>
+       
+        <li id="NDK" class="tags__li tags-btn">NDK</li>
+       
+        <li id="其他" class="tags__li tags-btn">其他</li>
+       
+        <li id="HTML5" class="tags__li tags-btn">HTML5</li>
+       
+        <li id="工程相关" class="tags__li tags-btn">工程相关</li>
+       
+        <li id="网络技术" class="tags__li tags-btn">网络技术</li>
+       
+        <li id="数据处理" class="tags__li tags-btn">数据处理</li>
+       
+        <li id="VideoAndMap" class="tags__li tags-btn">VideoAndMap</li>
+      
+    </ul>
+
+    <div id="tags__bottom">
+      <a href="mailto:luofenglc@gmail.com" id="icon-email" class="tags-btn fontello"></a>
+      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello"></a>
+    </div>
+  </nav> <!-- end #tags -->
+
+  <div id="posts-list">
+    <form action="" id="search-form">
+      <a href="/index.html" id="mobile-avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+      <!-- NOTE: input field is disabled by default -->
+      <input id="search-input" type="text" placeholder="Search...">
+    </form>
+
+    <nav id="pl__container">
+    
+      <a class="工程相关 pl__all" href="/2018/04/01/jar.html"><span class="pl__circle"></span><span class="pl__title">jar打包问题</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/http_sb.html"><span class="pl__circle"></span><span class="pl__title">http请求头</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/fiddler.html"><span class="pl__circle"></span><span class="pl__title">Fiddler抓取数据失败：tunnel to 443</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="Java pl__all" href="/2018/04/01/thread.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="NDK pl__all" href="/2018/03/15/jni2.html"><span class="pl__circle"></span><span class="pl__title">JNI常见问题(问题查询笔记)2</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="HTML5 pl__all" href="/2018/03/15/DCloud.html"><span class="pl__circle"></span><span class="pl__title">DCloud下的静态资源路径</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="数据处理 pl__all" href="/2018/03/15/python4.html"><span class="pl__circle"></span><span class="pl__title">python4-mxnet笔记</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_zlgx.html"><span class="pl__circle"></span><span class="pl__title">Android增量更新</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_yh.html"><span class="pl__circle"></span><span class="pl__title">Android优化</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/Androidstore.html"><span class="pl__circle"></span><span class="pl__title">Android访问存储目录</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP0.html"><span class="pl__circle"></span><span class="pl__title">PHP语法简要笔记</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="工程相关 pl__all" href="/2018/01/01/adb.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS2.html"><span class="pl__circle"></span><span class="pl__title">AndroidHTTPS安全请求解析2-手机请求以及连接捕获</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS.html"><span class="pl__circle"></span><span class="pl__title">Android HTTPS安全请求解析-keystore工具的使用</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="Java pl__all" href="/2017/10/07/point2.html"><span class="pl__circle"></span><span class="pl__title">混淆点义</span><span class="pl__date">Oct 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/27/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">oracle数据库入门</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/23/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">Google离线地图</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps2.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定2</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps1.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定1</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="其他 pl__all" href="/2017/09/10/php.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thresd2.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thread1.html"><span class="pl__circle"></span><span class="pl__title">线程复习笔记</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/08/05/AndroidSafe.html"><span class="pl__circle"></span><span class="pl__title">android权限管理</span><span class="pl__date">Aug 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/07/25/maven2.html"><span class="pl__circle"></span><span class="pl__title">maven2</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/07/20/dbtest.html"><span class="pl__circle"></span><span class="pl__title">数据库测试</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/07/02/cordova.html"><span class="pl__circle"></span><span class="pl__title">cordova</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/06/08/kotlin.html"><span class="pl__circle"></span><span class="pl__title">Kotlin笔记</span><span class="pl__date">Jun 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/05/20/Python2.html"><span class="pl__circle"></span><span class="pl__title">python笔记2</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/05/06/retrofit.html"><span class="pl__circle"></span><span class="pl__title">Retrofit浅析-OkHttp-rxjava</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/04/25/python.html"><span class="pl__circle"></span><span class="pl__title">python笔记1</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/04/20/Freemarker.html"><span class="pl__circle"></span><span class="pl__title">Freemarker基本使用</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/04/03/git2.html"><span class="pl__circle"></span><span class="pl__title">GIT配置</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/31/smali.html"><span class="pl__circle"></span><span class="pl__title">Android反编译smali文件的修改</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/28/Bootstrap.html"><span class="pl__circle"></span><span class="pl__title">Bootstrap</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/21/smali2.html"><span class="pl__circle"></span><span class="pl__title">android反编译还原项目指南</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/20/something.html"><span class="pl__circle"></span><span class="pl__title">一些web相关东西(摘自网络)</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/16/linux.html"><span class="pl__circle"></span><span class="pl__title">linux网络调试</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/15/project.html"><span class="pl__circle"></span><span class="pl__title">如何将已存在的APK项目作为资源引用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/13/caffe.html"><span class="pl__circle"></span><span class="pl__title">protobuf基本使用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/09/docker.html"><span class="pl__circle"></span><span class="pl__title">docker</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="网络技术 pl__all" href="/2017/03/06/broadcast.html"><span class="pl__circle"></span><span class="pl__title">网络探测技术初探</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/02/26/GBK.html"><span class="pl__circle"></span><span class="pl__title">GBK编码问题</span><span class="pl__date">Feb 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/01/16/error.html"><span class="pl__circle"></span><span class="pl__title">eclipse配合maven导入项目遇到的问题</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/01/16/fastdfs.html"><span class="pl__circle"></span><span class="pl__title">FastDFS配置文档</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/28/Intellij.html"><span class="pl__circle"></span><span class="pl__title">intellij尝试</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/26/maven.html"><span class="pl__circle"></span><span class="pl__title">MAVEN配置</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/12/19/flash.html"><span class="pl__circle"></span><span class="pl__title">flash RTMP 推流</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/12/12/jbmp.html"><span class="pl__circle"></span><span class="pl__title">JBMP安装</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/12/01/c++-copy.html"><span class="pl__circle"></span><span class="pl__title">c++学习笔记</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/27/C++-point.html"><span class="pl__circle"></span><span class="pl__title">c语言微知识点</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/20/C++-jni.html"><span class="pl__circle"></span><span class="pl__title">jni编程中C++/C语言一些问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/17/RTMP.html"><span class="pl__circle"></span><span class="pl__title">RTMP延时问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/16/ffplay.html"><span class="pl__circle"></span><span class="pl__title">ffmpeg/ffplay命令记录（转载，整理）</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/11/09/database.html"><span class="pl__circle"></span><span class="pl__title">Android数据库并发操作</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/06/sdl.html"><span class="pl__circle"></span><span class="pl__title">SDL&android</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/30/live555-dir.html"><span class="pl__circle"></span><span class="pl__title">live555初探-修改live555当前工作目录</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/29/live555-android.html"><span class="pl__circle"></span><span class="pl__title">live555 window下编译运行以及Android平台的移植</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/27/red5.html"><span class="pl__circle"></span><span class="pl__title">red5流媒体服务器的搭建以及Tomcat上的集成</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/25/ffmpeg-jna.html"><span class="pl__circle"></span><span class="pl__title">Android手机视频直播推流-RTMP推流-解决方案一</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/17/ffmpeg.html"><span class="pl__circle"></span><span class="pl__title">基于Android的手机推流</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/12/ffmpeg-decode.html"><span class="pl__circle"></span><span class="pl__title">音视频编解码-ffmpeg解码</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/10/02/wildernessdiary-time.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-时空狂想</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/09/25/javah.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio解决javah生成头文件时找不到类的问题</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/09/18/net-analysis.html"><span class="pl__circle"></span><span class="pl__title">网络工程-抓包分析</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/09/15/BLocation.html"><span class="pl__circle"></span><span class="pl__title">Android基站定位</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/26/netty-point.html"><span class="pl__circle"></span><span class="pl__title">netty point</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/25/netty_connect.html"><span class="pl__circle"></span><span class="pl__title">netty框架是如何执行connect连接的</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/20/netty-beat.html"><span class="pl__circle"></span><span class="pl__title">netty自带心跳响应</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/12/AndroidSVG.html"><span class="pl__circle"></span><span class="pl__title">android svg动画</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/11/Androidstudioupdatelike.html"><span class="pl__circle"></span><span class="pl__title">AndroidStudio版本更新记录</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/05/proguard.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下的代码混淆</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/02/nine.html"><span class="pl__circle"></span><span class="pl__title">nine patch图片的用法绘制以及作用</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/07/22/zip.html"><span class="pl__circle"></span><span class="pl__title">Android解压缩zip文件</span><span class="pl__date">Jul 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/06/07/person.html"><span class="pl__circle"></span><span class="pl__title">程序员编程语录</span><span class="pl__date">Jun 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/04/29/sqlite.html"><span class="pl__circle"></span><span class="pl__title">Android数据库和Bean的交互</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/25/wildernessdiary-habby.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-习惯</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/16/wildernessdiary-start.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-开篇</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/02/21/studio.html"><span class="pl__circle"></span><span class="pl__title">Visual Studio开发Android程序</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/02/19/c++.html"><span class="pl__circle"></span><span class="pl__title">C++学习整理</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/02/17/socket.html"><span class="pl__circle"></span><span class="pl__title">Socket编程笔记</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/16/apk.html"><span class="pl__circle"></span><span class="pl__title">git常用命令行</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/14/apk.html"><span class="pl__circle"></span><span class="pl__title">android反编译</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/05/html5-2.html"><span class="pl__circle"></span><span class="pl__title">html5内嵌入android</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/04/html5-1.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习记录</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/03/html5.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox3.html"><span class="pl__circle"></span><span class="pl__title">想要冬眠的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox2.html"><span class="pl__circle"></span><span class="pl__title">擅长卖萌的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox1.html"><span class="pl__circle"></span><span class="pl__title">正在找东西的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/project-mode.html"><span class="pl__circle"></span><span class="pl__title">我对瀑布开发模式和敏捷开发模式的理解</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/dream-flower.html"><span class="pl__circle"></span><span class="pl__title">梦花</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/25/stackblur.html"><span class="pl__circle"></span><span class="pl__title">Android滤镜-快速模糊</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/listview-focus.html"><span class="pl__circle"></span><span class="pl__title">listview焦点冲突</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/android-StringPicker.html"><span class="pl__circle"></span><span class="pl__title">NumberPicker与StringPicker</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/15/NDK.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下jni的一些问题</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/draw-a-logo2.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO兼容低版本</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/android-logo1.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现3</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/14/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现2</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/12/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现1</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/01/11/deal-with-pix.html"><span class="pl__circle"></span><span class="pl__title">android图像处理:像素过滤</span><span class="pl__date">Jan 2016</span></a>
+    
+    </nav>
+  </div> <!-- end #posts-list -->
+</aside> <!-- end #sidebar -->
+    <div id="post">
+      <div id="pjax">
+        <article id="post__content">
+  <h1 id="post__title" data-identifier="20170920">GPS坐标区域判定2</h1>
+  <blockquote>
+  <p>文章链接:<a href="http://www.liuschen.com">http://www.liuschen.com</a></p>
+</blockquote>
+
+<h1 id="section">1.两点之间距离</h1>
+
+<p>通过手动算法计算：</p>
+
+<pre><code>public static double getEarthDistance(double lat1,double lon1,
+                             double lat2, double lon2){
+    double φ1 = Math.toRadians(lat1);
+    double φ2 = Math.toRadians(lat2);
+    double Δφ = Math.toRadians(lat2-lat1);
+    double Δλ =  Math.toRadians(lon2-lon1);
+
+    double a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ/2) * Math.sin(Δλ/2);
+
+    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    double d = EARTH_RADIUS_KM * c;
+    return d;
+}
+</code></pre>
+
+<p>通过android中现成的方法:</p>
+
+<pre><code>private static void computeDistanceAndBearing(double lat1, double lon1,
+    double lat2, double lon2, float[] results) {
+    // Based on http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
+    // using the "Inverse Formula" (section 4)
+
+    int MAXITERS = 20;
+    // Convert lat/long to radians
+    lat1 *= Math.PI / 180.0;
+    lat2 *= Math.PI / 180.0;
+    lon1 *= Math.PI / 180.0;
+    lon2 *= Math.PI / 180.0;
+
+    double a = 6378137.0; // WGS84 major axis
+    double b = 6356752.3142; // WGS84 semi-major axis
+    double f = (a - b) / a;
+    double aSqMinusBSqOverBSq = (a * a - b * b) / (b * b);
+
+    double L = lon2 - lon1;
+    double A = 0.0;
+    double U1 = Math.atan((1.0 - f) * Math.tan(lat1));
+    double U2 = Math.atan((1.0 - f) * Math.tan(lat2));
+
+    double cosU1 = Math.cos(U1);
+    double cosU2 = Math.cos(U2);
+    double sinU1 = Math.sin(U1);
+    double sinU2 = Math.sin(U2);
+    double cosU1cosU2 = cosU1 * cosU2;
+    double sinU1sinU2 = sinU1 * sinU2;
+
+    double sigma = 0.0;
+    double deltaSigma = 0.0;
+    double cosSqAlpha = 0.0;
+    double cos2SM = 0.0;
+    double cosSigma = 0.0;
+    double sinSigma = 0.0;
+    double cosLambda = 0.0;
+    double sinLambda = 0.0;
+
+    double lambda = L; // initial guess
+    for (int iter = 0; iter &lt; MAXITERS; iter++) {
+        double lambdaOrig = lambda;
+        cosLambda = Math.cos(lambda);
+        sinLambda = Math.sin(lambda);
+        double t1 = cosU2 * sinLambda;
+        double t2 = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
+        double sinSqSigma = t1 * t1 + t2 * t2; // (14)
+        sinSigma = Math.sqrt(sinSqSigma);
+        cosSigma = sinU1sinU2 + cosU1cosU2 * cosLambda; // (15)
+        sigma = Math.atan2(sinSigma, cosSigma); // (16)
+        double sinAlpha = (sinSigma == 0) ? 0.0 :
+            cosU1cosU2 * sinLambda / sinSigma; // (17)
+        cosSqAlpha = 1.0 - sinAlpha * sinAlpha;
+        cos2SM = (cosSqAlpha == 0) ? 0.0 :
+            cosSigma - 2.0 * sinU1sinU2 / cosSqAlpha; // (18)
+
+        double uSquared = cosSqAlpha * aSqMinusBSqOverBSq; // defn
+        A = 1 + (uSquared / 16384.0) * // (3)
+            (4096.0 + uSquared *
+             (-768 + uSquared * (320.0 - 175.0 * uSquared)));
+        double B = (uSquared / 1024.0) * // (4)
+            (256.0 + uSquared *
+             (-128.0 + uSquared * (74.0 - 47.0 * uSquared)));
+        double C = (f / 16.0) *
+            cosSqAlpha *
+            (4.0 + f * (4.0 - 3.0 * cosSqAlpha)); // (10)
+        double cos2SMSq = cos2SM * cos2SM;
+        deltaSigma = B * sinSigma * // (6)
+            (cos2SM + (B / 4.0) *
+             (cosSigma * (-1.0 + 2.0 * cos2SMSq) -
+              (B / 6.0) * cos2SM *
+              (-3.0 + 4.0 * sinSigma * sinSigma) *
+              (-3.0 + 4.0 * cos2SMSq)));
+
+        lambda = L +
+            (1.0 - C) * f * sinAlpha *
+            (sigma + C * sinSigma *
+             (cos2SM + C * cosSigma *
+              (-1.0 + 2.0 * cos2SM * cos2SM))); // (11)
+
+        double delta = (lambda - lambdaOrig) / lambda;
+        if (Math.abs(delta) &lt; 1.0e-12) {
+            break;
+        }
+    }
+
+    float distance = (float) (b * A * (sigma - deltaSigma));
+    results[0] = distance;
+    if (results.length &gt; 1) {
+        float initialBearing = (float) Math.atan2(cosU2 * sinLambda,
+            cosU1 * sinU2 - sinU1 * cosU2 * cosLambda);
+        initialBearing *= 180.0 / Math.PI;
+        results[1] = initialBearing;
+        if (results.length &gt; 2) {
+            float finalBearing = (float) Math.atan2(cosU1 * sinLambda,
+                -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda);
+            finalBearing *= 180.0 / Math.PI;
+            results[2] = finalBearing;
+        }
+    }
+}
+</code></pre>
+
+<h1 id="section-1">2.判断一点是否在不规则多边形中</h1>
+
+<p>判断一点是否在多边形中，常用的是射线法，个人觉得也是最简单的一种，因为比较角度和面积都会牵扯到正负的判断，而射线法则不需要。规则：</p>
+
+<pre><code>以给定的点为起点，向任意方向做一条射线。如果射线与给定的多边形的交点为奇数则该点在多边形内部（点不再多边形边上且不与顶点重合），为偶数则为点在多边形外（0是偶数）。
+</code></pre>
+
+<p>单单这样看的话，也并不简单，首先应该先建立坐标系，然后取一条过点的射线，列出函数表达式，然后因为已知多边形各各点的坐标，求出每条边的函数，遍历每条边，计算与射线的交点并计算交点是否在多边形的边上。如果在，算作一个交点。最后算出总的交点个数即可。</p>
+
+<pre><code>特殊情况：当所选取的射线与一条边重合时，如果点不在重合线段上，算作两个交点，如果在，算作一个交点，并且排除相邻两边的计算，排除以上情况后，如果射线过多边形的一个顶点，那么依旧算作两个交点，并且排除过该顶点的另一条边的计算。其余的按照正常计算即可。
+</code></pre>
+
+<p>具体问题具体分析，gps坐标是地理坐标，是在一个球体上表示，如果求一个点是否在指定图形区域内，如果要在笛卡尔坐标系中计算，就需要将坐标投影到平面上，可以用web墨卡托坐标系，在平面坐标系中求得多边形距离给定点最近的一点的坐标，将此点再次转化为gps坐标，然后计算给定点与该点的距离即可。</p>
+
+<pre><code>之所以做两次转化是因为平面坐标系计算距离不准确，而且维度不同误差很大，所以平面坐标系将点到多边形转化为点到点的计算，然后可以在球面坐标系中用现成的方法来计算
+</code></pre>
+
+<p>但是，以上方法还是太麻烦了，因为是应用计算，完全不必要，只需要取一个特殊的射线即可，我取的是 给定点指向北极点（将极点看作无穷远）的射线。那么只需要3步骤即可：</p>
+
+<ul>
+  <li>1.判断射线是否与多边形边重合</li>
+  <li>2.判断给定点是否与多边形顶点重合</li>
+  <li>3.判断多边形每条边是否与射线相交（遍历，以下是对多边形每条线段的处理）</li>
+  <li>3.1.线段两个端点的纬度如果大于给定点，经度如果一个大于一个小于给定点则相交，记为一个交点。</li>
+  <li>3.2.如果线段两端点经度一个大于一个小于给定点，同时纬度一个大于一个小于给定点，那么就需要通过平行相交的比例关系判断与射线所在直线的交点是否是在射线上。如果在，记为一个交点。</li>
+</ul>
+
+<p>具体算法:</p>
+
+<pre><code>/**
+ * 判断点是否在图形区域内
+ * 原理:射线法，取点所在的经线作为射线来判断
+ *
+ * 特殊情况：
+ * 1.射线与n条边重合
+ * 2.射线与经过n个顶点
+ * @param point 点的经纬度，0/1   latitude/ longitude 纬度/经度
+ * @param polygon 多边形的点集合，0/1   latitude/ longitude 纬度/经度
+ * */
+public static boolean isPointInPolygon(double[] point,double[][] polygon){
+    /**参考射线取点所在经线自该点向南极发射的一条射线*/
+    int node = 0;
+    for (int i = 0; i &lt; polygon.length; i++) {
+        int next = i+1;
+        if (i==polygon.length-1)
+            next = 0;
+        /**首先判断边是否与参考经线重合*/
+        if(point[1]==polygon[i][1]&amp;&amp;polygon[i][1]==polygon[next][1]){
+            if((point[0]&gt;=polygon[i][0]&amp;&amp;point[0]&lt;=polygon[next][0])||(point[0]&lt;=polygon[i][0]&amp;&amp;point[0]&gt;=polygon[next][0])){
+                /**在线段内*/
+                return true;
+            }else if(point[0]&lt;polygon[i][0]&amp;&amp;point[0]&lt;polygon[next][0]){
+                /**在线段外的射线上*/
+                System.out.println("~~点在线段延长线上:"+i);
+                node+=2;
+            }else{
+                /**在线段外，并且不在射线上*/
+            }
+        }else if(point[1]==polygon[i][1]){
+            /**判断顶点是否在参考经线之上*/
+            if(point[0]==polygon[i][0]){
+                /**点与图形顶点重合*/
+                return true;
+            }else if(point[0]&lt;polygon[i][0]){
+                node+=2;
+            }
+        }else{
+            /**判断边是否与射线相交*/
+
+            /**这种计算的先决条件是线段两点必须分布在当前位置点所在经线的两端*/
+            if((polygon[i][1]&gt;point[1]&amp;&amp;polygon[next][1]&gt;point[1])||(polygon[i][1]&lt;point[1]&amp;&amp;polygon[next][1]&lt;point[1])){
+                /**参考经线不会经过该线段*/
+                continue;
+            }else{
+                /**判断纬度是否需要计算*/
+                if(polygon[i][0]&gt;point[0]&amp;&amp; polygon[next][0]&gt;point[0]){
+                    System.out.println("~~纬度判断:"+i);
+                    node++;
+                }else if(polygon[i][0]&lt;point[0]&amp;&amp; polygon[next][0]&gt;point[0]){
+                    /***/
+                    double tempLength1 = getDistanceByAndroid(polygon[i][0],polygon[i][1],polygon[i][0],point[1]);
+                    double tempLength2 = getDistanceByAndroid(polygon[next][0],polygon[next][1],polygon[next][0],point[1]);
+                    /**参考距离*/
+                    double tempLength4 = getDistanceByAndroid(point[0],point[1],polygon[next][0],point[1]);
+
+                    double tempLength5 = getDistanceByAndroid(polygon[i][0],point[1],polygon[next][0],point[1]);
+                    if((tempLength4/tempLength5)&gt;(tempLength2/(tempLength1+tempLength2))){
+                        /**经过一个交点*/
+                        System.out.println("~~夹点判断1:"+i);
+                        node++;
+                    }
+                }else if(polygon[i][0]&gt;point[0]&amp;&amp; polygon[next][0]&lt;point[0]){
+                    /***/
+                    double tempLength1 = getDistanceByAndroid(polygon[i][0],polygon[i][1],polygon[i][0],point[1]);
+                    double tempLength2 = getDistanceByAndroid(polygon[next][0],polygon[next][1],polygon[next][0],point[1]);
+                    /**参考距离*/
+                    double tempLength3 = getDistanceByAndroid(point[0],point[1],polygon[i][0],point[1]);
+
+                    double tempLength5 = getDistanceByAndroid(polygon[i][0],point[1],polygon[next][0],point[1]);
+                    if((tempLength3/tempLength5)&gt;(tempLength1/(tempLength1+tempLength2))){
+                        /**经过一个交点*/
+                        System.out.println("~~夹点判断2:"+i);
+                        node++;
+                    }
+                }
+                /**
+                 * polygon[i][0]&lt;point[0]&amp;&amp; polygon[next][0]&lt;point[0]
+                 相交于射线的反向延长线上(最后一种可能，基于性能不做判断)
+                 * */
+                }
+            }
+    }
+    System.out.println("~~node:"+node);
+    if(node%2==0) return false;
+    else return true;
+}
+</code></pre>
+
+<h1 id="section-2">3.计算点到多边形的距离</h1>
+
+<p>直接计算我没有好的方法，我计算的是配合上面判断点是否在多边形内部，然后计算点到各个多边形边的最短距离</p>
+
+<ul>
+  <li>1.遍历多边形，得出每条边</li>
+  <li>2.已知给定点到线段端点的长度，以及线段长度，求出点到线段的距离</li>
+</ul>
+
+<p>算法1，已知三边长，求高：</p>
+
+ 	/**<br />
+<pre><code> * 计算三角上a边上的高
+ *@param a a边长
+ *@param b b边长
+ *@param c c边长
+ * */
+public static double getTrigCh(double b,double c,double a){
+    double p1 = a+c+b;
+    double p2 = a+c-b;
+    double p3 = b+a-c;
+    double p4 = b-a+c;
+    double r1 = p1*p2*p3*p4;
+    double r2 = Math.sqrt(r1);
+    return r2/(2*a);
+}
+</code></pre>
+
+<p>算法2，计算点到多边形的距离：</p>
+
+<pre><code>/**计算点到多边形之间的距离*/
+public static double calculateDistance(double[] point,double[][] polygon){
+    double[] distances = new double[polygon.length];
+    double[] sideLengths = new double[polygon.length];
+    for (int i = 0; i &lt; polygon.length; i++) {
+        int next = i+1;
+        if (i==polygon.length-1)
+            next = 0;
+        distances[i] = getDistance(point[0],point[1],polygon[i][0],polygon[i][1]);
+        sideLengths[i] = getDistance(polygon[i][0],polygon[i][1],polygon[next][0],polygon[next][1]);
+        System.out.println("~distances["+i+"]:"+distances[i]);
+        System.out.println("~sideLengths["+i+"]:"+sideLengths[i]);
+    }
+    double minDistance = Double.MAX_VALUE;
+    for (int i = 0; i &lt; polygon.length; i++) {
+        int next = i+1;
+        if (i==polygon.length-1)
+            next = 0;
+        double tampDistance;
+        if(distances[i]&gt;distances[next]&amp;&amp;distances[i]&gt;sideLengths[i]){
+            tampDistance = distances[next];
+        }else if(distances[next]&gt;distances[i]&amp;&amp;distances[next]&gt;sideLengths[i]){
+            tampDistance = distances[i];
+        }else{
+            tampDistance = getTrigCh(distances[i],distances[next],sideLengths[i]);
+        }
+        System.out.println("~tampDistance:"+tampDistance);
+        minDistance = (minDistance&gt;tampDistance)?tampDistance:minDistance;
+    }
+    return minDistance;
+}
+</code></pre>
+
+<blockquote>
+  <p><a href="http://www.liuschen.com/code/gpsUtils.html">更多GPS操作方法</a></p>
+</blockquote>
+
+</article> <!-- end #post__content -->
+
+<div id="post__share">
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://www.liuschen.com/2017/09/20/gps2.html&text=GPS坐标区域判定2" target="_blank"></a>
+  <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://www.liuschen.com/2017/09/20/gps2.html&title=GPS坐标区域判定2" target="_blank"></a>
+</div> <!-- end #post__share -->
+<div id="disqus_thread" name="luofeng">
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+</div>
+
+<!-- <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//luofeng.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+
+
+        <p id="copyright">Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Theme <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Hosted on <a href="https://pages.github.com" target="_blank">Github</a></p>
+      </div> <!-- end #pjax -->
+
+      <div id="post__toc-trigger">
+        <div id="post__toc">
+          <span id="post__toc-title">Table of Contents</span>
+          <ul id="post__toc-ul"></ul>
+        </div>
+      </div>
+    </div> <!-- end #post -->
+
+    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.pjax.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/script.js"></script>
+  </body>
+</html>

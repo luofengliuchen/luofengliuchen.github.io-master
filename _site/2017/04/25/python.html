@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
+
+<title>python笔记1 | 落风的博客</title>
+<meta name="author" content="落风">
+
+  <meta name="keywords" content="Python">
+
+
+
+
+<link rel="shortcut icon" href="http://7xpui7.com1.z0.glb.clouddn.com/blog-site-favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+<link href="/pages/rss.xml" rel="alternate" title="落风的博客" type="application/atom+xml">
+  </head>
+  <body>
+    <aside id="sidebar">
+  <nav id="tags">
+    <a href="/index.html" id="avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+
+    <ul id="tags__ul">
+      <li id="pl__all" class="tags__li tags-btn active">全部</li>
+       
+        <li id="Java" class="tags__li tags-btn">Java</li>
+       
+        <li id="Android" class="tags__li tags-btn">Android</li>
+       
+        <li id="NDK" class="tags__li tags-btn">NDK</li>
+       
+        <li id="其他" class="tags__li tags-btn">其他</li>
+       
+        <li id="HTML5" class="tags__li tags-btn">HTML5</li>
+       
+        <li id="工程相关" class="tags__li tags-btn">工程相关</li>
+       
+        <li id="网络技术" class="tags__li tags-btn">网络技术</li>
+       
+        <li id="数据处理" class="tags__li tags-btn">数据处理</li>
+       
+        <li id="VideoAndMap" class="tags__li tags-btn">VideoAndMap</li>
+      
+    </ul>
+
+    <div id="tags__bottom">
+      <a href="mailto:luofenglc@gmail.com" id="icon-email" class="tags-btn fontello"></a>
+      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello"></a>
+    </div>
+  </nav> <!-- end #tags -->
+
+  <div id="posts-list">
+    <form action="" id="search-form">
+      <a href="/index.html" id="mobile-avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+      <!-- NOTE: input field is disabled by default -->
+      <input id="search-input" type="text" placeholder="Search...">
+    </form>
+
+    <nav id="pl__container">
+    
+      <a class="工程相关 pl__all" href="/2018/04/01/jar.html"><span class="pl__circle"></span><span class="pl__title">jar打包问题</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/http_sb.html"><span class="pl__circle"></span><span class="pl__title">http请求头</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/fiddler.html"><span class="pl__circle"></span><span class="pl__title">Fiddler抓取数据失败：tunnel to 443</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="Java pl__all" href="/2018/04/01/thread.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="NDK pl__all" href="/2018/03/15/jni2.html"><span class="pl__circle"></span><span class="pl__title">JNI常见问题(问题查询笔记)2</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="HTML5 pl__all" href="/2018/03/15/DCloud.html"><span class="pl__circle"></span><span class="pl__title">DCloud下的静态资源路径</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="数据处理 pl__all" href="/2018/03/15/python4.html"><span class="pl__circle"></span><span class="pl__title">python4-mxnet笔记</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_zlgx.html"><span class="pl__circle"></span><span class="pl__title">Android增量更新</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_yh.html"><span class="pl__circle"></span><span class="pl__title">Android优化</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/Androidstore.html"><span class="pl__circle"></span><span class="pl__title">Android访问存储目录</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP0.html"><span class="pl__circle"></span><span class="pl__title">PHP语法简要笔记</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="工程相关 pl__all" href="/2018/01/01/adb.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS2.html"><span class="pl__circle"></span><span class="pl__title">AndroidHTTPS安全请求解析2-手机请求以及连接捕获</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS.html"><span class="pl__circle"></span><span class="pl__title">Android HTTPS安全请求解析-keystore工具的使用</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="Java pl__all" href="/2017/10/07/point2.html"><span class="pl__circle"></span><span class="pl__title">混淆点义</span><span class="pl__date">Oct 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/27/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">oracle数据库入门</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/23/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">Google离线地图</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps2.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定2</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps1.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定1</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="其他 pl__all" href="/2017/09/10/php.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thresd2.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thread1.html"><span class="pl__circle"></span><span class="pl__title">线程复习笔记</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/08/05/AndroidSafe.html"><span class="pl__circle"></span><span class="pl__title">android权限管理</span><span class="pl__date">Aug 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/07/25/maven2.html"><span class="pl__circle"></span><span class="pl__title">maven2</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/07/20/dbtest.html"><span class="pl__circle"></span><span class="pl__title">数据库测试</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/07/02/cordova.html"><span class="pl__circle"></span><span class="pl__title">cordova</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/06/08/kotlin.html"><span class="pl__circle"></span><span class="pl__title">Kotlin笔记</span><span class="pl__date">Jun 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/05/20/Python2.html"><span class="pl__circle"></span><span class="pl__title">python笔记2</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/05/06/retrofit.html"><span class="pl__circle"></span><span class="pl__title">Retrofit浅析-OkHttp-rxjava</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/04/25/python.html"><span class="pl__circle"></span><span class="pl__title">python笔记1</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/04/20/Freemarker.html"><span class="pl__circle"></span><span class="pl__title">Freemarker基本使用</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/04/03/git2.html"><span class="pl__circle"></span><span class="pl__title">GIT配置</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/31/smali.html"><span class="pl__circle"></span><span class="pl__title">Android反编译smali文件的修改</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/28/Bootstrap.html"><span class="pl__circle"></span><span class="pl__title">Bootstrap</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/21/smali2.html"><span class="pl__circle"></span><span class="pl__title">android反编译还原项目指南</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/20/something.html"><span class="pl__circle"></span><span class="pl__title">一些web相关东西(摘自网络)</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/16/linux.html"><span class="pl__circle"></span><span class="pl__title">linux网络调试</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/15/project.html"><span class="pl__circle"></span><span class="pl__title">如何将已存在的APK项目作为资源引用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/13/caffe.html"><span class="pl__circle"></span><span class="pl__title">protobuf基本使用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/09/docker.html"><span class="pl__circle"></span><span class="pl__title">docker</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="网络技术 pl__all" href="/2017/03/06/broadcast.html"><span class="pl__circle"></span><span class="pl__title">网络探测技术初探</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/02/26/GBK.html"><span class="pl__circle"></span><span class="pl__title">GBK编码问题</span><span class="pl__date">Feb 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/01/16/error.html"><span class="pl__circle"></span><span class="pl__title">eclipse配合maven导入项目遇到的问题</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/01/16/fastdfs.html"><span class="pl__circle"></span><span class="pl__title">FastDFS配置文档</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/28/Intellij.html"><span class="pl__circle"></span><span class="pl__title">intellij尝试</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/26/maven.html"><span class="pl__circle"></span><span class="pl__title">MAVEN配置</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/12/19/flash.html"><span class="pl__circle"></span><span class="pl__title">flash RTMP 推流</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/12/12/jbmp.html"><span class="pl__circle"></span><span class="pl__title">JBMP安装</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/12/01/c++-copy.html"><span class="pl__circle"></span><span class="pl__title">c++学习笔记</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/27/C++-point.html"><span class="pl__circle"></span><span class="pl__title">c语言微知识点</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/20/C++-jni.html"><span class="pl__circle"></span><span class="pl__title">jni编程中C++/C语言一些问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/17/RTMP.html"><span class="pl__circle"></span><span class="pl__title">RTMP延时问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/16/ffplay.html"><span class="pl__circle"></span><span class="pl__title">ffmpeg/ffplay命令记录（转载，整理）</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/11/09/database.html"><span class="pl__circle"></span><span class="pl__title">Android数据库并发操作</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/06/sdl.html"><span class="pl__circle"></span><span class="pl__title">SDL&android</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/30/live555-dir.html"><span class="pl__circle"></span><span class="pl__title">live555初探-修改live555当前工作目录</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/29/live555-android.html"><span class="pl__circle"></span><span class="pl__title">live555 window下编译运行以及Android平台的移植</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/27/red5.html"><span class="pl__circle"></span><span class="pl__title">red5流媒体服务器的搭建以及Tomcat上的集成</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/25/ffmpeg-jna.html"><span class="pl__circle"></span><span class="pl__title">Android手机视频直播推流-RTMP推流-解决方案一</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/17/ffmpeg.html"><span class="pl__circle"></span><span class="pl__title">基于Android的手机推流</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/12/ffmpeg-decode.html"><span class="pl__circle"></span><span class="pl__title">音视频编解码-ffmpeg解码</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/10/02/wildernessdiary-time.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-时空狂想</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/09/25/javah.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio解决javah生成头文件时找不到类的问题</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/09/18/net-analysis.html"><span class="pl__circle"></span><span class="pl__title">网络工程-抓包分析</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/09/15/BLocation.html"><span class="pl__circle"></span><span class="pl__title">Android基站定位</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/26/netty-point.html"><span class="pl__circle"></span><span class="pl__title">netty point</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/25/netty_connect.html"><span class="pl__circle"></span><span class="pl__title">netty框架是如何执行connect连接的</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/20/netty-beat.html"><span class="pl__circle"></span><span class="pl__title">netty自带心跳响应</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/12/AndroidSVG.html"><span class="pl__circle"></span><span class="pl__title">android svg动画</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/11/Androidstudioupdatelike.html"><span class="pl__circle"></span><span class="pl__title">AndroidStudio版本更新记录</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/05/proguard.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下的代码混淆</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/02/nine.html"><span class="pl__circle"></span><span class="pl__title">nine patch图片的用法绘制以及作用</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/07/22/zip.html"><span class="pl__circle"></span><span class="pl__title">Android解压缩zip文件</span><span class="pl__date">Jul 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/06/07/person.html"><span class="pl__circle"></span><span class="pl__title">程序员编程语录</span><span class="pl__date">Jun 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/04/29/sqlite.html"><span class="pl__circle"></span><span class="pl__title">Android数据库和Bean的交互</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/25/wildernessdiary-habby.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-习惯</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/16/wildernessdiary-start.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-开篇</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/02/21/studio.html"><span class="pl__circle"></span><span class="pl__title">Visual Studio开发Android程序</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/02/19/c++.html"><span class="pl__circle"></span><span class="pl__title">C++学习整理</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/02/17/socket.html"><span class="pl__circle"></span><span class="pl__title">Socket编程笔记</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/16/apk.html"><span class="pl__circle"></span><span class="pl__title">git常用命令行</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/14/apk.html"><span class="pl__circle"></span><span class="pl__title">android反编译</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/05/html5-2.html"><span class="pl__circle"></span><span class="pl__title">html5内嵌入android</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/04/html5-1.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习记录</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/03/html5.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox3.html"><span class="pl__circle"></span><span class="pl__title">想要冬眠的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox2.html"><span class="pl__circle"></span><span class="pl__title">擅长卖萌的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox1.html"><span class="pl__circle"></span><span class="pl__title">正在找东西的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/project-mode.html"><span class="pl__circle"></span><span class="pl__title">我对瀑布开发模式和敏捷开发模式的理解</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/dream-flower.html"><span class="pl__circle"></span><span class="pl__title">梦花</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/25/stackblur.html"><span class="pl__circle"></span><span class="pl__title">Android滤镜-快速模糊</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/listview-focus.html"><span class="pl__circle"></span><span class="pl__title">listview焦点冲突</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/android-StringPicker.html"><span class="pl__circle"></span><span class="pl__title">NumberPicker与StringPicker</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/15/NDK.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下jni的一些问题</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/draw-a-logo2.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO兼容低版本</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/android-logo1.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现3</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/14/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现2</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/12/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现1</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/01/11/deal-with-pix.html"><span class="pl__circle"></span><span class="pl__title">android图像处理:像素过滤</span><span class="pl__date">Jan 2016</span></a>
+    
+    </nav>
+  </div> <!-- end #posts-list -->
+</aside> <!-- end #sidebar -->
+    <div id="post">
+      <div id="pjax">
+        <article id="post__content">
+  <h1 id="post__title" data-identifier="20170425">python笔记1</h1>
+  <blockquote>
+  <p>文章链接:<a href="http://www.liuschen.com">http://www.liuschen.com</a></p>
+</blockquote>
+
+<blockquote>
+  <p>python语言接近于自然语言，基本语法逻辑和其他语言一样，只是一些小的细节不同，python2.x和python3.x的一些函数也有一些细节的不同。<a href="http://www.runoob.com/python/">python2的教程</a>而我首先用的是python3,所以主要记录一下不同。</p>
+</blockquote>
+
+<h2 id="python3python2">1.python3和python2差异</h2>
+
+<p>python3中print后面字符串需要加()</p>
+
+<p>urllib分为了若干模块，需要分别引用</p>
+
+<h2 id="section">2.安装下载</h2>
+
+<p>选择下载安装最好选择32位的2.x版的Python，原因如下：</p>
+
+<ul>
+  <li>2.x版的存在时间长，教程比较好找，相关blog也很多</li>
+  <li><a href="https://sourceforge.net/projects/mysql-python/?source=typ_redirect">连接mysql的数据库引擎</a>，诸如此类的插件库比较好找,换32位的也是因为64位的这个插件支持不好，因为插件是32位的，我安装的mysql也是32位的，避免麻烦</li>
+  <li>PIL是一个图形处理库，也是win32的和数据库连接引擎安装方式一样</li>
+</ul>
+
+<h2 id="section-1">3.正则表达式</h2>
+
+<p>python的正则表达式主要有3中判断：</p>
+
+<ul>
+  <li>匹配开始位置，如果不匹配返回none：re.match</li>
+  <li>搜索整个字符串:re.search</li>
+  <li>搜索整个字符串并返回一个list:re.findAll</li>
+</ul>
+
+<p>正则表达式的字符规则不说了，主要需要注意的方面是</p>
+
+<ul>
+  <li>正则表达式前加一个字符’r’</li>
+  <li>正则可以引号嵌套，同时里面可以添加括号
+    <ul>
+      <li>一个括号的话，查找返回的是括号内的表达式匹配内容</li>
+      <li>多个括号的话，是返回的一个多维列表，列表中每一个对象是一个元组，元组中是对每一个括号内容匹配到的值</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="mysql">4.Mysql数据库</h2>
+
+<p>数据库操作比较固定</p>
+
+<pre><code>import MySQLdb
+
+db = MySQLdb.connect("127.0.0.1","user","pwd","数据库名" )
+
+# 使用cursor()方法获取操作游标 
+
+cursor = db.cursor()
+
+# SQL 语句
+sql = ""
+
+try:
+   # 执行sql语句
+   cursor.execute(sql)
+   # 提交到数据库执行
+   db.commit()
+except:
+   # 发生错误时回滚
+   db.rollback()
+
+# 关闭数据库连接
+db.close()
+</code></pre>
+
+<h2 id="oracle">4.5.连接Oracle数据库</h2>
+
+<p>下载数据库驱动:<a href="https://pypi.python.org/pypi/cx_Oracle/5.3">https://pypi.python.org/pypi/cx_Oracle/5.3</a></p>
+
+<p>注意下载的python版本的位数和驱动的位数以及安装的oracle数据库位数要一致</p>
+
+<p>我在本机安装的oracle是64位的，而驱动和python都是32位的，所以总是提示：</p>
+
+<pre><code>import cx_Oracle
+ImportError: DLL load failed: %1 不是有效的 Win32 应用程序。
+</code></pre>
+
+<p>然后搜索下载一个32位的oci.dll放在python\Lib\site-packages下，问题解决。应该是数据库驱动会访问本机中的oci.dll，一般搜索都会在环境变量目录中和本目录中寻找，python\Lib\site-packages是插件安装目录，所以放在该目录下能被顺利访问到。但是又出现另一个问题，运行到调用数据库的程序会报：</p>
+
+<pre><code>cx_Oracle.InterfaceError: Unable to acquire Oracle environment handle
+</code></pre>
+
+<p>我的处理方法是下载instantclient-basic-win32-11.2.0.1.0.zip，这个是连接数据库的客户端，一定要32位的，不然就没意义了。<br />
+然后拷贝其中的oci.dll, oraociei10.dll, oraocci10.dll到site-package中，当然oci.dll要覆盖之前添加的，因为要保证版本一致才行。</p>
+
+<pre><code>db=cx_Oracle.connect('username','password','127.0.0.1/orcl',cx_Oracle.SYSDBA)
+</code></pre>
+
+<p>开始IP的部分用的是本机的IP地址，但是却会报异常：</p>
+
+<pre><code>cx_Oracle.DatabaseError: ORA-12541: TNS:no listener
+</code></pre>
+
+<p>将IP地址改为127.0.0.1能正常访问。</p>
+
+<h2 id="section-2">5.常见错误(注意问题)</h2>
+
+<ul>
+  <li>IndentationError: unindent does not match any outer indentation level</li>
+</ul>
+
+<p>前面的空格和制表符不能混用，否则就会出现这类问题，写程序时最好将空白的符号显示出来</p>
+
+<ul>
+  <li>
+    <p>格式化输出字符串”%s”%x,字符串和实际值用%隔开</p>
+  </li>
+  <li>
+    <p>AttributeError: ‘module’ object has no attribute ‘XXX’</p>
+  </li>
+</ul>
+
+<p>.pyc是Python的字节码文件，如果新建.py文件时，不要与预留关键字和模块名重复，否则引用就有可能出现问题，实际调用的是.pyc文件，所以解决办法将目录中与模块名重复的.py文件重新命名，并且删除生成的.pyc文件，重新编译即可<br />
+* url中带有‘,’的图片urlretrieve下载不了</p>
+
+<h2 id="section-3">6.多线程使用</h2>
+
+<p>基础用thread</p>
+
+<pre><code>thread.start_new_thread
+</code></pre>
+
+<p>也可以用thread的包装threading</p>
+
+<p>以上两个都是包里面自带的，还可以使用线程池</p>
+
+<p>python安装目录下有一个script文件夹，里面有包管理工具pip,可以运行如pip install threadpool安装线程池模块</p>
+
+<pre><code>task_pool = threadpool.ThreadPool(10,10,0,10)
+param_list = [(({param1:param1},{param2:param2}))]
+	requests = threadpool.makeRequests(线程函数, param_list)
+	[task_pool.putRequest(req) for req in requests]
+task_pool.wait()
+
+def 线程函数(param1,param2):
+	return;
+</code></pre>
+
+<p>直接在主线程中是取不到全局定义的变量的，因为语法原因会被作为新的局部变量，所以如果要在子线程中取全局变量需要在其作用域中加全局声明 global，如要用全局变量context,就需要先</p>
+
+<pre><code>global Context
+</code></pre>
+
+<h2 id="scrapy">7.使用Scrapy爬网页</h2>
+
+<p>安装</p>
+
+<pre><code>pip install Scrapy
+</code></pre>
+
+<p>安装完后会有提示</p>
+
+<pre><code>----------------------------------------
+Command "f:\programer2\python27\python.exe -u -c "import setuptools, tokenize;__file__='c:\\users\\XXX\\appdata\\local
+\\temp\\pip-build-98jdcm\\Twisted\\setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '
+\n');f.close();exec(compile(code, __file__, 'exec'))" install --record c:\users\luofe\appdata\local\temp\pip-j9ztlc-reco
+rd\install-record.txt --single-version-externally-managed --compile" failed with error code 1 in c:\users\luofe\appdata\
+local\temp\pip-build-98jdcm\Twisted\
+</code></pre>
+
+<p>似乎是window平台对着个框架有些要求，太麻烦就不配置了，对于我的需求，用多线程自己抓取已经能够满足。</p>
+
+<h2 id="section-4">8.注意</h2>
+
+<p>空值：None<br />
+空字符：NULL</p>
+
+<h2 id="section-5">9.图像处理</h2>
+
+<p>PIL库导入：from PIL import Image, ImageEnhance, ImageDraw,ImageChops</p>
+
+<pre><code>#打开
+img = Image.open("C:\\Users\\luofe\\Pictures\\12.jpg")
+#改变大小
+new_img = img.resize((128, 128), Image.BILINEAR) 
+#旋转
+rot_img = new_img.rotate(45)
+#显示
+img.show()
+#保存
+img.save("name","格式")
+#获取尺寸
+width, height = img.size  
+#绘图，单独开一个图层
+draw = ImageDraw.Draw(img)  
+draw.line( ( (0,0), (width-1, height-1)), fill=255)
+#各种效果
+color = ImageEnhance.Color(img)  
+color_img = color.enhance(3.0)
+
+sharpness = ImageEnhance.Sharpness(img)  
+sharp_img = sharpness.enhance(7.0)
+
+contrast = ImageEnhance.Contrast(img)  
+contrast_img = contrast.enhance(2.0)  
+
+brightness = ImageEnhance.Brightness(img)  
+bright_img = brightness.enhance(2.0) 
+
+#反相
+invert_img = ImageChops.invert(img)
+#混合模式，需要两张图
+#lighter_image = ImageChops.lighter(image1, image2)
+#darker_image = ImageChops.darker(image1, image2)
+#difference_image = ImageChops.difference(image1, image2) 
+#multiply_image = ImageChops.multiply(image1, image2)
+#screen_image = ImageChops.screen(image1, image2)  
+#add_image = ImageChops.add(img1, img2, scale, offset)    
+#subtract_image = ImageChops.subtract(img1, img2, scale, offset)
+
+#获取像素点
+point = img.getpixel((pXX,pYY))
+#设置像素点
+img.putpixel((pXX,pYY),point)
+</code></pre>
+
+<h2 id="jupyter-notebook">10.jupyter notebook</h2>
+
+<blockquote>
+  <p>Jupyter Notebook（此前被称为 IPython notebook）是一个交互式笔记本，支持运行 40 多种编程语言。</p>
+</blockquote>
+
+<p>通过pip install jupyter来安装，提示血少C++库</p>
+
+<pre><code>running install
+running build
+running build_py
+creating build
+creating build\lib.win32-2.7
+copying scandir.py -&gt; build\lib.win32-2.7
+running build_ext
+building '_scandir' extension
+error: Microsoft Visual C++ 9.0 is required. Get it from http://aka.ms/vcpython27
+</code></pre>
+
+<p>下载VCForPython27.msi，安装，然后重试，安装成功</p>
+
+<p>将命令路径添加到环境变量后在cmd窗口键入命令：jupyter notebook，启动会打开一个浏览器文本编辑器，在文本编辑器中可以直接执行代码并生成结果。</p>
+
+<h2 id="pythoncaffe">11.Python与caffe结合</h2>
+
+<p>下载的caffe是for window版本的，首先，解压，进入目录下Python文件夹中，查看requirement.txt文件夹，根据内容安装依赖</p>
+
+<pre><code>#和c语言沟通，可以将Python编译成c语言模块使用
+Cython&gt;=0.19.2
+#Python的一种开源的数值计算扩展，有matlabd的一些功能
+numpy&gt;=1.7.1
+#也是一种数字计算库
+scipy&gt;=0.13.2
+#一组用于图像处理的算法的集合，是Python下的一种图形库
+scikit-image&gt;=0.9.3
+#是一个 Python 的 2D绘图库，它以各种硬拷贝格式和跨平台的交互式环境生成出版质量级别的图形。有点类似MATLAB中的统计图。
+matplotlib&gt;=1.3.1
+#一个 python 的交互式 shell，比默认的python shell 好用得多，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数。
+ipython&gt;=3.0.0
+#HDF5持久化存储的Python版本
+h5py&gt;=2.2.0
+#一个键值对数据库
+leveldb&gt;=0.191
+#NetworkX是一个用Python语言开发的图论与复杂网络建模工具，内置了常用的图与复杂网络分析算法，可以方便的进行复杂网络数据分析、仿真建模等工作。
+networkx&gt;=1.8.1
+#python测试框架
+nose&gt;=1.3.0
+#Pandas是python的一个数据分析包
+pandas&gt;=0.12.0
+#python时间处理工具类
+python-dateutil&gt;=1.4,&lt;2
+#将文件读取到内存，主要用来读取配置文件
+protobuf&gt;=2.5.0
+#用来解析命令行参数的库
+python-gflags&gt;=2.0
+#L是一个Python的YAML解析器
+pyyaml&gt;=3.10
+#PIL图形库
+Pillow&gt;=2.3.0
+#画图，数据分析的依赖库
+six&gt;=1.1.0
+</code></pre>
+
+<p>主要是通过<strong>pip install [soft_name]</strong>，可以直接执行：</p>
+
+<pre><code>pip install -r requirements.txt
+</code></pre>
+
+
+</article> <!-- end #post__content -->
+
+<div id="post__share">
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://www.liuschen.com/2017/04/25/python.html&text=python笔记1" target="_blank"></a>
+  <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://www.liuschen.com/2017/04/25/python.html&title=python笔记1" target="_blank"></a>
+</div> <!-- end #post__share -->
+<div id="disqus_thread" name="luofeng">
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+</div>
+
+<!-- <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//luofeng.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+
+
+        <p id="copyright">Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Theme <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Hosted on <a href="https://pages.github.com" target="_blank">Github</a></p>
+      </div> <!-- end #pjax -->
+
+      <div id="post__toc-trigger">
+        <div id="post__toc">
+          <span id="post__toc-title">Table of Contents</span>
+          <ul id="post__toc-ul"></ul>
+        </div>
+      </div>
+    </div> <!-- end #post -->
+
+    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.pjax.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/script.js"></script>
+  </body>
+</html>

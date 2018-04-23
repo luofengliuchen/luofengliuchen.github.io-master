@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
+
+<title>Android基站定位 | 落风的博客</title>
+<meta name="author" content="落风">
+
+  <meta name="keywords" content="android,Location">
+
+
+
+
+<link rel="shortcut icon" href="http://7xpui7.com1.z0.glb.clouddn.com/blog-site-favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+<link href="/pages/rss.xml" rel="alternate" title="落风的博客" type="application/atom+xml">
+  </head>
+  <body>
+    <aside id="sidebar">
+  <nav id="tags">
+    <a href="/index.html" id="avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+
+    <ul id="tags__ul">
+      <li id="pl__all" class="tags__li tags-btn active">全部</li>
+       
+        <li id="Java" class="tags__li tags-btn">Java</li>
+       
+        <li id="Android" class="tags__li tags-btn">Android</li>
+       
+        <li id="NDK" class="tags__li tags-btn">NDK</li>
+       
+        <li id="其他" class="tags__li tags-btn">其他</li>
+       
+        <li id="HTML5" class="tags__li tags-btn">HTML5</li>
+       
+        <li id="工程相关" class="tags__li tags-btn">工程相关</li>
+       
+        <li id="网络技术" class="tags__li tags-btn">网络技术</li>
+       
+        <li id="数据处理" class="tags__li tags-btn">数据处理</li>
+       
+        <li id="VideoAndMap" class="tags__li tags-btn">VideoAndMap</li>
+      
+    </ul>
+
+    <div id="tags__bottom">
+      <a href="mailto:luofenglc@gmail.com" id="icon-email" class="tags-btn fontello"></a>
+      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello"></a>
+    </div>
+  </nav> <!-- end #tags -->
+
+  <div id="posts-list">
+    <form action="" id="search-form">
+      <a href="/index.html" id="mobile-avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+      <!-- NOTE: input field is disabled by default -->
+      <input id="search-input" type="text" placeholder="Search...">
+    </form>
+
+    <nav id="pl__container">
+    
+      <a class="工程相关 pl__all" href="/2018/04/01/jar.html"><span class="pl__circle"></span><span class="pl__title">jar打包问题</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/http_sb.html"><span class="pl__circle"></span><span class="pl__title">http请求头</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/fiddler.html"><span class="pl__circle"></span><span class="pl__title">Fiddler抓取数据失败：tunnel to 443</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="Java pl__all" href="/2018/04/01/thread.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="NDK pl__all" href="/2018/03/15/jni2.html"><span class="pl__circle"></span><span class="pl__title">JNI常见问题(问题查询笔记)2</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="HTML5 pl__all" href="/2018/03/15/DCloud.html"><span class="pl__circle"></span><span class="pl__title">DCloud下的静态资源路径</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="数据处理 pl__all" href="/2018/03/15/python4.html"><span class="pl__circle"></span><span class="pl__title">python4-mxnet笔记</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_zlgx.html"><span class="pl__circle"></span><span class="pl__title">Android增量更新</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_yh.html"><span class="pl__circle"></span><span class="pl__title">Android优化</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/Androidstore.html"><span class="pl__circle"></span><span class="pl__title">Android访问存储目录</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP0.html"><span class="pl__circle"></span><span class="pl__title">PHP语法简要笔记</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="工程相关 pl__all" href="/2018/01/01/adb.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS2.html"><span class="pl__circle"></span><span class="pl__title">AndroidHTTPS安全请求解析2-手机请求以及连接捕获</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS.html"><span class="pl__circle"></span><span class="pl__title">Android HTTPS安全请求解析-keystore工具的使用</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="Java pl__all" href="/2017/10/07/point2.html"><span class="pl__circle"></span><span class="pl__title">混淆点义</span><span class="pl__date">Oct 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/27/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">oracle数据库入门</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/23/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">Google离线地图</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps2.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定2</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps1.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定1</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="其他 pl__all" href="/2017/09/10/php.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thresd2.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thread1.html"><span class="pl__circle"></span><span class="pl__title">线程复习笔记</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/08/05/AndroidSafe.html"><span class="pl__circle"></span><span class="pl__title">android权限管理</span><span class="pl__date">Aug 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/07/25/maven2.html"><span class="pl__circle"></span><span class="pl__title">maven2</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/07/20/dbtest.html"><span class="pl__circle"></span><span class="pl__title">数据库测试</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/07/02/cordova.html"><span class="pl__circle"></span><span class="pl__title">cordova</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/06/08/kotlin.html"><span class="pl__circle"></span><span class="pl__title">Kotlin笔记</span><span class="pl__date">Jun 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/05/20/Python2.html"><span class="pl__circle"></span><span class="pl__title">python笔记2</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/05/06/retrofit.html"><span class="pl__circle"></span><span class="pl__title">Retrofit浅析-OkHttp-rxjava</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/04/25/python.html"><span class="pl__circle"></span><span class="pl__title">python笔记1</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/04/20/Freemarker.html"><span class="pl__circle"></span><span class="pl__title">Freemarker基本使用</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/04/03/git2.html"><span class="pl__circle"></span><span class="pl__title">GIT配置</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/31/smali.html"><span class="pl__circle"></span><span class="pl__title">Android反编译smali文件的修改</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/28/Bootstrap.html"><span class="pl__circle"></span><span class="pl__title">Bootstrap</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/21/smali2.html"><span class="pl__circle"></span><span class="pl__title">android反编译还原项目指南</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/20/something.html"><span class="pl__circle"></span><span class="pl__title">一些web相关东西(摘自网络)</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/16/linux.html"><span class="pl__circle"></span><span class="pl__title">linux网络调试</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/15/project.html"><span class="pl__circle"></span><span class="pl__title">如何将已存在的APK项目作为资源引用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/13/caffe.html"><span class="pl__circle"></span><span class="pl__title">protobuf基本使用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/09/docker.html"><span class="pl__circle"></span><span class="pl__title">docker</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="网络技术 pl__all" href="/2017/03/06/broadcast.html"><span class="pl__circle"></span><span class="pl__title">网络探测技术初探</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/02/26/GBK.html"><span class="pl__circle"></span><span class="pl__title">GBK编码问题</span><span class="pl__date">Feb 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/01/16/error.html"><span class="pl__circle"></span><span class="pl__title">eclipse配合maven导入项目遇到的问题</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/01/16/fastdfs.html"><span class="pl__circle"></span><span class="pl__title">FastDFS配置文档</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/28/Intellij.html"><span class="pl__circle"></span><span class="pl__title">intellij尝试</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/26/maven.html"><span class="pl__circle"></span><span class="pl__title">MAVEN配置</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/12/19/flash.html"><span class="pl__circle"></span><span class="pl__title">flash RTMP 推流</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/12/12/jbmp.html"><span class="pl__circle"></span><span class="pl__title">JBMP安装</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/12/01/c++-copy.html"><span class="pl__circle"></span><span class="pl__title">c++学习笔记</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/27/C++-point.html"><span class="pl__circle"></span><span class="pl__title">c语言微知识点</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/20/C++-jni.html"><span class="pl__circle"></span><span class="pl__title">jni编程中C++/C语言一些问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/17/RTMP.html"><span class="pl__circle"></span><span class="pl__title">RTMP延时问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/16/ffplay.html"><span class="pl__circle"></span><span class="pl__title">ffmpeg/ffplay命令记录（转载，整理）</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/11/09/database.html"><span class="pl__circle"></span><span class="pl__title">Android数据库并发操作</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/06/sdl.html"><span class="pl__circle"></span><span class="pl__title">SDL&android</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/30/live555-dir.html"><span class="pl__circle"></span><span class="pl__title">live555初探-修改live555当前工作目录</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/29/live555-android.html"><span class="pl__circle"></span><span class="pl__title">live555 window下编译运行以及Android平台的移植</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/27/red5.html"><span class="pl__circle"></span><span class="pl__title">red5流媒体服务器的搭建以及Tomcat上的集成</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/25/ffmpeg-jna.html"><span class="pl__circle"></span><span class="pl__title">Android手机视频直播推流-RTMP推流-解决方案一</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/17/ffmpeg.html"><span class="pl__circle"></span><span class="pl__title">基于Android的手机推流</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/12/ffmpeg-decode.html"><span class="pl__circle"></span><span class="pl__title">音视频编解码-ffmpeg解码</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/10/02/wildernessdiary-time.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-时空狂想</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/09/25/javah.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio解决javah生成头文件时找不到类的问题</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/09/18/net-analysis.html"><span class="pl__circle"></span><span class="pl__title">网络工程-抓包分析</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/09/15/BLocation.html"><span class="pl__circle"></span><span class="pl__title">Android基站定位</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/26/netty-point.html"><span class="pl__circle"></span><span class="pl__title">netty point</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/25/netty_connect.html"><span class="pl__circle"></span><span class="pl__title">netty框架是如何执行connect连接的</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/20/netty-beat.html"><span class="pl__circle"></span><span class="pl__title">netty自带心跳响应</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/12/AndroidSVG.html"><span class="pl__circle"></span><span class="pl__title">android svg动画</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/11/Androidstudioupdatelike.html"><span class="pl__circle"></span><span class="pl__title">AndroidStudio版本更新记录</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/05/proguard.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下的代码混淆</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/02/nine.html"><span class="pl__circle"></span><span class="pl__title">nine patch图片的用法绘制以及作用</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/07/22/zip.html"><span class="pl__circle"></span><span class="pl__title">Android解压缩zip文件</span><span class="pl__date">Jul 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/06/07/person.html"><span class="pl__circle"></span><span class="pl__title">程序员编程语录</span><span class="pl__date">Jun 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/04/29/sqlite.html"><span class="pl__circle"></span><span class="pl__title">Android数据库和Bean的交互</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/25/wildernessdiary-habby.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-习惯</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/16/wildernessdiary-start.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-开篇</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/02/21/studio.html"><span class="pl__circle"></span><span class="pl__title">Visual Studio开发Android程序</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/02/19/c++.html"><span class="pl__circle"></span><span class="pl__title">C++学习整理</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/02/17/socket.html"><span class="pl__circle"></span><span class="pl__title">Socket编程笔记</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/16/apk.html"><span class="pl__circle"></span><span class="pl__title">git常用命令行</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/14/apk.html"><span class="pl__circle"></span><span class="pl__title">android反编译</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/05/html5-2.html"><span class="pl__circle"></span><span class="pl__title">html5内嵌入android</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/04/html5-1.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习记录</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/03/html5.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox3.html"><span class="pl__circle"></span><span class="pl__title">想要冬眠的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox2.html"><span class="pl__circle"></span><span class="pl__title">擅长卖萌的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox1.html"><span class="pl__circle"></span><span class="pl__title">正在找东西的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/project-mode.html"><span class="pl__circle"></span><span class="pl__title">我对瀑布开发模式和敏捷开发模式的理解</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/dream-flower.html"><span class="pl__circle"></span><span class="pl__title">梦花</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/25/stackblur.html"><span class="pl__circle"></span><span class="pl__title">Android滤镜-快速模糊</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/listview-focus.html"><span class="pl__circle"></span><span class="pl__title">listview焦点冲突</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/android-StringPicker.html"><span class="pl__circle"></span><span class="pl__title">NumberPicker与StringPicker</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/15/NDK.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下jni的一些问题</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/draw-a-logo2.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO兼容低版本</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/android-logo1.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现3</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/14/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现2</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/12/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现1</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/01/11/deal-with-pix.html"><span class="pl__circle"></span><span class="pl__title">android图像处理:像素过滤</span><span class="pl__date">Jan 2016</span></a>
+    
+    </nav>
+  </div> <!-- end #posts-list -->
+</aside> <!-- end #sidebar -->
+    <div id="post">
+      <div id="pjax">
+        <article id="post__content">
+  <h1 id="post__title" data-identifier="20160915">Android基站定位</h1>
+  <blockquote>
+  <p>定位是一项精细的活，现在GPS基本上已经成为了手机上的一项基本功能，但同时它也有诸多的限制，如启动慢，受环境影响明显等，所以后来又有诸多辅助定位的手段，如基站定位，和WiFi定位，不过两者却都是需要基于庞大的数据支持，也就是必须有基站和WiFi热点与真实GPS坐标映射的数据库才行。</p>
+</blockquote>
+
+<blockquote>
+  <p>文章链接:<a href="http://www.liuschen.com">http://www.liuschen.com</a></p>
+</blockquote>
+
+<h2 id="gsm--umts--lte">1. GSM / UMTS / LTE</h2>
+
+<pre><code> MCC，Mobile Country Code，移动国家代码（中国的为460）；
+ MNC，Mobile Network Code，移动网络号码（00移动 01联通 11电信4G）； 
+ LAC/TAC(1~65535)，Location Area Code，位置区域码；
+ CID/CI( 2G(1~65535), 3G/4G(1~268435455))，Cell Identity，基站编号；
+</code></pre>
+
+<h3 id="android">android手机的获取:</h3>
+
+<pre><code>TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+ String operator = manager.getNetworkOperator();
+ /**通过operator获取 MCC 和MNC */
+ int MCC = Integer.parseInt(operator.substring(0, 3));
+ int MNC = Integer.parseInt(operator.substring(3));
+
+ GsmCellLocation location = (GsmCellLocation) manager.getCellLocation();
+
+ /**通过GsmCellLocation获取中国移动和联通 LAC 和cellID */
+ int LAC = location.getLac();
+ int CID = location.getCid(); 
+</code></pre>
+
+<h2 id="cdma">2. CDMA</h2>
+
+<pre><code>BID(1~65535):cdmaCellLocation.getBaseStationId()（基站ID,同GSM的CID）
+NID(0~65535):cdmaCellLocation.getNetworkId() (网络ID,同GSM的LAC)
+SID(0~32767):cdmaCellLocation.getSystemId() (同GSM的MNC)
+</code></pre>
+
+<h3 id="android-1">android手机中的获取</h3>
+
+ 		TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);<br />
+<pre><code>    CdmaCellLocation location = (CdmaCellLocation)manager.getCellLocation();
+    int BID = location.getBaseStationId();
+    int NID = location.getNetworkId();
+	int SID = location.getSystemId();
+</code></pre>
+
+<h2 id="section">3. 手机信号的获取</h2>
+
+<p>Android可以通过以下代码获取到手机收到的所有信号</p>
+
+<pre><code>TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    String operator = manager.getNetworkOperator();
+    /**通过operator获取 MCC 和MNC */
+    int mcc = Integer.parseInt(operator.substring(0, 3));
+    int mnc = Integer.parseInt(operator.substring(3));
+
+    List&lt;CellInfo&gt; allCellInfo =  manager.getAllCellInfo();
+    String result = "";
+    for (CellInfo info:allCellInfo) {
+
+        if(info instanceof CellInfoCdma){
+            CellIdentityCdma cellIdentityCdma = ((CellInfoCdma)info).getCellIdentity();
+            result += "BaseStationId:"+cellIdentityCdma.getBasestationId()
+                    +",NetworkId:"+cellIdentityCdma.getNetworkId()+",SystemId："
+                    +cellIdentityCdma.getSystemId()+",signal"+((CellInfoCdma)info).getCellSignalStrength()+"\n";
+        }else if(info instanceof CellInfoLte){
+            CellIdentityLte cellIdentityLte = ((CellInfoLte)info).getCellIdentity();
+            result += "Mnc:"+cellIdentityLte.getMnc()
+                    +",Ci:"+cellIdentityLte.getCi()+",Tac："
+                    +cellIdentityLte.getTac()+",signal"+((CellInfoLte)info).getCellSignalStrength()+"\n";
+        }else if(info instanceof CellInfoGsm){
+            CellIdentityGsm cellIdentityGsm = ((CellInfoGsm)info).getCellIdentity();
+            result += "Mnc:"+cellIdentityGsm.getMnc()
+                    +",Cid:"+cellIdentityGsm.getCid()+",Lac："
+                    +cellIdentityGsm.getLac()+",signal"+((CellInfoGsm)info).getCellSignalStrength()+"\n";
+        }else if(info instanceof CellInfoWcdma){
+            CellIdentityWcdma cellIdentityWcdma = ((CellInfoWcdma)info).getCellIdentity();
+            result += "Mnc:"+cellIdentityWcdma.getMnc()
+                    +",Cid:"+cellIdentityWcdma.getCid()+",Lac："
+                    +cellIdentityWcdma.getLac()+",signal"+((CellInfoWcdma)info).getCellSignalStrength()+"\n";
+        }
+    }
+</code></pre>
+
+<p>每个if条件中得到的结果前面三个大抵是每个基站的标识以及区域信息，就如上面的MNC,CID之类的，而最后一个是获取的信号强度SignalStrength，第一个CellInfoCdma能获取到这几个值</p>
+
+<pre><code>private int mCdmaDbm;   // This value is the RSSI value
+private int mCdmaEcio;  // This value is the Ec/Io
+private int mEvdoDbm;   // This value is the EVDO RSSI value
+private int mEvdoEcio;  // This value is the EVDO Ec/Io
+private int mEvdoSnr;   // Valid values are 0-8.  8 is the highest signal to noise ratio
+</code></pre>
+
+<p><strong>RSSI</strong>:Received Signal Strength Indication接收的信号强度指示，无线发送层的可选部分，用来判定链接质量，以及是否增大广播发送强度，可用来测算距离<br />
+<a href="http://www.cnblogs.com/lele/articles/2832885.html">RSSI为什么是负值</a></p>
+
+<p><strong>Ec/Io</strong>:这是一个反映手机端当前接收的导频信号（Pilot）的水平。手机开机首先做的事情就是搜索导频信号，如果搜索不到有用的导频信号，手机就无法正确识别网络。很多时候，手机经常会处在很多基站重叠覆盖的区域，也就是有很多导频的区域。各个导频之间也会相互干扰，形成导频污染。Ec表示手机当前接收到的可用导频信号强度，Io表示手机当前所接收到的所有干扰信号强度。所以，Ec/Io就表明手机当前所接收到的有用信号和干扰信号的比例。反映了手机在这一点上多路导频信号的整体覆盖水平。</p>
+
+<p>第二个CellInfoLte能获取到的值：</p>
+
+<pre><code>private int mSignalStrength;  //信号强度
+private int mRsrp;			  //表示LTE参考信号接收质量，这种度量主要是根据信号质量来对不同LTE候选小区进行排序。这种测量用作切换和小区重选决定的输入。
+private int mRsrq;            //表示发送信号质量
+private int mRssnr;
+private int mCqi;
+private int mTimingAdvance;
+</code></pre>
+
+<p>第三个CellSignalStrengthGsm和第四个CellSignalStrengthWcdma能获取到的值：</p>
+
+<pre><code>private int mSignalStrength; // Valid values are (0-31, 99) as defined in TS 27.007 8.5
+private int mBitErrorRate;   // bit error rate (0-7, 99) as defined in TS 27.007 8.5
+</code></pre>
+
+<p>到这里可能会郁闷，lte,cdma,gsm这些是什么？这些是手机用到的通信技术，具体解释网上很多，而划分到三大运营商如下：</p>
+
+<ul>
+  <li>中国移动，2G：GSM，3G：TD-SCDMA ,4G:TD-LTE</li>
+  <li>中国联通，2G：GSM，3G：WCDMA ,4G:FDD-LTE</li>
+  <li>中国电信，2G：CDMA（实际上相当于2.5G），3G：CDMA 2000 ,4G:FDD-LTE、TD-LTE</li>
+</ul>
+
+<p>在Android内部区分信号类型是按照如下规则:</p>
+
+<pre><code>switch (networkType) {
+        case NETWORK_TYPE_GPRS:
+        case NETWORK_TYPE_GSM:
+        case NETWORK_TYPE_EDGE:
+        case NETWORK_TYPE_CDMA:
+        case NETWORK_TYPE_1xRTT:
+        case NETWORK_TYPE_IDEN:
+            return NETWORK_CLASS_2_G;
+        case NETWORK_TYPE_UMTS:
+        case NETWORK_TYPE_EVDO_0:
+        case NETWORK_TYPE_EVDO_A:
+        case NETWORK_TYPE_HSDPA:
+        case NETWORK_TYPE_HSUPA:
+        case NETWORK_TYPE_HSPA:
+        case NETWORK_TYPE_EVDO_B:
+        case NETWORK_TYPE_EHRPD:
+        case NETWORK_TYPE_HSPAP:
+        case NETWORK_TYPE_TD_SCDMA:
+            return NETWORK_CLASS_3_G;
+        case NETWORK_TYPE_LTE:
+        case NETWORK_TYPE_IWLAN:
+            return NETWORK_CLASS_4_G;
+        default:
+            return NETWORK_CLASS_UNKNOWN;
+    }
+</code></pre>
+
+<p>这些信号类型是为了针对不同手机卡不同返回值做具体处理用的，但是返回的东西的用途确是一样的</p>
+
+<ul>
+  <li>
+    <p>基站标识，用来从已经知道的数据库中取出对应的卫星坐标，这个获取数据库是关键，网上有许多付费提供的接口，有些免费，却限制次数，但是所幸，我需要做基站定位的地方，区域有限，想取到这些位置可能覆盖到的基站信息可能并不难，只需要写一个程序，拿着手机在区域内到处走走，搜集到所有基站的信息，然后自己建个数据库即可（0），也可以用网上限制次数的免费接口，反正只用一次也足够，总之，方法很多。</p>
+  </li>
+  <li>
+    <p>当前位置距离基站的距离，这个对于我而言比较复杂，我能想到的有两种方法，一是通过电波到达时间来算距离，即TDOA定位，但是找不到获取对应信息的方法，只能放弃，二是通过信号强度来计算出自己距离基站的位置，而信号强度上面已经获取到了，只剩下计算的方法（1）（2）。获取到距离后通过三个或三个以上的基站就可以定位到当前位置。</p>
+  </li>
+</ul>
+
+<p>（0）<a href="http://www.gpsspg.com/bs.htm">基站查询</a></p>
+
+<p>（1）<a href="http://www.cnblogs.com/magicboy110/archive/2010/12/10/1902741.html">比较详细的参考</a></p>
+
+<p>（2）<a href="http://www.360doc.com/content/15/0725/11/8493019_487280425.shtml">自由空间路径传播损耗</a></p>
+
+<p>除了基站定位，还有WiFi定位，与基站定位原理一样，只要附近有WiFi，不需要连接上，只需获取其唯一的标识，然后通过数据库查询其对应的坐标即可，数据库的建立是问题，毕竟WiFi哪里都是，于是有人说，找几个出租，给些钱，装上GPS与WiFi连接对应设备到处跑，不是也很快吗，想想也是，一些看似庞大的工程，其实往往不难，只要用对地方，我们平时常用app，谁知道会不会把我们连接的WiFi和已经获取GPS坐标绑定上传呢。</p>
+
+<p>以上是Android基站定位的原理，其实如果不执着于完全的自主开发，完全可以用第三方提供的服务如<a href="http://lbsyun.baidu.com/index.php?title=android-locsdk">百度定位</a>，大致原理相同，但是很多算法不需要自己去考虑。</p>
+
+</article> <!-- end #post__content -->
+
+<div id="post__share">
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://www.liuschen.com/2016/09/15/BLocation.html&text=Android基站定位" target="_blank"></a>
+  <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://www.liuschen.com/2016/09/15/BLocation.html&title=Android基站定位" target="_blank"></a>
+</div> <!-- end #post__share -->
+<div id="disqus_thread" name="luofeng">
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+</div>
+
+<!-- <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//luofeng.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+
+
+        <p id="copyright">Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Theme <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Hosted on <a href="https://pages.github.com" target="_blank">Github</a></p>
+      </div> <!-- end #pjax -->
+
+      <div id="post__toc-trigger">
+        <div id="post__toc">
+          <span id="post__toc-title">Table of Contents</span>
+          <ul id="post__toc-ul"></ul>
+        </div>
+      </div>
+    </div> <!-- end #post -->
+
+    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.pjax.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/script.js"></script>
+  </body>
+</html>

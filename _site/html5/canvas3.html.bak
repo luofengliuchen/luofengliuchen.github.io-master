@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="canvas.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+	drawCanvas();
+});
+
+$(window).resize(drawCanvas);
+
+function drawCanvas(){
+	
+	//获取canvas对象
+    var canvas  = $("#mycanvas");
+	//的到2D context
+	var context = canvas.get(0).getContext("2d");
+	
+	//使canvas元素填充窗口
+	canvas.attr("width",500);
+	canvas.attr("height",500);
+	
+	context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	//清除窗口
+	canvas.attr("width",1000);
+	canvas.attr("height",800);
+	
+	
+	//颜色取色器
+	var image = new Image();
+	image.src = "example.jpg";
+	$(image).load(function(e) {
+		//显示图像
+       // context.drawImage(image,0,0);
+	   //适应画布
+	   context.drawImage(image,0,0,canvas.width(),canvas.height());
+    });
+	
+	
+	$("body").css("backgroundColor","rgba(255,0,0,255)");
+	canvas.click(function(e) {
+		
+		$("body").css("backgroundColor","rgba(0,0,255,128)");
+		
+        var canvasOffset = canvas.offset();
+		var canvasX = Math.floor(e.pageX - canvasOffset.left);
+		var canvasY = Math.floor(e.pageY - canvasOffset.top);
+		//alert("canvasX"+canvasX+",canvasY"+canvasY);
+		
+		var imageData = context.getImageData(canvasX,canvasY,1,1);//该处可能会抛出一个安全异常
+		
+		var pixel = imageData.data;
+		
+		var pixelColor = "rgba("+pixel[0]+","+pixel[1]+","+pixel[2]+","+pixel[3]+")";
+		alert("pixel[0]："+pixel[0]+",pixel[1]："+pixel[1]);
+		$("body").css("backgroundColor",pixelColor);
+		
+    });
+	}
+
+function drawPicture(canvas,context){
+	
+	//阴影，变形在此处的应用，可以做出镜像，万花筒等效果
+	context.shadowBlur = 20;
+	context.shadowColor = "rgb(0,0,0)";
+	//将图片绘制到画布上
+	var image = new Image();
+	image.src = "example.jpg";
+	$(image).load(function(e) {
+		//显示图像
+       // context.drawImage(image,0,0);
+	   //适应画布
+	   context.drawImage(image,0,0,canvas.width(),canvas.height());
+	   //图像裁剪,裁剪的图像超出部分会以平铺的形式展示，
+	   context.drawImage(image,0,0,1000
+	   ,1000,0,0,canvas.width(),canvas.height());
+    });
+	}
+
+
+function visitPixel(canvas,context){
+	
+	//访问像素值
+	var imageData = context.getImageData(0,0,3,3);
+	var pixel = imageData.data; //CanvasPixelArray
+	
+	var width = imageData.width;
+	var x = 2;
+	var y = 2;
+	
+	//通过图像中的坐标确定像素在CanvasPixelArray中的位置
+	var pixelRed = ((y-1)*(width*4))+((x-1)*4);
+	var pixelGreen = pixelRed + 1;
+	var pixelBlue = pixelRed + 2;
+	var pixelAlpha = pixelRed + 3;
+	
+	var red = pixel[pixelRed];
+	var green = pixel[pixelGreen];
+	var blue = pixel[pixelBlue];
+	var alpha = pixel[pixelAlpha];
+	
+	}
+	
+</script>
+
+<title>qjlogo的js实现</title>
+</head>
+
+<body>
+
+<canvas id="mycanvas" width="1000" height="1000">
+
+</canvas>
+
+
+
+</body>
+</html>

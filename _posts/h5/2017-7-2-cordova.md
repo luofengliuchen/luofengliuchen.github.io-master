@@ -1,0 +1,124 @@
+---
+layout: post
+title: cordova
+category: HTML5
+keywords: cordova,html5
+---
+
+>文章链接:[http://www.liuschen.com](http://www.liuschen.com)
+
+
+首先安装[Node.js](https://nodejs.org/en/download/);
+
+在命令行中安装cordova
+
+	npm install -g cordova
+
+创建工程
+
+	cordova create hello com.example.hello HelloWorld
+
+执行完这一步，会在当前目录之下生成一个hello文件夹，文件夹内目录结构:
+
+	--hooks(文件夹)
+	--platforms(空文件夹)
+	--plugins(空文件夹)
+	--www(存放网页js代码)
+	-config.xml(配置文件)
+
+进入目录并添加打包平台
+
+	cd hello
+	cordova platform add ios --save
+	cordova platform add android --save
+
+添加平台时可以指定版本
+
+	cordova platform add android@5.1 --save
+
+此时在platforms(空文件夹)和plugins(空文件夹)下都会生成相应内容，如果后面加--save则会在config.xml中添加
+
+	<engine name="android" spec="~5.1.1" />
+
+命令文档cordova platform --help
+	
+	
+	Synopsis
+	
+	    cordova platform <command> [options]
+	
+	Manage project platforms
+	
+	    add <plat-spec> [...].............. Add specified platforms
+	        --save ........................ Save specified platforms into config.xml after installing them
+	
+	        --link ........................ When <plat-spec> is a local path, links the platform
+	                                        library directly instead of making a copy of it (support
+	                                        varies by platform; useful for platform development)
+	
+	        --fetch ....................... Fetches the plugin into the project's node_modules directory.
+	                                        Uses `npm install` to do the fetching.
+	
+	
+	
+	
+	    remove <platform> [...] ........... Remove specified platforms
+	        --save ........................ Delete specified platforms from config.xml after removing them
+	        --fetch ....................... Removes the plugin from the project's node_modules directory.
+	                                        Runs `npm uninstall` under the hood.
+	
+	
+	    update <plat-spec> ................ Update the version of Cordova used for a specific platform;
+	                                        update to the latest <version> if no <plat-spec> is specified
+	
+	        --save ........................ Save the latest versions for specified platforms into config.xml
+	
+	        --fetch ....................... Fetches the plugin into the project's node_modules directory.
+	                                        Uses `npm install` to do the fetching.
+	
+	    list .............................. List all installed and available platforms
+	    check ............................. List platforms which can be updated by `cordova platform update`
+	    save .............................. Save version of all platforms added to config.xml
+	
+	
+	Syntax
+	    <plat-spec> : <platform>[@<version>]|<path>|<url>[#<commit-ish>]
+	
+	    <platform> ........................ Platform name e.g. android, ios, windows etc.
+	    <version> ......................... Major.minor.patch version specifier using semver
+	    <path> ............................ Path to a directory containing a platform
+	    <url> ............................. Url to a git repository containing a platform
+	    <commit-ish> ...................... Commit/tag/bramch reference. If none is specified, 'master' is used
+	
+	Aliases
+	    platforms -> platform
+	    rm -> remove
+	    ls -> list
+	
+	Examples
+	    cordova platform add android ios --save
+	    cordova platform add android@^5.0.0 --save
+	    cordova platform add https://github.com/myfork/cordova-android.git#4.0.0 --save
+	    cordova platform add ../android --save
+	    cordova platform add ../cordova-android.tgz --save
+	    cordova platform rm android --save
+	    cordova platform ls
+
+
+
+配置环境变量ANDROID_HOME(SDK路径)和JAVA_HOME(JDK路径)
+
+查看环境需求
+
+	cordova requirements
+
+编译
+
+	cordova build
+
+编译过程，如果选择新版本本地没有相关资源会自动下载，编译后会在
+
+	/platforms/android/build/outputs/apk/
+
+目录下生成android版的app
+

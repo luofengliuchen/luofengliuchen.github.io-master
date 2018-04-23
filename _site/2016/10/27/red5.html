@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
+
+<title>red5流媒体服务器的搭建以及Tomcat上的集成 | 落风的博客</title>
+<meta name="author" content="落风">
+
+  <meta name="keywords" content="red5,tomcat，直播">
+
+
+
+
+<link rel="shortcut icon" href="http://7xpui7.com1.z0.glb.clouddn.com/blog-site-favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+<link href="/pages/rss.xml" rel="alternate" title="落风的博客" type="application/atom+xml">
+  </head>
+  <body>
+    <aside id="sidebar">
+  <nav id="tags">
+    <a href="/index.html" id="avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+
+    <ul id="tags__ul">
+      <li id="pl__all" class="tags__li tags-btn active">全部</li>
+       
+        <li id="Java" class="tags__li tags-btn">Java</li>
+       
+        <li id="Android" class="tags__li tags-btn">Android</li>
+       
+        <li id="NDK" class="tags__li tags-btn">NDK</li>
+       
+        <li id="其他" class="tags__li tags-btn">其他</li>
+       
+        <li id="HTML5" class="tags__li tags-btn">HTML5</li>
+       
+        <li id="工程相关" class="tags__li tags-btn">工程相关</li>
+       
+        <li id="网络技术" class="tags__li tags-btn">网络技术</li>
+       
+        <li id="数据处理" class="tags__li tags-btn">数据处理</li>
+       
+        <li id="VideoAndMap" class="tags__li tags-btn">VideoAndMap</li>
+      
+    </ul>
+
+    <div id="tags__bottom">
+      <a href="mailto:luofenglc@gmail.com" id="icon-email" class="tags-btn fontello"></a>
+      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello"></a>
+    </div>
+  </nav> <!-- end #tags -->
+
+  <div id="posts-list">
+    <form action="" id="search-form">
+      <a href="/index.html" id="mobile-avatar" style="background-image:url(http://7xpui7.com1.z0.glb.clouddn.com/blog-site-avatar.png)"></a>
+      <!-- NOTE: input field is disabled by default -->
+      <input id="search-input" type="text" placeholder="Search...">
+    </form>
+
+    <nav id="pl__container">
+    
+      <a class="工程相关 pl__all" href="/2018/04/01/jar.html"><span class="pl__circle"></span><span class="pl__title">jar打包问题</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/http_sb.html"><span class="pl__circle"></span><span class="pl__title">http请求头</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/04/01/fiddler.html"><span class="pl__circle"></span><span class="pl__title">Fiddler抓取数据失败：tunnel to 443</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="Java pl__all" href="/2018/04/01/thread.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Apr 2018</span></a>
+    
+      <a class="NDK pl__all" href="/2018/03/15/jni2.html"><span class="pl__circle"></span><span class="pl__title">JNI常见问题(问题查询笔记)2</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="HTML5 pl__all" href="/2018/03/15/DCloud.html"><span class="pl__circle"></span><span class="pl__title">DCloud下的静态资源路径</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="数据处理 pl__all" href="/2018/03/15/python4.html"><span class="pl__circle"></span><span class="pl__title">python4-mxnet笔记</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_zlgx.html"><span class="pl__circle"></span><span class="pl__title">Android增量更新</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/android_yh.html"><span class="pl__circle"></span><span class="pl__title">Android优化</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="Android pl__all" href="/2018/03/15/Androidstore.html"><span class="pl__circle"></span><span class="pl__title">Android访问存储目录</span><span class="pl__date">Mar 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP0.html"><span class="pl__circle"></span><span class="pl__title">PHP语法简要笔记</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="其他 pl__all" href="/2018/01/20/PHP.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="工程相关 pl__all" href="/2018/01/01/adb.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS2.html"><span class="pl__circle"></span><span class="pl__title">AndroidHTTPS安全请求解析2-手机请求以及连接捕获</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="网络技术 pl__all" href="/2018/01/01/AndroidHTTPS.html"><span class="pl__circle"></span><span class="pl__title">Android HTTPS安全请求解析-keystore工具的使用</span><span class="pl__date">Jan 2018</span></a>
+    
+      <a class="Java pl__all" href="/2017/10/07/point2.html"><span class="pl__circle"></span><span class="pl__title">混淆点义</span><span class="pl__date">Oct 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/27/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">oracle数据库入门</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/23/GoogleMap.html"><span class="pl__circle"></span><span class="pl__title">Google离线地图</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps2.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定2</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2017/09/20/gps1.html"><span class="pl__circle"></span><span class="pl__title">GPS坐标区域判定1</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="其他 pl__all" href="/2017/09/10/php.html"><span class="pl__circle"></span><span class="pl__title">PHP开发环境搭建</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thresd2.html"><span class="pl__circle"></span><span class="pl__title">线程实例分析</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/09/03/thread1.html"><span class="pl__circle"></span><span class="pl__title">线程复习笔记</span><span class="pl__date">Sep 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/08/05/AndroidSafe.html"><span class="pl__circle"></span><span class="pl__title">android权限管理</span><span class="pl__date">Aug 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/07/25/maven2.html"><span class="pl__circle"></span><span class="pl__title">maven2</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/07/20/dbtest.html"><span class="pl__circle"></span><span class="pl__title">数据库测试</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/07/02/cordova.html"><span class="pl__circle"></span><span class="pl__title">cordova</span><span class="pl__date">Jul 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/06/08/kotlin.html"><span class="pl__circle"></span><span class="pl__title">Kotlin笔记</span><span class="pl__date">Jun 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/05/20/Python2.html"><span class="pl__circle"></span><span class="pl__title">python笔记2</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="Android pl__all" href="/2017/05/06/retrofit.html"><span class="pl__circle"></span><span class="pl__title">Retrofit浅析-OkHttp-rxjava</span><span class="pl__date">May 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/04/25/python.html"><span class="pl__circle"></span><span class="pl__title">python笔记1</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/04/20/Freemarker.html"><span class="pl__circle"></span><span class="pl__title">Freemarker基本使用</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/04/03/git2.html"><span class="pl__circle"></span><span class="pl__title">GIT配置</span><span class="pl__date">Apr 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/31/smali.html"><span class="pl__circle"></span><span class="pl__title">Android反编译smali文件的修改</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/28/Bootstrap.html"><span class="pl__circle"></span><span class="pl__title">Bootstrap</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/21/smali2.html"><span class="pl__circle"></span><span class="pl__title">android反编译还原项目指南</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="HTML5 pl__all" href="/2017/03/20/something.html"><span class="pl__circle"></span><span class="pl__title">一些web相关东西(摘自网络)</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/16/linux.html"><span class="pl__circle"></span><span class="pl__title">linux网络调试</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/03/15/project.html"><span class="pl__circle"></span><span class="pl__title">如何将已存在的APK项目作为资源引用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/13/caffe.html"><span class="pl__circle"></span><span class="pl__title">protobuf基本使用</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/03/09/docker.html"><span class="pl__circle"></span><span class="pl__title">docker</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="网络技术 pl__all" href="/2017/03/06/broadcast.html"><span class="pl__circle"></span><span class="pl__title">网络探测技术初探</span><span class="pl__date">Mar 2017</span></a>
+    
+      <a class="Java pl__all" href="/2017/02/26/GBK.html"><span class="pl__circle"></span><span class="pl__title">GBK编码问题</span><span class="pl__date">Feb 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2017/01/16/error.html"><span class="pl__circle"></span><span class="pl__title">eclipse配合maven导入项目遇到的问题</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="数据处理 pl__all" href="/2017/01/16/fastdfs.html"><span class="pl__circle"></span><span class="pl__title">FastDFS配置文档</span><span class="pl__date">Jan 2017</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/28/Intellij.html"><span class="pl__circle"></span><span class="pl__title">intellij尝试</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/12/26/maven.html"><span class="pl__circle"></span><span class="pl__title">MAVEN配置</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/12/19/flash.html"><span class="pl__circle"></span><span class="pl__title">flash RTMP 推流</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/12/12/jbmp.html"><span class="pl__circle"></span><span class="pl__title">JBMP安装</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/12/01/c++-copy.html"><span class="pl__circle"></span><span class="pl__title">c++学习笔记</span><span class="pl__date">Dec 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/27/C++-point.html"><span class="pl__circle"></span><span class="pl__title">c语言微知识点</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/20/C++-jni.html"><span class="pl__circle"></span><span class="pl__title">jni编程中C++/C语言一些问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/17/RTMP.html"><span class="pl__circle"></span><span class="pl__title">RTMP延时问题</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/11/16/ffplay.html"><span class="pl__circle"></span><span class="pl__title">ffmpeg/ffplay命令记录（转载，整理）</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/11/09/database.html"><span class="pl__circle"></span><span class="pl__title">Android数据库并发操作</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/11/06/sdl.html"><span class="pl__circle"></span><span class="pl__title">SDL&android</span><span class="pl__date">Nov 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/30/live555-dir.html"><span class="pl__circle"></span><span class="pl__title">live555初探-修改live555当前工作目录</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/29/live555-android.html"><span class="pl__circle"></span><span class="pl__title">live555 window下编译运行以及Android平台的移植</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/27/red5.html"><span class="pl__circle"></span><span class="pl__title">red5流媒体服务器的搭建以及Tomcat上的集成</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/25/ffmpeg-jna.html"><span class="pl__circle"></span><span class="pl__title">Android手机视频直播推流-RTMP推流-解决方案一</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/17/ffmpeg.html"><span class="pl__circle"></span><span class="pl__title">基于Android的手机推流</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/10/12/ffmpeg-decode.html"><span class="pl__circle"></span><span class="pl__title">音视频编解码-ffmpeg解码</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/10/02/wildernessdiary-time.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-时空狂想</span><span class="pl__date">Oct 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/09/25/javah.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio解决javah生成头文件时找不到类的问题</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/09/18/net-analysis.html"><span class="pl__circle"></span><span class="pl__title">网络工程-抓包分析</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="VideoAndMap pl__all" href="/2016/09/15/BLocation.html"><span class="pl__circle"></span><span class="pl__title">Android基站定位</span><span class="pl__date">Sep 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/26/netty-point.html"><span class="pl__circle"></span><span class="pl__title">netty point</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/25/netty_connect.html"><span class="pl__circle"></span><span class="pl__title">netty框架是如何执行connect连接的</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/08/20/netty-beat.html"><span class="pl__circle"></span><span class="pl__title">netty自带心跳响应</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/12/AndroidSVG.html"><span class="pl__circle"></span><span class="pl__title">android svg动画</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/11/Androidstudioupdatelike.html"><span class="pl__circle"></span><span class="pl__title">AndroidStudio版本更新记录</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/08/05/proguard.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下的代码混淆</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/08/02/nine.html"><span class="pl__circle"></span><span class="pl__title">nine patch图片的用法绘制以及作用</span><span class="pl__date">Aug 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/07/22/zip.html"><span class="pl__circle"></span><span class="pl__title">Android解压缩zip文件</span><span class="pl__date">Jul 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/06/07/person.html"><span class="pl__circle"></span><span class="pl__title">程序员编程语录</span><span class="pl__date">Jun 2016</span></a>
+    
+      <a class="数据处理 pl__all" href="/2016/04/29/sqlite.html"><span class="pl__circle"></span><span class="pl__title">Android数据库和Bean的交互</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/25/wildernessdiary-habby.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-习惯</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/04/16/wildernessdiary-start.html"><span class="pl__circle"></span><span class="pl__title">荒原日记-开篇</span><span class="pl__date">Apr 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/02/21/studio.html"><span class="pl__circle"></span><span class="pl__title">Visual Studio开发Android程序</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/02/19/c++.html"><span class="pl__circle"></span><span class="pl__title">C++学习整理</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="网络技术 pl__all" href="/2016/02/17/socket.html"><span class="pl__circle"></span><span class="pl__title">Socket编程笔记</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/16/apk.html"><span class="pl__circle"></span><span class="pl__title">git常用命令行</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="工程相关 pl__all" href="/2016/02/14/apk.html"><span class="pl__circle"></span><span class="pl__title">android反编译</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/05/html5-2.html"><span class="pl__circle"></span><span class="pl__title">html5内嵌入android</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/04/html5-1.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习记录</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="HTML5 pl__all" href="/2016/02/03/html5.html"><span class="pl__circle"></span><span class="pl__title">HTML5绘图学习</span><span class="pl__date">Feb 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox3.html"><span class="pl__circle"></span><span class="pl__title">想要冬眠的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox2.html"><span class="pl__circle"></span><span class="pl__title">擅长卖萌的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/31/fox1.html"><span class="pl__circle"></span><span class="pl__title">正在找东西的狐狸</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/project-mode.html"><span class="pl__circle"></span><span class="pl__title">我对瀑布开发模式和敏捷开发模式的理解</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="其他 pl__all" href="/2016/01/27/dream-flower.html"><span class="pl__circle"></span><span class="pl__title">梦花</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/25/stackblur.html"><span class="pl__circle"></span><span class="pl__title">Android滤镜-快速模糊</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/listview-focus.html"><span class="pl__circle"></span><span class="pl__title">listview焦点冲突</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/18/android-StringPicker.html"><span class="pl__circle"></span><span class="pl__title">NumberPicker与StringPicker</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="NDK pl__all" href="/2016/01/15/NDK.html"><span class="pl__circle"></span><span class="pl__title">Androidstudio下jni的一些问题</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/draw-a-logo2.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO兼容低版本</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/15/android-logo1.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现3</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/14/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现2</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Android pl__all" href="/2016/01/12/draw-a-logo.html"><span class="pl__circle"></span><span class="pl__title">Android绘图-LOGO-实现1</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Java pl__all" href="/2016/01/11/deal-with-pix.html"><span class="pl__circle"></span><span class="pl__title">android图像处理:像素过滤</span><span class="pl__date">Jan 2016</span></a>
+    
+    </nav>
+  </div> <!-- end #posts-list -->
+</aside> <!-- end #sidebar -->
+    <div id="post">
+      <div id="pjax">
+        <article id="post__content">
+  <h1 id="post__title" data-identifier="20161027">red5流媒体服务器的搭建以及Tomcat上的集成</h1>
+  <blockquote>
+  <p>文章链接:<a href="http://www.liuschen.com">http://www.liuschen.com</a></p>
+</blockquote>
+
+<h1 id="section">1.流媒体服务器的搭建</h1>
+
+<p>首先需要安装Java环境，此步略过，然后下载<a href="https://github.com/Red5/red5-server/releases/tag/v1.0.7-RELEASE">red5</a>文件，解压得到一个类似tomcat的服务器，点击red5.bat（window下下载的zip文件中的）启动，在浏览器中访问http://localhost:5080/如果能访问到red5就证明服务已经启动了。</p>
+
+<p>首先第一个问题，点击此时网页中的install，跳转的应用列表为空，这里只是说明由于某些原因网站上的资源被墙了，或不提供了，这个显示的并不是本地资源。如果想要示例程序自己在网上找就好了。</p>
+
+<p><strong>修改IP地址和端口：red5目录下conf文件夹中的red5.properties，主要改的是HTTP和RTMP的地址，如果想要在主机外访问，将0.0.0.0改为自己局域网中或是对外网提供的IP地址</strong></p>
+
+<p>如果自己webapps文件夹内没有应用，也就是没有示例程序，也可以从网上下载别人打包好的red5-1.0.0-webapps-demos.zip解压到里面，先把应用跑起来走通功能才不至于被打击主动性。里面的Demo主要用了oflaDemo和Publisher（直接在webapps是没有这个名字的程序的，需要访问主界面，点击demo连接到的界面才能看到），oflaDemo是一个点播程序，而Publisher是一个兼具发布与直播的flash程序</p>
+
+<p><strong>这时候如果之前已经改过IP那么在demo里面连接的时候一定要把localhost改为自己设置的IP地址</strong></p>
+
+<p>然后此时就可以直播了，可以现在Publisher程序中测试一下，然后改为用手机客户端推流，之前的地址是固定的，如<strong>rtmp://ip地址/oflaDemo</strong>，后面在加上就是推流的地址，只要不是太离谱，可以随便取，如2334,322df什么的，由客户端指定，完整就是<strong>rtmp://ip地址/oflaDemo/自己取得流名称</strong>，然后再在另一端用一个有流媒体播放的播放器，输入同一个地址就可以播放了。</p>
+
+<h1 id="red5tomcat">2.将red5集成在tomcat上启动</h1>
+
+<p>red5据说原本就是在tomcat上跑的，后来分开，而下载的red5的目录结构像极了tomcat，里面也有webapps跑着小程序，一度让我非常困惑。想把red5集成到tomcat中但是网上说的要么年代久远，要么大部分繁琐非常，试了几种方式，大概出了个思路，即使用网上给出的war包<strong>red5-war-1.0-RC1.zip</strong>，中间我下载了n个red5版本的程序，也渐渐没了耐心。最后发现red5-war-1.0-RC1.zip里面包含了移植需要的所有东西。</p>
+
+<h2 id="section-1">一.验证</h2>
+
+<p>将red5-war-1.0-RC1.zip包解压后，把ROOT.war解压到tomcat目录下webapps对应的ROOT包中，启动tomcat，如果正常启动并且能够访问到red5界面，说明这个包能用。</p>
+
+<h2 id="section-2">二.新建项目</h2>
+
+<p>在myeclipse中新建一个web工程。</p>
+
+<h2 id="section-3">三.配置文件的移植</h2>
+
+<p>将red5-war-1.0-RC1\ROOT\WEB-INF\classes下的配置文件拷贝到工程对应的src目录下，工程中的web.xml用red5-war-1.0-RC1\ROOT\WEB-INF中对应的替代。</p>
+
+<h2 id="lib">四.lib文件的移植</h2>
+
+<p>red5-war-1.0-RC1\ROOT\WEB-INF\lib下的文件全部拷贝到项目对应的文件夹中，打开cmd,切换到red5-war-1.0-RC1\ROOT\WEB-INF\classes中，执行命令</p>
+
+<pre><code>jar -cvf red5final.jar org
+</code></pre>
+
+<p>生成了red5final.jar的库文件，同样拷贝到项目对应的lib文件夹中</p>
+
+<p>此时运行程序应该不会有错，我用了好几个版本的red5中的源程序来替代red5final.jar，但是总是会出各种问题。只有用同一个包中的才行。如果之前在tomcat上验证通过，这里也就不应该有什么问题。</p>
+
+<h1 id="section-4">3.通过推流和播放验证移植成功</h1>
+
+<p>首先，修改绑定的IP地址，若是找不到red5.properties或是类似的文件，就直接在red5-core.xml中修改，默认的rtmp端口一般是1935,搜一下就找到了。</p>
+
+<p>然后修改root-web.xml里面的</p>
+
+<pre><code>&lt;property name="contextPath" value="/oflaDemo" /&gt;
+</code></pre>
+
+<p>oflaDemo可以用其他字符，也是取一个名字，rtmp访问时会用到（紧跟在ip后面）：</p>
+
+<pre><code>rtmp://ip地址/oflaDemo/自己取得流名称
+</code></pre>
+
+
+</article> <!-- end #post__content -->
+
+<div id="post__share">
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://www.liuschen.com/2016/10/27/red5.html&text=red5流媒体服务器的搭建以及Tomcat上的集成" target="_blank"></a>
+  <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://www.liuschen.com/2016/10/27/red5.html&title=red5流媒体服务器的搭建以及Tomcat上的集成" target="_blank"></a>
+</div> <!-- end #post__share -->
+<div id="disqus_thread" name="luofeng">
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+</div>
+
+<!-- <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//luofeng.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+
+
+        <p id="copyright">Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Theme <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Hosted on <a href="https://pages.github.com" target="_blank">Github</a></p>
+      </div> <!-- end #pjax -->
+
+      <div id="post__toc-trigger">
+        <div id="post__toc">
+          <span id="post__toc-title">Table of Contents</span>
+          <ul id="post__toc-ul"></ul>
+        </div>
+      </div>
+    </div> <!-- end #post -->
+
+    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.pjax.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/script.js"></script>
+  </body>
+</html>
